@@ -2,7 +2,7 @@
 
 让用户的 Agent 建立一个可以换人接着做的项目。目标、事实、工作和接续依据由仓库与原生任务系统持有，创建工具可以离席。
 
-本地首版 `0.1.0a1` 提供两个可独立携带的能力包：
+当前本地候选 `0.1.0a3` 提供两个可独立携带的能力包：
 
 - [cybercorp](skills/cybercorp/SKILL.md)：创建／接入方法与安装工具，生成项目自有的准备、工作、审查入口和原生协作辅助命令。
 - [corpo-launcher](skills/corpo-launcher/SKILL.md)：面向多种 CLI runtime 的启动器半成品；由用户配置接入，附 Kiro 示例。目标 Corp 不依赖它运行。
@@ -18,6 +18,10 @@ python3 skills/cybercorp/scripts/cybercorp.py /path/to/project --brief /path/to/
 [输入格式](skills/cybercorp/references/brief.md) 支持新项目的目标／范围，或已有项目的 `project_ref`。`--dry-run` 只输出文件计划。可以在仓库外的临时目录试用 [示例输入](examples/receipt-desk.json)。
 
 安装会保留已有根 README／AGENTS 内容并追加入口；冲突文件需要显式适配。相同输入再次运行会保留项目后续编辑。脚本不提交、发布或创建 GitHub 工作，也不会宣称初始化完成；Agent 随后从生成项目的 `docs/corp/README.md` 继续准备与交接。
+
+`0.1.0a3` 按任务披露方法：正常工作只读入口、工作方法、约定核验与占用协议；修改约定、跨事项统筹和损坏历史恢复各在触发时读取。保留异常记录、任务内修复与局部暂停的区分。同一最小示例的普通工作静态指令约 2.6k tokens，较前一本地候选减少约 63%–70%；实际项目材料和原生任务输出另计。
+
+新建项目获得这些方法；已有项目按[采纳说明](skills/cybercorp/references/brief.md)适配方法与链接目标，保留项目自有编辑，不能重新安装覆盖。
 
 生成后的仓库自带以下命令：
 

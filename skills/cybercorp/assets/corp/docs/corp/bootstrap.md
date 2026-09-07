@@ -1,24 +1,16 @@
 # Enter an existing clone
 
-Use the actual repository root and its intended remote. Preserve existing worktrees, commits, local data and Git operations. For a new independent task, the included helper observes the remote's default branch at a fixed commit and can create an independent worktree:
+Preserve the original checkout, WIP and Git operations. For a new independent task, observe its intended remote's fixed default-branch commit and optionally create your own checkout:
 
 ```sh
 python3 .agents/corp/enter.py
 python3 .agents/corp/enter.py --worktree /path/to/new-checkout
 ```
 
-Both commands read the remote, including `--dry-run`. Use them within the user's network authorization; local creation does not require this step. `--remote` selects an existing named remote; `--branch` selects an explicit remote branch when needed. `--dry-run` with `--worktree` plans from that live read without fetching or writing. Network/identity failures are errors, not proof that an old cache is current.
+Both read the network, including `--dry-run`; local creation does not require them. `--remote` chooses an existing remote; `--branch` an explicit remote branch. `--dry-run --worktree ...` plans without fetching/writing. Failures do not establish that cached state is current.
 
-The creation command fetches the observed SHA without writing FETCH_HEAD, creates its own branch and checks the actual result. It leaves the original checkout in place rather than pulling, resetting, stashing or cleaning it. This avoids relying on a clean status or branch name to prove that the original directory may safely be updated. Existing worktree destinations are not reused.
+The helper fetches the observed SHA without changing FETCH_HEAD and creates its own branch in a new destination. It does not pull/reset/stash/clean the original. Read the new checkout's root/path contracts in the actual runtime; reload incompatible cached instructions or start a fresh session. Updated files do not change accepted task pins or prove runtime reload.
 
-Continue from the new checkout's root and path contracts. If the runtime has cached incompatible old instructions, reliably reload them or use a fresh session before dependent work. File update, runtime reload and accepted task inputs are distinct.
+For resumed work, use its verified shared checkpoint in your own worktree and recheck current execution rights. An old clone lacking this entry first needs explicit distribution of a current entry/clone.
 
-For a resumed task, use its verified shared checkpoint commit and your own worktree rather than starting its implementation again from the latest default branch. Confirm current native execution rights and protect the predecessor's artifacts. A release/expiry only changes execution occupancy.
-
-An old clone that never contained this entry cannot discover a new rule by itself. The first distribution must provide a current clone or explicit available entry. Thereafter the repository owns the entry; the startup prompt need not copy it.
-
-## Ordinary environment
-
-The included helpers use Python 3.9+, Git and the user's normal GitHub CLI authentication. They do not install dependencies, read secrets or change tool trust. The context reader uses GitHub's actual default branch; its read-only result is not an atomic snapshot, authorization or readiness judgment.
-
-Equivalent native CLI/API/UI operations are valid. If a helper is unavailable, use the same shared owners and preserve its observation limits; do not invent empty work/claims from an error.
+Helpers need Python 3.9+, Git and ordinary authenticated `gh`; they install nothing or change tool trust. Equivalent native CLI/API/UI operations are valid under the same contracts and observation limits.
