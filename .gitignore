@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+.pytest_cache/
+build/
+dist/
+
+# Local working records are not required to build or use the source package.
+/.local/
+/discovery.md
+/docs/anchor/
+/docs/log/
+.env
+.env.*
+!.env.example
