@@ -1,0 +1,98 @@
+{
+  "baseline": "2579453fbde96df0eaac0c8f62e5d28f9942ac21",
+  "scenario": "Same generated Receipt Desk brief; complete method file cold reads; before lacks the new communication capability. Excludes host instructions, business inputs, API histories, source, tests and conversation. Not runtime billing.",
+  "paths": {
+    "ordinary_work": {
+      "before": [
+        "docs/corp/README.md",
+        "docs/corp/development-loop.md",
+        ".agents/skills/work-corp/SKILL.md",
+        "docs/corp/claim-protocol.md",
+        "docs/corp/spec-protocol.md"
+      ],
+      "after": [
+        "docs/corp/README.md",
+        "docs/corp/development-loop.md",
+        ".agents/skills/work-corp/SKILL.md",
+        "docs/corp/claim-protocol.md",
+        "docs/corp/spec-protocol.md"
+      ]
+    },
+    "explicit_single_pr_review": {
+      "before": [
+        "docs/corp/README.md",
+        "docs/corp/development-loop.md",
+        ".agents/skills/review-corp/SKILL.md",
+        "docs/corp/spec-protocol.md"
+      ],
+      "after": [
+        "docs/corp/README.md",
+        "docs/corp/development-loop.md",
+        ".agents/skills/review-corp/SKILL.md",
+        "docs/corp/spec-protocol.md"
+      ]
+    },
+    "work_with_owner_communication": {
+      "before": [
+        "docs/corp/README.md",
+        "docs/corp/development-loop.md",
+        ".agents/skills/work-corp/SKILL.md",
+        "docs/corp/claim-protocol.md",
+        "docs/corp/spec-protocol.md"
+      ],
+      "after": [
+        "docs/corp/README.md",
+        "docs/corp/development-loop.md",
+        ".agents/skills/work-corp/SKILL.md",
+        "docs/corp/claim-protocol.md",
+        "docs/corp/spec-protocol.md",
+        "docs/corp/communication.md",
+        "docs/corp/owner-communication.md"
+      ]
+    }
+  },
+  "measurements": {
+    "ordinary_work": {
+      "before": {
+        "characters": 11782,
+        "utf8_bytes": 11934,
+        "o200k_base": 2379,
+        "cl100k_base": 2404
+      },
+      "after": {
+        "characters": 13806,
+        "utf8_bytes": 13958,
+        "o200k_base": 2751,
+        "cl100k_base": 2778
+      }
+    },
+    "explicit_single_pr_review": {
+      "before": {
+        "characters": 6874,
+        "utf8_bytes": 7026,
+        "o200k_base": 1374,
+        "cl100k_base": 1402
+      },
+      "after": {
+        "characters": 9428,
+        "utf8_bytes": 9580,
+        "o200k_base": 1856,
+        "cl100k_base": 1885
+      }
+    },
+    "work_with_owner_communication": {
+      "before": {
+        "characters": 11782,
+        "utf8_bytes": 11934,
+        "o200k_base": 2379,
+        "cl100k_base": 2404
+      },
+      "after": {
+        "characters": 17496,
+        "utf8_bytes": 17648,
+        "o200k_base": 3402,
+        "cl100k_base": 3431
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "source_version": "0.1.0a3",
+  "candidate_version": "0.1.0a4",
+  "refusal": "Corp already installed with different inputs/package; adapt the existing owners instead of overwriting",
+  "refused_upgrade_changed_files": false,
+  "manually_adopted_paths": [
+    "docs/corp/communication.md",
+    "docs/corp/milestone-delivery.md",
+    "docs/corp/coordination.md",
+    "docs/corp/README.md",
+    "docs/corp/claim-protocol.md",
+    "docs/corp/development-loop.md",
+    ".agents/skills/prepare-corp/SKILL.md",
+    ".agents/skills/review-corp/SKILL.md",
+    ".agents/skills/work-corp/SKILL.md"
+  ],
+  "existing_card_route": "docs/owner-guide.md",
+  "original_install_manifest_sha256": "0444b436629fede363a4a75c12300a9625da64f31cb55146f0d30c2bdff57a66",
+  "original_manifest_preserved": true,
+  "custom_work_promise_preserved": true,
+  "project_check_preserved_and_run": true,
+  "resolvable_local_markdown_links": 28,
+  "ceiling": "Actual local refusal and deliberate file adaptation; not evidence that a real project accepted or consumed the changed rules."
+}

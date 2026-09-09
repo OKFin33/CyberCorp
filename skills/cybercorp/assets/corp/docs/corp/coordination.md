@@ -1,6 +1,6 @@
 # Declare before cross-Issue planning
 
-Before expensive planning or generating downstream work, inspect the current goal, outcomes and all open/closed `work:coordination` Issues in its native Milestone. The global context read discovers that collection; a selected coordination Issue reads it too.
+For stage planning, overall review or delivery, read [milestone-delivery.md](milestone-delivery.md). Before expensive planning, stage review or generating downstream work, inspect the current goal, outcomes and all open/closed `work:coordination` Issues in its native Milestone. The global context read discovers that collection; a selected coordination Issue reads it too.
 
 Before creating an Issue or publishing its first or replacement Spec acceptance, read [spec-authoring.md](spec-authoring.md). Reuse an existing bounded entry. If none owns the actual gap, create only a minimal outcome Spec with that classification and Milestone, then reread the collection before deeper planning. Set the actual Milestone on delivery work so global discovery finds it; a parent/goal link is insufficient.
 

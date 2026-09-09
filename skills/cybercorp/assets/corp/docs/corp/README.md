@@ -6,7 +6,8 @@ Read `{{PROJECT_REF}}` and relevant owners in [canon-map.yaml](canon-map.yaml), 
 
 ## Read for this task
 
-- Work or review: [development-loop.md](development-loop.md), then only its matching method.
+- Start/resume work, plan or review: [development-loop.md](development-loop.md), then only its matching method.
+- Owner communication or reply adoption: [communication.md](communication.md).
 - Establish or complete project preparation: `.agents/skills/prepare-corp/SKILL.md` from the repo root.
 - Obtain a current checkout from an existing clone: [bootstrap.md](bootstrap.md). For resumed work, use its verified checkpoint instead of restarting from the default branch.
 

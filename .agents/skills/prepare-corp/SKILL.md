@@ -9,6 +9,8 @@ Read `docs/corp/README.md`, the goal and `docs/corp/development-loop.md`. Preser
 
 Within authorization, verify the real GitHub repository, delivery Milestone and classification; map their owners in `docs/corp/canon-map.yaml`. Before creating an Issue or publishing its first or replacement Spec acceptance, read `docs/corp/spec-authoring.md`. Reuse existing preparation work, creating a minimal discoverable entry only if needed. Read it back natively. Before deeper cross-Issue planning, use `docs/corp/coordination.md`; use the work method for executing the converged Issue.
 
+For the project development route and stage result/acceptance contract, use `docs/corp/milestone-delivery.md`; whole-project preparation remains a separate judgment. Before communicating or adopting an Owner reply, use `docs/corp/communication.md` and its current card.
+
 Survey major results, boundaries, dependencies, sources and gaps. Reuse owners; route necessary inputs into shared accessible surfaces without copying secrets/private material wholesale. Verify adoption and affected consumer updates, not merely successful copying. Fill gaps by impact and near-term need; distinguish unavailable inputs, failed routing, normative conflicts, ordinary design choices and unclear acceptance. Future design choices need not all be settled now.
 
 Record outcomes and remaining gaps in existing preparation work. Hand off when an authorized successor can understand the whole goal/boundaries, obtain required inputs, see gaps/impact, and advance meaningful work or identify a scoped stop. Explain that judgment with evidence and establish the next useful native work. Generated files and type checks alone do not prove preparation complete.
