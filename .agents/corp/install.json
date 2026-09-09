@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0a3",
+  "brief_sha256": "d6205a3672b9751296362802b0dfec6791f7522bb589871532015b05dd866464",
+  "payload_sha256": "7bb553d092a54a4d1f77c1238cd9a5f5afd2cb14d60dc7e1bf46725403663243",
+  "files": {
+    ".agents/corp/enter.py": "3134a5632d6cb7d750cee249b9b5393232da528fc5d51ed53892d30287cabc17",
+    ".agents/corp/format-event.py": "b2ca2e1f11101f6aeb5f97561f22a03682ab3c7f4a98229f8db02092a3215427",
+    ".agents/corp/repo-context.py": "cde89b88b4a51fcb02c08b4308fd2a4a54e2fcc2c171d5e496fcac7033f8c2b0",
+    ".agents/corp/spec-checkpoint.py": "e28ed28346ac4ba462b0513dff820ce2a9d0c00d86dfb837335f57d7cf7636b1",
+    ".agents/corp/work-state.py": "3864d90681b2e604e98574d5834bf7682aef4f052e152fdcf788a38ecfd903ec",
+    ".agents/skills/prepare-corp/SKILL.md": "3138e72ff630018a1b3a83756567bc80ddf906a1b1126021feca7eae7c15d171",
+    ".agents/skills/review-corp/SKILL.md": "f04e9d0df68556aaed2bce85abc5cf5631f049bd3c02b5cfc6d6cc91d25d63d0",
+    ".agents/skills/work-corp/SKILL.md": "f3a8763471ee1a51ea1005eea2d8cc86e25e23040bca1d1b3f02e0db81fcb065",
+    "docs/corp/README.md": "8ae0236b5b60bb1e55b2bfbb9e46d5303ad9899c32e26c73e0e4134ab1897b61",
+    "docs/corp/bootstrap.md": "a970b2cc2a2b0355ee6b4ec5008250d120ba3c809531fbe0a1071574aa525586",
+    "docs/corp/claim-protocol.md": "49ad85b56d742e1a127f8d845caeb9b1bd63e6c88df5d033343835fecd873cd2",
+    "docs/corp/coordination.md": "8d23f6c26d36dc80781f0afeab92464a8d5d79d7e3bd43c914da275dfd9c8b49",
+    "docs/corp/damaged-history.md": "3e247e8aa0043ca543859948f420439a7223225d0e6d4df5208107f4702d2a69",
+    "docs/corp/development-loop.md": "1db6213031a9a7086493e6c2764fba337bde5989c2173b5d46f119098120e9fd",
+    "docs/corp/spec-authoring.md": "a861d18db3e26fc05e33e8e025a47eedbb8486088c6d0d8d012aeb1db878085b",
+    "docs/corp/spec-protocol.md": "6f6ed14317a436a0c12e1cc8456fc6c3755710fd9a3b72220b4094d2676822eb",
+    "docs/corp/canon-map.yaml": "c5ae7ce77b9cd8d6ce4d9219da01e523d8ee075d27fe1c698eb2537bf0e45743",
+    "AGENTS.md": "287b2d82fee2d0ef61c3e32bf203310f54222bfec22ca0f9fa49af7f30a64dfa",
+    "README.md": "8d1f48936f8e5434ee9c112b5364583c873c141f75839033418a66dabfa5d7f2"
+  },
+  "authority": "installation provenance only; not task state or readiness"
+}
