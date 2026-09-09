@@ -36,4 +36,3 @@ python3 -m unittest discover -s /tmp/receipt-positive-rebuild/tests
 本轮合成场景已观察到上述方法消费、真实实例更换、同机时间重叠、修正与独立复验。没有真实 GitHub 竞争/跨机证据、通知接入或 Owner 理解证据。合成项目未授权 merge，独立 reviewer 因此只清除固定候选阻塞，未声称正式阶段交付；CyberCorp 默认分支实际采纳同样等待具体授权与真实集成核验。长期阶段效果仍未验证。通用验证反馈属于下一步范围，本次没有实现其检查工具或失败调度。
 
 复建最终应用可从 `receipt/continuation.bundle` clone 后显式 checkout `56a975ad0f2eeecbbcdc711803a3d4cc6ede859c`；同一 bundle 保留原始、退款与故障候选分支。两个局部候选则分别 checkout `unintegrated/partials.bundle` 中的 `b848222e5d33b580e4298fb5a98c5c4015a65c76` 和 `8f4dcd01418452c7109771b90440971a82ac7726`。CLI 检查命令仍为各自项目的 README/test owner 所示命令。
-
