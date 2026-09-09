@@ -55,13 +55,21 @@ python3 skills/corpo-launcher/scripts/corpo.py --runtime kiro resume --cwd /path
 
 ## 开发与验证
 
-Python 3.9+，无需第三方 Python 运行依赖；GitHub 读取另需 Git 和正常认证的 `gh`。
+安装、dry-run 和本地测试需要 Python 3.9+ 与 Git，无需第三方 Python 运行依赖；原生 GitHub 读取另需正常认证的 `gh`。
 
 ```sh
 python3 -m unittest discover -s tests
 python3 -m unittest discover -s skills/corpo-launcher/scripts/tests
 ```
 
+根测试入口已包含启动器测试；第二条用于单独验证启动器，其结果不与根入口相加。[CI](.github/workflows/tests.yml)复用根入口，在 PR 和默认分支上记录实际测试版本。
+
 本地验证覆盖可携带安装、已有项目保护、真实临时 Git 工作树、原生协议回放及 fake-CLI 启动／恢复。GitHub API 行为使用隔离夹具；Kiro 包装器真实模型端到端测试、独立 Corpo 在第二项目交付实际成果和新多机协作尚未验证。
 
 [产品约定](docs/product.md) · [实现计划](docs/plan.md) · [实现来源](docs/source-notes.md)
+
+<!-- cybercorp:entry:start -->
+## Agent collaboration
+
+工作 Agent 从 [Corp 入口](docs/corp/README.md) 进入项目。
+<!-- cybercorp:entry:end -->
