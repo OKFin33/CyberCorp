@@ -49,6 +49,17 @@
         "docs/corp/communication.md",
         "docs/corp/owner-communication.md"
       ]
+    },
+    "stage_review_existing_coordination": {
+      "after": [
+        "docs/corp/README.md",
+        "docs/corp/development-loop.md",
+        ".agents/skills/review-corp/SKILL.md",
+        "docs/corp/spec-protocol.md",
+        "docs/corp/milestone-delivery.md",
+        "docs/corp/coordination.md",
+        "docs/corp/claim-protocol.md"
+      ]
     }
   },
   "measurements": {
@@ -92,6 +103,14 @@
         "utf8_bytes": 17648,
         "o200k_base": 3402,
         "cl100k_base": 3431
+      }
+    },
+    "stage_review_existing_coordination": {
+      "after": {
+        "characters": 22108,
+        "utf8_bytes": 22260,
+        "o200k_base": 4273,
+        "cl100k_base": 4308
       }
     }
   }
