@@ -1,0 +1,26 @@
+{
+  "head": "5331b0bbab3ece9e94ddac3fe24def2ddf7a2180",
+  "source_methods": {
+    "docs/corp/communication.md": "e9232400ef6ef966b2d779a5055feb57f0432853ee581f94ad6562eb6c5cef02",
+    "docs/corp/owner-communication.md": "14fdf0b6d890d6473f8550c2e974b5aaf8758fa8003a1a2a1b6aa047f459c02a",
+    "docs/corp/spec-authoring.md": "a861d18db3e26fc05e33e8e025a47eedbb8486088c6d0d8d012aeb1db878085b",
+    "docs/corp/milestone-delivery.md": "1690cf07388bd729116b468aafc48c528e10a3972997187a434bb693e1f1ed9c",
+    "docs/corp/coordination.md": "763b3e194eb7b431ac7b8c053476c5d6fc64a90662c14fd631eb151a46d4f380",
+    "docs/corp/spec-protocol.md": "6f6ed14317a436a0c12e1cc8456fc6c3755710fd9a3b72220b4094d2676822eb",
+    "docs/corp/README.md": "12d456495e11426ad505b770684ef743ce8821f14764cc1008bfe7254a7ec225",
+    "docs/corp/claim-protocol.md": "f85dc9c6044fa84ad5eef462d6d505335a3de3234e6264873da330f0f7b46846",
+    "docs/corp/damaged-history.md": "3e247e8aa0043ca543859948f420439a7223225d0e6d4df5208107f4702d2a69",
+    "docs/corp/verification.md": "dc1bbfa0adf34e59694cd7fe8a214f0c0c019630ff027c9192c2e0f28f10c68b",
+    "docs/corp/bootstrap.md": "a970b2cc2a2b0355ee6b4ec5008250d120ba3c809531fbe0a1071574aa525586",
+    "docs/corp/development-loop.md": "ad4680dd8de92c97656653a8661de1f28f95d36b1ea7e59e1697c7c91337a487",
+    ".agents/skills/prepare-corp/SKILL.md": "058da7ff4433bcd29a154fa15101b88d5f1e67a45ea313cf8cf96e163e92088c",
+    ".agents/skills/review-corp/SKILL.md": "f66aa9df3eca25f86027e9312ee24d7b6fceb599448f5956bb659455452e66d4",
+    ".agents/skills/work-corp/SKILL.md": "930d2746418a5c41b8bc38b70031151275ff272de1273f2e52f8abd424a5b76c",
+    ".agents/corp/format-event.py": "b2ca2e1f11101f6aeb5f97561f22a03682ab3c7f4a98229f8db02092a3215427",
+    ".agents/corp/repo-context.py": "cde89b88b4a51fcb02c08b4308fd2a4a54e2fcc2c171d5e496fcac7033f8c2b0",
+    ".agents/corp/check.py": "083e7c4256782b210a10f213e422b86c7c97bd3a3b6db651538e00ecca673e68",
+    ".agents/corp/spec-checkpoint.py": "e28ed28346ac4ba462b0513dff820ce2a9d0c00d86dfb837335f57d7cf7636b1",
+    ".agents/corp/work-state.py": "3864d90681b2e604e98574d5834bf7682aef4f052e152fdcf788a38ecfd903ec",
+    ".agents/corp/enter.py": "3134a5632d6cb7d750cee249b9b5393232da528fc5d51ed53892d30287cabc17"
+  }
+}

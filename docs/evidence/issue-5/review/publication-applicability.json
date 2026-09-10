@@ -1,0 +1,16 @@
+{
+  "review_snapshot": "64f008b71f04503f634cb649f6cbdd68e176c229",
+  "review_manifest_entries": 147,
+  "matching_entries": 144,
+  "post_review_changed_paths": [
+    "docs/evidence/issue-5/README.md",
+    "README.md",
+    "docs/plan.md"
+  ],
+  "assessment": "All differences are status prose and evidence links; implementation fingerprints and reviewed behavior remain unchanged. Review snapshot is disposable local history, not a published feature commit or native PR approval.",
+  "original_base": "15682e2d9ca77dfbd8234cadc803f35557d0f76c",
+  "merged_base": "7ebc4a6d7b24b294b02e0a610c53924e612ea9c8",
+  "base_tree": "04eb29b08b95cfc254dacd0bdda445864dbee9ca",
+  "base_assessment": "Both base commits have the same Git tree. Aligning the unpublished branch introduces no source or semantic conflict.",
+  "publication_scope": "Existing Issue 5 candidate, all synthetic evidence, and this applicability record. Actual feature head, native review archive, CI and outstanding merge decision belong to the PR and Issue checkpoint."
+}

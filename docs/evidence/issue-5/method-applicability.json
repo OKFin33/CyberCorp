@@ -1,0 +1,20 @@
+{
+  "matching_final_method_sources": {
+    "preparation": {
+      ".agents/skills/prepare-corp/SKILL.md": true,
+      ".agents/skills/work-corp/SKILL.md": true,
+      "docs/corp/milestone-delivery.md": true
+    },
+    "prerequisite": {
+      ".agents/skills/prepare-corp/SKILL.md": true,
+      ".agents/skills/work-corp/SKILL.md": true,
+      "docs/corp/milestone-delivery.md": true
+    },
+    "library": {
+      ".agents/skills/prepare-corp/SKILL.md": true,
+      ".agents/skills/work-corp/SKILL.md": true,
+      "docs/corp/milestone-delivery.md": true
+    }
+  },
+  "helper_limit": "Early consumers used an earlier check.py snapshot. Later changes narrow referenced-skill checks, support titled links and improve malformed/missing CI evidence diagnostics; method bodies above are unchanged. Final helper positive/negative cases run in repository tests. The independent candidate review uses the final helper source."
+}

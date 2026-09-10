@@ -1,0 +1,8 @@
+{
+  "actual_head": "5331b0bbab3ece9e94ddac3fe24def2ddf7a2180",
+  "working_tree": "",
+  "command": "python3 -m unittest discover -s tests",
+  "result": "passed",
+  "performed_by": "parent evaluator independently reran the consumer project tests; no source edit",
+  "python": "Python 3.14.2"
+}

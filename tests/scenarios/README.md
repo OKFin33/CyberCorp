@@ -6,6 +6,9 @@ These create disposable projects using the actual creation package. They are opt
 python3 tests/scenarios/delivery_fixture.py /tmp/receipt-example
 python3 tests/scenarios/card_fixture.py /tmp/card-example
 python3 tests/scenarios/unintegrated_fixture.py /tmp/partial-example
+python3 tests/scenarios/preparation_fixture.py /tmp/preparation-example
+python3 tests/scenarios/preparation_fixture.py /tmp/prerequisite-example --variant prerequisite
+python3 tests/scenarios/preparation_fixture.py /tmp/library-example --variant infrastructure
 ```
 
 Give an independent consumer only its generated target and a normal request to advance the project, or prepare the requested communication. Let it discover its own entry, product and environment contract. The receipt scenario uses a real disposable Git repo and bare transport plus a limited offline `gh api` substitute; `.scenario/README.md` describes its supported API. Preserve `.scenario/state.json`, `.scenario/api.jsonl`, shared Git refs, application source/tests and the consumer's report before comparing with the specification's criteria. Do not provide desired answers or adjust evidence to match them. Unsupported APIs fail; the consumer may use an already supported form or report the environment limit.
@@ -13,6 +16,8 @@ Give an independent consumer only its generated target and a normal request to a
 The receipt inputs include an empty applicable implementation queue, an ordinary PR without a review promise, a separate explicit future review promise, and a departed instance's recorded but undelivered request. For reply continuation, append an attributable synthetic Owner response through the local API only after the initial consumer stops; give the next independent instance the same project entry. Attribute this as evaluator-supplied scenario input, not a real user decision. For fixed-stage correction tests, record any deliberate fault injection as evaluator setup and pin the resulting candidate; reviewers receive the normal project objective and candidate, not a list of desired findings.
 
 The unintegrated fixture publishes two real local branches, each with a passing focused unit test, but no combined CLI candidate. Ask a fresh consumer for a bounded stage-readiness assessment from its entry; preserve its observations without treating partial green checks as the stage result.
+
+The preparation fixture supplies an agreed project goal, inputs and existing maintenance work, but no application implementation or detailed delivery route. Ask one consumer to prepare the project for another Corpo, then ask a fresh instance to advance the project from its shared entry. The prerequisite and infrastructure variants supply different actual goals/dependencies; ask consumers to advance one useful result. Keep these requests separate from evaluator criteria. The additional offline endpoints support Milestones and Issue relationships; default-branch content follows the fixture's real local shared Git ref. Local branch integration is authorized in these disposable variants, not real GitHub merge or external effects.
 
 The card targets use the same facts and independent project-owned cards. Ask for separate Owner drafts through their own entry. Freeze outputs before comparing how expression changes while result, failures, evidence ceilings and needed decisions remain intact. This cannot establish real Owner understanding or actual notification delivery.
 

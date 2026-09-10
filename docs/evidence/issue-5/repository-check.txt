@@ -1,0 +1,118 @@
++ /opt/homebrew/opt/python@3.14/bin/python3.14 .agents/corp/check.py --base 15682e2d9ca77dfbd8234cadc803f35557d0f76c
+{
+  "status": "passed",
+  "command": [
+    "python3",
+    ".agents/corp/check.py",
+    "--base",
+    "15682e2d9ca77dfbd8234cadc803f35557d0f76c"
+  ],
+  "python": "3.14.2",
+  "scope": "Local Corp wiring and Git difference; no network or business tests",
+  "errors": [],
+  "git": {
+    "head": "15682e2d9ca77dfbd8234cadc803f35557d0f76c",
+    "base": "15682e2d9ca77dfbd8234cadc803f35557d0f76c",
+    "base_source": "explicit --base",
+    "range": "15682e2d9ca77dfbd8234cadc803f35557d0f76c -> working tree",
+    "tracked_changes": [
+      ".agents/skills/prepare-corp/SKILL.md",
+      ".agents/skills/work-corp/SKILL.md",
+      ".github/workflows/tests.yml",
+      "README.md",
+      "docs/corp/development-loop.md",
+      "docs/corp/milestone-delivery.md",
+      "docs/plan.md",
+      "docs/product.md",
+      "docs/specs/delivery-communication-verification.md",
+      "skills/cybercorp/assets/corp/.agents/skills/prepare-corp/SKILL.md",
+      "skills/cybercorp/assets/corp/.agents/skills/work-corp/SKILL.md",
+      "skills/cybercorp/assets/corp/docs/corp/development-loop.md",
+      "skills/cybercorp/assets/corp/docs/corp/milestone-delivery.md",
+      "skills/cybercorp/references/brief.md",
+      "skills/cybercorp/scripts/cybercorp.py",
+      "tests/scenarios/README.md",
+      "tests/scenarios/delivery_fixture.py"
+    ],
+    "untracked": [
+      ".agents/corp/check.py",
+      "docs/corp/verification.md",
+      "docs/evidence/issue-5/README.md",
+      "docs/evidence/issue-5/library/api.jsonl.gz",
+      "docs/evidence/issue-5/library/consumer-report.md",
+      "docs/evidence/issue-5/library/evaluator-check.json",
+      "docs/evidence/issue-5/library/evaluator-tests.txt",
+      "docs/evidence/issue-5/library/result.bundle",
+      "docs/evidence/issue-5/library/snapshot.json",
+      "docs/evidence/issue-5/library/state.json",
+      "docs/evidence/issue-5/method-applicability.json",
+      "docs/evidence/issue-5/old-project-adoption-initial.json",
+      "docs/evidence/issue-5/old-project-adoption.json",
+      "docs/evidence/issue-5/preparation-successor/api.jsonl.gz",
+      "docs/evidence/issue-5/preparation-successor/consumer-report.md",
+      "docs/evidence/issue-5/preparation-successor/evaluator-check.json",
+      "docs/evidence/issue-5/preparation-successor/evaluator-tests.txt",
+      "docs/evidence/issue-5/preparation-successor/result.bundle",
+      "docs/evidence/issue-5/preparation-successor/state.json",
+      "docs/evidence/issue-5/preparation/api.jsonl.gz",
+      "docs/evidence/issue-5/preparation/consumer-report.md",
+      "docs/evidence/issue-5/preparation/result.bundle",
+      "docs/evidence/issue-5/preparation/snapshot.json",
+      "docs/evidence/issue-5/preparation/state.json",
+      "docs/evidence/issue-5/prerequisite/api.jsonl.gz",
+      "docs/evidence/issue-5/prerequisite/consumer-report.md",
+      "docs/evidence/issue-5/prerequisite/evaluator-check.json",
+      "docs/evidence/issue-5/prerequisite/evaluator-tests.txt",
+      "docs/evidence/issue-5/prerequisite/result.bundle",
+      "docs/evidence/issue-5/prerequisite/snapshot.json",
+      "docs/evidence/issue-5/prerequisite/state.json",
+      "docs/evidence/issue-5/reading-cost.json",
+      "docs/evidence/issue-5/repair-setup/api.jsonl.gz",
+      "docs/evidence/issue-5/repair-setup/failure.bundle",
+      "docs/evidence/issue-5/repair-setup/setup-failure.txt",
+      "docs/evidence/issue-5/repair-setup/setup.json",
+      "docs/evidence/issue-5/repair-setup/state.json",
+      "docs/evidence/issue-5/repair-successor/api.jsonl.gz",
+      "docs/evidence/issue-5/repair-successor/consumer-report.md",
+      "docs/evidence/issue-5/repair-successor/evaluator-check.json",
+      "docs/evidence/issue-5/repair-successor/evaluator-tests.txt",
+      "docs/evidence/issue-5/repair-successor/result.bundle",
+      "docs/evidence/issue-5/repair-successor/state.json",
+      "scripts/check.py",
+      "skills/cybercorp/assets/corp/.agents/corp/check.py",
+      "skills/cybercorp/assets/corp/docs/corp/verification.md",
+      "tests/scenarios/preparation_fixture.py",
+      "tests/test_scenario_environment.py",
+      "tests/test_verification.py"
+    ],
+    "ci": {},
+    "dirty": true
+  },
+  "unverified_routes": [
+    {
+      "id": "active-change-specs",
+      "target": "https://github.com/OKFin33/CyberCorp/issues",
+      "status": "active",
+      "reason": "remote; not contacted"
+    },
+    {
+      "id": "current-delivery-focus",
+      "target": "https://github.com/OKFin33/CyberCorp/milestone/1",
+      "status": "active",
+      "reason": "remote; not contacted"
+    }
+  ],
+  "structure": {
+    "documents": 16,
+    "methods": 3,
+    "references": 77,
+    "python_helpers": 6,
+    "spec_self_check": "passed"
+  }
+}
++ /opt/homebrew/opt/python@3.14/bin/python3.14 -m unittest discover -s tests
+...........................................................................................................................
+----------------------------------------------------------------------
+Ran 123 tests in 21.901s
+
+OK

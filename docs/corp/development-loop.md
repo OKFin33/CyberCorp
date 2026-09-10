@@ -13,8 +13,8 @@ Replace `7` with the actual Issue. Read relevant discussions/artifacts behind th
 
 | Actual gap | Action and exit |
 | --- | --- |
-| Applicable implementation/correction exists | work: finish the remaining result and self-check |
-| Unfinished goal lacks near-term work or dependency continuity | plan: form executable work, then advance it |
+| Available work advances a needed delivery result or prerequisite | work: finish the result and self-check |
+| Delivery lacks necessary work or dependency continuity, even with a nonempty queue | plan: fill the gap, then advance it |
 | A reviewable integrated stage lacks independent judgment | review: fix the object and undertake one bounded review |
 | Review found acceptance blockers | work: repair and recheck; plan only for real cross-Issue needs |
 | Final results and evidence hold | plan: verify delivery, shared records and next entry |
@@ -29,6 +29,7 @@ An ordinary PR without review does not itself create review work. Independent re
 - Preparation gap: `.agents/skills/prepare-corp/SKILL.md`.
 - Stage planning, candidate/recheck or delivery: [milestone-delivery.md](milestone-delivery.md); before expensive cross-Issue work use [coordination.md](coordination.md).
 - Owner communication or reply adoption: [communication.md](communication.md), which routes to the current project card.
+- Check setup, version/CI evidence or failure continuation: [verification.md](verification.md).
 
 Read files directly if native skill discovery is unavailable. A fact owner identifies responsibility, not an automatic human approver. Return shared premise changes to affected existing owners before their dependent execution continues.
 

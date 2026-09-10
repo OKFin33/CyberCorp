@@ -1,0 +1,101 @@
+{
+  "source_version": "0.1.0a3",
+  "candidate_version": "0.1.0a5",
+  "refusal": "Target is inside another Git repository; use its real root",
+  "refused_upgrade_changed_files": false,
+  "adapted_paths": [
+    "docs/corp/communication.md",
+    "docs/corp/spec-authoring.md",
+    "docs/corp/milestone-delivery.md",
+    "docs/corp/coordination.md",
+    "docs/corp/spec-protocol.md",
+    "docs/corp/claim-protocol.md",
+    "docs/corp/damaged-history.md",
+    "docs/corp/verification.md",
+    "docs/corp/bootstrap.md",
+    "docs/corp/development-loop.md",
+    ".agents/skills/prepare-corp/SKILL.md",
+    ".agents/skills/review-corp/SKILL.md",
+    ".agents/skills/work-corp/SKILL.md",
+    ".agents/corp/format-event.py",
+    ".agents/corp/repo-context.py",
+    ".agents/corp/check.py",
+    ".agents/corp/spec-checkpoint.py",
+    ".agents/corp/work-state.py",
+    ".agents/corp/enter.py"
+  ],
+  "custom_card_preserved": true,
+  "custom_review_promise_preserved": true,
+  "task_pin_preserved": true,
+  "initial_install_manifest_preserved": true,
+  "project_check_preserved_and_run": true,
+  "portable_check": {
+    "status": "passed",
+    "command": [
+      "python3",
+      ".agents/corp/check.py"
+    ],
+    "python": "3.14.2",
+    "scope": "Local Corp wiring and Git difference; no network or business tests",
+    "errors": [],
+    "git": {
+      "head": null,
+      "base": "4b825dc642cb6eb9a060e54bf8d69288fbee4904",
+      "base_source": "local HEAD plus working tree (initial: whole tree)",
+      "range": "empty tree -> working tree",
+      "tracked_changes": [],
+      "untracked": [
+        ".agents/corp/check.py",
+        ".agents/corp/enter.py",
+        ".agents/corp/format-event.py",
+        ".agents/corp/install.json",
+        ".agents/corp/repo-context.py",
+        ".agents/corp/spec-checkpoint.py",
+        ".agents/corp/work-state.py",
+        ".agents/skills/prepare-corp/SKILL.md",
+        ".agents/skills/review-corp/SKILL.md",
+        ".agents/skills/work-corp/SKILL.md",
+        "AGENTS.md",
+        "README.md",
+        "accepted-work.md",
+        "docs/corp/README.md",
+        "docs/corp/bootstrap.md",
+        "docs/corp/canon-map.yaml",
+        "docs/corp/claim-protocol.md",
+        "docs/corp/communication.md",
+        "docs/corp/coordination.md",
+        "docs/corp/damaged-history.md",
+        "docs/corp/development-loop.md",
+        "docs/corp/milestone-delivery.md",
+        "docs/corp/project.md",
+        "docs/corp/spec-authoring.md",
+        "docs/corp/spec-protocol.md",
+        "docs/corp/verification.md",
+        "docs/owner-guide.md",
+        "tests/check_existing.py"
+      ],
+      "ci": {},
+      "dirty": true
+    },
+    "unverified_routes": [
+      {
+        "id": "active-change-specs",
+        "target": null,
+        "status": "unresolved"
+      },
+      {
+        "id": "current-delivery-focus",
+        "target": null,
+        "status": "unresolved"
+      }
+    ],
+    "structure": {
+      "documents": 15,
+      "methods": 3,
+      "references": 60,
+      "python_helpers": 6,
+      "spec_self_check": "passed"
+    }
+  },
+  "ceiling": "Deliberate local file adaptation and actual checks. It does not establish real project adoption or independent semantic acceptance."
+}

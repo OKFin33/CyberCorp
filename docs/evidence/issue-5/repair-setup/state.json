@@ -1,0 +1,208 @@
+{
+  "main": "b66b48cc9e28e9d17639406a17bc609ff80b2a9a",
+  "serial": 11,
+  "milestone": {
+    "number": 1,
+    "title": "Prepare and begin the accepted project",
+    "description": "Use product.md and existing sources to prepare this project for independent continuation and advance its accepted result. Sources: product.md at b66b48cc9e28e9d17639406a17bc609ff80b2a9a",
+    "state": "open",
+    "html_url": "https://github.com/fixture/receipt-desk/milestone/1"
+  },
+  "issues": {
+    "6": {
+      "id": 1006,
+      "number": 6,
+      "title": "Implement the accepted inventory file library",
+      "body": "<!-- spec:start -->\nbaseline_commit: b66b48cc9e28e9d17639406a17bc609ff80b2a9a\nImplement validated load/save for inputs/format.md at baseline. Round-trip valid records, reject malformed files and duplicate IDs, and preserve old content after invalid saves. Keep the behavior tests in the actual check entry.\nRequired inputs: https://github.com/fixture/receipt-desk/blob/b66b48cc9e28e9d17639406a17bc609ff80b2a9a/product.md and inputs/ at the same commit. Local fixture development authority is in product.md.\n<!-- spec:end -->\n",
+      "state": "open",
+      "state_reason": null,
+      "comments": 8,
+      "created_at": "2026-09-10T03:00:34.989330+00:00",
+      "updated_at": "2026-09-10T03:12:04.194384+00:00",
+      "html_url": "https://github.com/fixture/receipt-desk/issues/6",
+      "labels": [],
+      "milestone": {
+        "number": 1
+      }
+    },
+    "8": {
+      "id": 1008,
+      "number": 8,
+      "title": "Document contributor commands",
+      "body": "<!-- spec:start -->\nbaseline_commit: b66b48cc9e28e9d17639406a17bc609ff80b2a9a\nDocument the current Python/Git and test commands for contributors; do not claim the example-only check proves application behavior.\nRequired inputs: https://github.com/fixture/receipt-desk/blob/b66b48cc9e28e9d17639406a17bc609ff80b2a9a/product.md and inputs/ at the same commit. Local fixture development authority is in product.md.\n<!-- spec:end -->\n",
+      "state": "open",
+      "state_reason": null,
+      "comments": 2,
+      "created_at": "2026-09-10T03:00:34.989330+00:00",
+      "updated_at": "2026-09-10T03:06:31.107694+00:00",
+      "html_url": "https://github.com/fixture/receipt-desk/issues/8",
+      "labels": [],
+      "milestone": {
+        "number": 1
+      }
+    },
+    "9": {
+      "id": 1009,
+      "number": 9,
+      "title": "Improve example check diagnostics",
+      "body": "<!-- spec:start -->\nbaseline_commit: b66b48cc9e28e9d17639406a17bc609ff80b2a9a\nImprove the existing inventory example check so duplicate IDs report the offending ID. Preserve the accepted input schema.\nRequired inputs: https://github.com/fixture/receipt-desk/blob/b66b48cc9e28e9d17639406a17bc609ff80b2a9a/product.md and inputs/ at the same commit. Local fixture development authority is in product.md.\n<!-- spec:end -->\n",
+      "state": "open",
+      "state_reason": null,
+      "comments": 1,
+      "created_at": "2026-09-10T03:00:34.989330+00:00",
+      "updated_at": "2026-09-10T03:00:34.989330+00:00",
+      "html_url": "https://github.com/fixture/receipt-desk/issues/9",
+      "labels": [],
+      "milestone": {
+        "number": 1
+      }
+    }
+  },
+  "comments": {
+    "6": [
+      {
+        "id": 1,
+        "body": "SPEC_ACCEPTED issue=6 spec_sha256=05254ec36c91071580cc72e49527a36f4403b403712cf7aaba26873a996bb9f2 source=https://github.com/fixture/receipt-desk/blob/b66b48cc9e28e9d17639406a17bc609ff80b2a9a/product.md",
+        "created_at": "2026-09-10T03:00:34.989330+00:00",
+        "updated_at": "2026-09-10T03:00:34.989330+00:00",
+        "html_url": "https://github.com/fixture/receipt-desk/issues/6#issuecomment-1",
+        "user": {
+          "login": "fixture-owner"
+        }
+      },
+      {
+        "id": 4,
+        "body": "Bounded implementation and checks of the accepted library; 35 minutes allows implementation, local checks and shared handoff.\n\n```agent-event\n{\"event\":\"claim\",\"instance\":\"aid-v1-d86c5e80-362b-43b9-967e-33e8c2b5d12c\",\"lease_until\":\"2026-09-10T03:38:07.494491+00:00\",\"base_commit\":\"b66b48cc9e28e9d17639406a17bc609ff80b2a9a\",\"branch\":\"codex/inventory-library\",\"scope\":[\"inventory.py\",\"tests/test_inventory.py\",\"README.md\"]}\n```\n",
+        "created_at": "2026-09-10T03:03:07.609138+00:00",
+        "updated_at": "2026-09-10T03:03:07.609138+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/6#issuecomment-4"
+      },
+      {
+        "id": 6,
+        "body": "```agent-event\n{\"event\":\"checkpoint\",\"instance\":\"aid-v1-d86c5e80-362b-43b9-967e-33e8c2b5d12c\",\"claim\":4,\"recovery\":{\"commit\":\"5331b0bbab3ece9e94ddac3fe24def2ddf7a2180\",\"branch\":\"codex/inventory-library\",\"artifacts\":[\"https://github.com/fixture/receipt-desk/pull/21\",\"https://github.com/fixture/receipt-desk/blob/5331b0bbab3ece9e94ddac3fe24def2ddf7a2180/README.md\"],\"done\":\"Implemented inventory.py load/save/validate and InventoryError; documented usable API; real behavior tests connected to unittest discovery. Chose Issue 6 because the accepted library product had no implementation; Issues 8 and 9 improve documentation/example diagnostics without delivering that capability. Published and verified exact shared feature commit.\",\"checks\":[\"Python 3.14.2 at 5331b0bbab3ece9e94ddac3fe24def2ddf7a2180: python3 -m unittest discover -s tests \u2014 11 tests passed\",\"python3 .agents/corp/check.py --base b66b48cc9e28e9d17639406a17bc609ff80b2a9a \u2014 passed with the three-file candidate diff and clean tree\",\"Separate program imported the library, round-tripped both supplied CSV records through JSON and preserved exact bytes on duplicate save \u2014 passed\",\"git ls-remote shared refs/heads/codex/inventory-library matched candidate SHA\"],\"remaining\":\"Independent judgment of the reviewable library result, local integration and formal stage delivery are unverified. No CI or real GitHub publication. Issues 8 and 9 remain open; contributor docs must use the new actual behavior entry.\",\"next\":\"Fetch shared/codex/inventory-library at the pinned commit, recover Issue 6 and PR 21, run README checks. Use development-loop and milestone-delivery to prepare applicable independent stage review with a non-implementer; do not treat self-checks as independent acceptance. Stop dependent acceptance if required inputs or candidate change.\",\"waiting_on\":[\"Independent reviewer through generated stage-review process; no agent spawned by this execution.\"]}}\n```\n",
+        "created_at": "2026-09-10T03:06:31.178612+00:00",
+        "updated_at": "2026-09-10T03:06:31.178612+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/6#issuecomment-6"
+      },
+      {
+        "id": 7,
+        "body": "```agent-event\n{\"event\":\"release\",\"instance\":\"aid-v1-d86c5e80-362b-43b9-967e-33e8c2b5d12c\",\"claim\":4,\"checkpoint\":6,\"reason\":\"Implementation and self-checks published in PR #21; hand off remaining independent review/integration/stage acceptance. No active writes remain.\"}\n```\n",
+        "created_at": "2026-09-10T03:06:31.423821+00:00",
+        "updated_at": "2026-09-10T03:06:31.423821+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/6#issuecomment-7"
+      },
+      {
+        "id": 8,
+        "body": "```agent-event\n{\"event\":\"claim\",\"instance\":\"aid-v1-ad12b001-8d0a-4d6d-ac6f-a5565522559a\",\"lease_until\":\"2026-09-10T03:22:02.629387+00:00\",\"base_commit\":\"5331b0bbab3ece9e94ddac3fe24def2ddf7a2180\",\"branch\":\"codex/inventory-library\",\"scope\":[\"check entry and deliberate synthetic route failure setup\"]}\n```",
+        "created_at": "2026-09-10T03:12:02.906560+00:00",
+        "updated_at": "2026-09-10T03:12:02.906560+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/6#issuecomment-8"
+      },
+      {
+        "id": 9,
+        "body": "Evaluator-supplied synthetic continuation input. The earlier library implementation remains at 5331b0bbab3ece9e94ddac3fe24def2ddf7a2180. This setup connected the actual project check entry and deliberately introduced a route failure in a new local candidate 22b6afb1868cf59018885e4a0fe72f20ecdd4437. It does not attribute this injection to the earlier consumer.\n\nCommand: python3 scripts/check.py\nPython: Python 3.14.2\nExit: 1\n\n+ /opt/homebrew/opt/python@3.14/bin/python3.14 .agents/corp/check.py\n{\n  \"status\": \"failed\",\n  \"command\": [\n    \"python3\",\n    \".agents/corp/check.py\"\n  ],\n  \"python\": \"3.14.2\",\n  \"scope\": \"Local Corp wiring and Git difference; no network or business tests\",\n  \"errors\": [\n    \"Missing local target: verification-entry.md\"\n  ],\n  \"git\": {\n    \"head\": \"22b6afb1868cf59018885e4a0fe72f20ecdd4437\",\n    \"base\": \"22b6afb1868cf59018885e4a0fe72f20ecdd4437\",\n    \"base_source\": \"local HEAD plus working tree (initial: whole tree)\",\n    \"range\": \"22b6afb1868cf59018885e4a0fe72f20ecdd4437 -> working tree\",\n    \"tracked_changes\": [],\n    \"untracked\": [],\n    \"ci\": {},\n    \"dirty\": false\n  },\n  \"unverified_routes\": [\n    {\n      \"id\": \"active-change-specs\",\n      \"target\": \"https://github.com/fixture/receipt-desk/issues\",\n      \"status\": \"active\",\n      \"reason\": \"remote; not contacted\"\n    },\n    {\n      \"id\": \"current-delivery-focus\",\n      \"target\": \"https://github.com/fixture/receipt-desk/milestone/1\",\n      \"status\": \"active\",\n      \"reason\": \"remote; not contacted\"\n    }\n  ]\n}\n",
+        "created_at": "2026-09-10T03:12:03.475577+00:00",
+        "updated_at": "2026-09-10T03:12:03.475577+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/6#issuecomment-9"
+      },
+      {
+        "id": 10,
+        "body": "```agent-event\n{\"event\":\"checkpoint\",\"instance\":\"aid-v1-ad12b001-8d0a-4d6d-ac6f-a5565522559a\",\"claim\":8,\"recovery\":{\"commit\":\"22b6afb1868cf59018885e4a0fe72f20ecdd4437\",\"branch\":\"codex/inventory-library\",\"artifacts\":[\"https://github.com/fixture/receipt-desk/issues/6#issuecomment-9\",\"https://github.com/fixture/receipt-desk/pull/21\"],\"done\":\"Library implementation retained; actual project check entry connected. Synthetic setup stopped with a reproducible check failure.\",\"checks\":[\"python3 scripts/check.py failed; exact version, output and deliberate setup attribution in linked native comment.\"],\"remaining\":\"Repair the failed check within existing work and verify relevant project behavior; independent review and final delivery remain unverified.\",\"next\":\"Recover the fixed candidate and native failure; reproduce through the actual project entry and continue owned correction.\",\"waiting_on\":[]}}\n```",
+        "created_at": "2026-09-10T03:12:03.897630+00:00",
+        "updated_at": "2026-09-10T03:12:03.897630+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/6#issuecomment-10"
+      },
+      {
+        "id": 11,
+        "body": "```agent-event\n{\"event\":\"release\",\"instance\":\"aid-v1-ad12b001-8d0a-4d6d-ac6f-a5565522559a\",\"claim\":8,\"checkpoint\":10,\"reason\":\"Synthetic predecessor setup has left; shared failure is ready for a fresh independent consumer.\"}\n```",
+        "created_at": "2026-09-10T03:12:04.194384+00:00",
+        "updated_at": "2026-09-10T03:12:04.194384+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/6#issuecomment-11"
+      }
+    ],
+    "8": [
+      {
+        "id": 2,
+        "body": "SPEC_ACCEPTED issue=8 spec_sha256=9e7acb648663392ecd6490d7faa5a40ecb5db6939842497a0f5bedfd2de4f039 source=https://github.com/fixture/receipt-desk/blob/b66b48cc9e28e9d17639406a17bc609ff80b2a9a/product.md",
+        "created_at": "2026-09-10T03:00:34.989330+00:00",
+        "updated_at": "2026-09-10T03:00:34.989330+00:00",
+        "html_url": "https://github.com/fixture/receipt-desk/issues/8#issuecomment-2",
+        "user": {
+          "login": "fixture-owner"
+        }
+      },
+      {
+        "id": 5,
+        "body": "Shared premise update from Issue #6: candidate 5331b0bbab3ece9e94ddac3fe24def2ddf7a2180 on shared/codex/inventory-library (PR #21) adds inventory.py and 10 library behavior tests; unittest discovery now runs 11 tests including the prior example test. README now documents the actual API and test command. This candidate is not yet integrated into main or independently reviewed. Please recover its outcome before documenting contributor commands, avoiding the stale example-only premise. No change to Issue #8 accepted scope.",
+        "created_at": "2026-09-10T03:06:31.107694+00:00",
+        "updated_at": "2026-09-10T03:06:31.107694+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/8#issuecomment-5"
+      }
+    ],
+    "9": [
+      {
+        "id": 3,
+        "body": "SPEC_ACCEPTED issue=9 spec_sha256=2ce2b92e2d0e80808fad3bdb8506c940ae0fb49504ee28af98253b135fab2e2c source=https://github.com/fixture/receipt-desk/blob/b66b48cc9e28e9d17639406a17bc609ff80b2a9a/product.md",
+        "created_at": "2026-09-10T03:00:34.989330+00:00",
+        "updated_at": "2026-09-10T03:00:34.989330+00:00",
+        "html_url": "https://github.com/fixture/receipt-desk/issues/9#issuecomment-3",
+        "user": {
+          "login": "fixture-owner"
+        }
+      }
+    ]
+  },
+  "pulls": {
+    "21": {
+      "number": 21,
+      "title": "Implement validated atomic inventory file library",
+      "body": "Implements Issue #6: other Python programs can load, validate and atomically save format-v1 inventory documents. Invalid content and duplicate IDs are rejected before modifying a destination. Extra fields and repeated JSON keys are rejected; the README documents the API and its atomic-replacement boundary.\n\nSpec pin: Issue #6, spec_sha256=05254ec36c91071580cc72e49527a36f4403b403712cf7aaba26873a996bb9f2, acceptance https://github.com/fixture/receipt-desk/issues/6#issuecomment-1.\n\nCandidate: 5331b0bbab3ece9e94ddac3fe24def2ddf7a2180; base b66b48cc9e28e9d17639406a17bc609ff80b2a9a. Exact candidate is available on local shared/codex/inventory-library (verified using git ls-remote).\n\nValidation on Python 3.14.2:\n- python3 -m unittest discover -s tests: 11 tests passed, including invalid documents, exact-byte preservation, replacement boundary and failure cleanup.\n- python3 .agents/corp/check.py --base b66b48cc9e28e9d17639406a17bc609ff80b2a9a: passed; local route/helper/diff evidence only.\n- A separate caller imported inventory, loaded inputs/inventory.csv, saved and reloaded both records, then attempted a duplicate-ID save and verified unchanged old bytes: passed.\n\nKnown limits: no writer locking or power-loss durability promise. No independent review, CI run, main integration or formal stage acceptance has occurred. This is an offline fixture PR and local bare-Git publication, not real GitHub publication. Issue #8 remains contributor-command work; its README premise has changed from example-only tests to real library tests. Issue #9 remains supplied-example diagnostics work.\n\nSuccessor: recover Issue #6 checkpoint and this exact branch; run the documented checks and the generated development loop to organize any applicable independent stage review. The implementer has not reviewed their own candidate independently.\n",
+      "state": "open",
+      "merged": false,
+      "html_url": "https://github.com/fixture/receipt-desk/pull/21",
+      "head": {
+        "sha": "22b6afb1868cf59018885e4a0fe72f20ecdd4437",
+        "ref": "codex/inventory-library"
+      },
+      "base": {
+        "sha": "b66b48cc9e28e9d17639406a17bc609ff80b2a9a",
+        "ref": "main"
+      }
+    }
+  },
+  "reviews": {},
+  "live_default": true,
+  "milestones": {
+    "1": {
+      "number": 1,
+      "title": "Prepare and begin the accepted project",
+      "description": "Use product.md and existing sources to prepare this project for independent continuation and advance its accepted result. Sources: product.md at b66b48cc9e28e9d17639406a17bc609ff80b2a9a",
+      "state": "open",
+      "html_url": "https://github.com/fixture/receipt-desk/milestone/1"
+    }
+  }
+}
