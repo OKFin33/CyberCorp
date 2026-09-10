@@ -1,0 +1,37 @@
++ /opt/homebrew/opt/python@3.14/bin/python3.14 .agents/corp/check.py
+{
+  "status": "failed",
+  "command": [
+    "python3",
+    ".agents/corp/check.py"
+  ],
+  "python": "3.14.2",
+  "scope": "Local Corp wiring and Git difference; no network or business tests",
+  "errors": [
+    "Missing local target: verification-entry.md"
+  ],
+  "git": {
+    "head": "22b6afb1868cf59018885e4a0fe72f20ecdd4437",
+    "base": "22b6afb1868cf59018885e4a0fe72f20ecdd4437",
+    "base_source": "local HEAD plus working tree (initial: whole tree)",
+    "range": "22b6afb1868cf59018885e4a0fe72f20ecdd4437 -> working tree",
+    "tracked_changes": [],
+    "untracked": [],
+    "ci": {},
+    "dirty": false
+  },
+  "unverified_routes": [
+    {
+      "id": "active-change-specs",
+      "target": "https://github.com/fixture/receipt-desk/issues",
+      "status": "active",
+      "reason": "remote; not contacted"
+    },
+    {
+      "id": "current-delivery-focus",
+      "target": "https://github.com/fixture/receipt-desk/milestone/1",
+      "status": "active",
+      "reason": "remote; not contacted"
+    }
+  ]
+}

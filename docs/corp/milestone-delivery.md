@@ -1,6 +1,6 @@
 # Deliver the current stage
 
-Read the accepted goal, current native Milestone and its actual outcomes. First project development reuses or establishes a coarse route covering the agreed goal: distant stages need outcomes and main prerequisites; the current stage needs executable work. Revisit it when dependencies change, not on a fixed planning schedule. Corp establishment/preparation (Phase 1/2) is separate from the project's own stage names and development acceptance.
+Read the accepted goal, current native Milestone and actual outcomes. During Phase 2, reuse or form a coarse route covering the whole agreement: derive remaining deliverables from use/acceptance scenarios, group outcomes with meaningful use, integration or acceptance, and order by agreed priorities, value and actual dependencies. Distant stages need outcomes and main prerequisites; the near term needs executable work. Revisit affected parts when outcomes or dependencies change. Corp preparation is separate from the project's stage names and development acceptance.
 
 ## Plan from the gap
 
@@ -8,7 +8,7 @@ The native Milestone owns this stage's outcome, scope, necessary premises, accep
 
 Before deep cross-Issue planning, stage review or work generation, use [coordination.md](coordination.md): discover existing open and closed entries, declare and converge, then claim the bounded outcome. Reuse applicable open work. A new round needs a real remaining result, not a reopened completed record or an empty review/integration ticket. Within accepted goals and authority, choose ordinary ordering, task expansion, reversible internal designs and repairs. Changes to commitments, acceptance, agreed priorities or authority need the appropriate Owner decision through [communication.md](communication.md).
 
-If the queue is empty but the goal remains unfinished, form work with obtainable inputs, an explicit result and direct verification, then advance that work. A plan or a new Issue alone is not the result. Keep a narrow assignment bounded; autonomous project work continues against the stage's actual gaps.
+Compare existing work and holders with the delivery gap. Reuse work that advances a necessary result or prerequisite; if coverage or dependency continuity is missing, form that work and advance it even when the queue is not empty. Work needs obtainable inputs, an explicit result and direct verification. Infrastructure may itself be the deliverable or a prerequisite. Parallel work follows actual capability/input dependencies, not whether an earlier Milestone is closed. A plan or new Issue alone is not the result; ordinary selection adds no report or full replanning ritual. Keep narrow assignments bounded and respect existing holders.
 
 ## Ready for independent stage review
 

@@ -1,0 +1,90 @@
+{
+  "source_version": "0.1.0a3",
+  "candidate_version": "0.1.0a5",
+  "entry": "Actual old/new scripts/cybercorp.py CLI --brief invocations against resolved project root",
+  "refusal": "{\"status\": \"error\", \"message\": \"Corp already installed with different inputs/package; adapt the existing owners instead of overwriting\"}",
+  "refusal_exit": 2,
+  "refused_upgrade_changed_files": false,
+  "adapted_paths": [
+    "docs/corp/communication.md",
+    "docs/corp/spec-authoring.md",
+    "docs/corp/milestone-delivery.md",
+    "docs/corp/coordination.md",
+    "docs/corp/spec-protocol.md",
+    "docs/corp/claim-protocol.md",
+    "docs/corp/damaged-history.md",
+    "docs/corp/verification.md",
+    "docs/corp/bootstrap.md",
+    "docs/corp/development-loop.md",
+    ".agents/skills/prepare-corp/SKILL.md",
+    ".agents/skills/review-corp/SKILL.md",
+    ".agents/skills/work-corp/SKILL.md",
+    ".agents/corp/format-event.py",
+    ".agents/corp/repo-context.py",
+    ".agents/corp/check.py",
+    ".agents/corp/spec-checkpoint.py",
+    ".agents/corp/work-state.py",
+    ".agents/corp/enter.py"
+  ],
+  "custom_card_preserved": true,
+  "custom_review_promise_preserved": true,
+  "local_spec_hash_before_after": "1fd585fc86b5a1d9a08530db046bb95d806472b45655c0e25002b3cdaee8be7c",
+  "local_checkpoint_preserved": true,
+  "initial_install_manifest_preserved": true,
+  "project_check_preserved_and_run": true,
+  "portable_check": {
+    "status": "passed",
+    "command": [
+      "python3",
+      ".agents/corp/check.py"
+    ],
+    "python": "3.14.2",
+    "scope": "Local Corp wiring and Git difference; no network or business tests",
+    "errors": [],
+    "git": {
+      "head": "63e203b5302697fdc7f12a45f5fc041d9b8568f1",
+      "base": "63e203b5302697fdc7f12a45f5fc041d9b8568f1",
+      "base_source": "local HEAD plus working tree (initial: whole tree)",
+      "range": "63e203b5302697fdc7f12a45f5fc041d9b8568f1 -> working tree",
+      "tracked_changes": [
+        ".agents/skills/prepare-corp/SKILL.md",
+        ".agents/skills/review-corp/SKILL.md",
+        ".agents/skills/work-corp/SKILL.md",
+        "docs/corp/claim-protocol.md",
+        "docs/corp/coordination.md",
+        "docs/corp/development-loop.md"
+      ],
+      "untracked": [
+        ".agents/corp/check.py",
+        "accepted-checkpoint.md",
+        "accepted-work.md",
+        "docs/corp/communication.md",
+        "docs/corp/milestone-delivery.md",
+        "docs/corp/verification.md"
+      ],
+      "ci": {},
+      "dirty": true
+    },
+    "unverified_routes": [
+      {
+        "id": "active-change-specs",
+        "target": null,
+        "status": "unresolved"
+      },
+      {
+        "id": "current-delivery-focus",
+        "target": null,
+        "status": "unresolved"
+      }
+    ],
+    "structure": {
+      "documents": 15,
+      "methods": 3,
+      "references": 60,
+      "python_helpers": 6,
+      "spec_self_check": "passed"
+    }
+  },
+  "excluded_initial_probe": "old-project-adoption-initial.json hit the enclosing-repository guard because an unresolved symlink path was passed directly to install(); it is not upgrade-refusal evidence.",
+  "ceiling": "Actual CLI refusal, deliberate local adaptation and executed local checks. Fixed Spec/checkpoint are local fixture records, not server acceptance. No real project adoption or independent semantic acceptance is claimed."
+}

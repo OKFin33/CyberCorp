@@ -1,0 +1,259 @@
+{
+  "main": "b821805165a8f94412c4c399f578319243f29532",
+  "serial": 14,
+  "milestone": {
+    "number": 1,
+    "title": "Prepare and begin the accepted project",
+    "description": "Use product.md and existing sources to prepare this project for independent continuation and advance its accepted result. Sources: product.md at 1ca41261f87b505610a70c5018f2bafac30c4b97",
+    "state": "open",
+    "html_url": "https://github.com/fixture/receipt-desk/milestone/1"
+  },
+  "issues": {
+    "8": {
+      "id": 1008,
+      "number": 8,
+      "title": "Document contributor commands",
+      "body": "<!-- spec:start -->\nbaseline_commit: 1ca41261f87b505610a70c5018f2bafac30c4b97\nDocument the current Python/Git and test commands for contributors; do not claim the example-only check proves application behavior.\nRequired inputs: https://github.com/fixture/receipt-desk/blob/1ca41261f87b505610a70c5018f2bafac30c4b97/product.md and inputs/ at the same commit. Local fixture development authority is in product.md.\n<!-- spec:end -->\n",
+      "state": "closed",
+      "state_reason": null,
+      "comments": 5,
+      "created_at": "2026-09-10T03:00:34.989104+00:00",
+      "updated_at": "2026-09-10T03:08:42.421443+00:00",
+      "html_url": "https://github.com/fixture/receipt-desk/issues/8",
+      "labels": [],
+      "milestone": {
+        "number": 1
+      }
+    },
+    "9": {
+      "id": 1009,
+      "number": 9,
+      "title": "Improve example check diagnostics",
+      "body": "<!-- spec:start -->\nbaseline_commit: 1ca41261f87b505610a70c5018f2bafac30c4b97\nImprove the existing inventory example check so duplicate IDs report the offending ID. Preserve the accepted input schema.\nRequired inputs: https://github.com/fixture/receipt-desk/blob/1ca41261f87b505610a70c5018f2bafac30c4b97/product.md and inputs/ at the same commit. Local fixture development authority is in product.md.\n<!-- spec:end -->\n",
+      "state": "open",
+      "state_reason": null,
+      "comments": 1,
+      "created_at": "2026-09-10T03:00:34.989104+00:00",
+      "updated_at": "2026-09-10T03:00:34.989104+00:00",
+      "html_url": "https://github.com/fixture/receipt-desk/issues/9",
+      "labels": [],
+      "milestone": {
+        "number": 1
+      }
+    },
+    "11": {
+      "id": 1011,
+      "number": 11,
+      "title": "Prepare whole-project route and development handoff",
+      "body": "<!-- spec:start -->\nbaseline_commit: 1ca41261f87b505610a70c5018f2bafac30c4b97\nOutcome: prepare Kit Desk's whole accepted scope for another Corpo to begin useful development from shared repository/native work alone.\nScope: adopt existing project/input facts into accessible technical owners; form a coarse full-scope delivery route, actionable near-term architecture and first executable work; document the real commands and remaining scaffold gaps; publish local Git preparation and recoverable handoff.\nAcceptance: another instance can locate product/inputs/maintenance boundaries, understand all five capabilities and stage prerequisites, identify the first work and direct checks, and distinguish input checks/preparation from unimplemented application behavior. Verify the shared commit and native work readback; run existing unittest and Corp checks.\nRequired Canon: https://github.com/fixture/receipt-desk/blob/1ca41261f87b505610a70c5018f2bafac30c4b97/product.md and https://github.com/fixture/receipt-desk/blob/1ca41261f87b505610a70c5018f2bafac30c4b97/inputs/format.md and https://github.com/fixture/receipt-desk/blob/1ca41261f87b505610a70c5018f2bafac30c4b97/inputs/inventory.csv plus project-owned Corp methods at that commit.\nAuthority: product.md authorizes ordinary design, native fixture work and local shared Git/main publication. No real network, external services or real GitHub merge. Do not implement the application or claim business delivery in this preparation task.\nUnknowns/stops: ordinary internal choices are delegated; stop affected work for a real product/input contradiction or missing authority. No independent successor run is authorized within this task, so readiness remains preparer's verified handoff until separately consumed.\nLasting facts: product.md owns goals; inputs/format.md owns inventory file format; docs/architecture.md will own module/data/command boundaries; native Milestones own stage agreements and Issue Specs own executable outcomes. README and Corp entry route to those owners.\n<!-- spec:end -->",
+      "state": "closed",
+      "state_reason": null,
+      "comments": 7,
+      "created_at": "2026-09-10T03:02:53.106771+00:00",
+      "updated_at": "2026-09-10T03:08:46.619813+00:00",
+      "html_url": "https://github.com/fixture/receipt-desk/issues/11",
+      "labels": [
+        {
+          "name": "work:coordination"
+        }
+      ],
+      "milestone": {
+        "number": 1
+      }
+    },
+    "12": {
+      "id": 1012,
+      "number": 12,
+      "title": "Implement persistent inventory import and available-item search",
+      "body": "<!-- spec:start -->\nbaseline_commit: b821805165a8f94412c4c399f578319243f29532\nOutcome: a volunteer can import inventory CSV and find available equipment by name/category across separate CLI invocations. This is the first runnable application slice for Milestone 1.\nRequired versioned inputs: https://github.com/fixture/receipt-desk/blob/b821805165a8f94412c4c399f578319243f29532/product.md (goal/authority), https://github.com/fixture/receipt-desk/blob/b821805165a8f94412c4c399f578319243f29532/inputs/inventory.csv (fictional sample), https://github.com/fixture/receipt-desk/blob/b821805165a8f94412c4c399f578319243f29532/inputs/format.md (accepted persisted inventory JSON), https://github.com/fixture/receipt-desk/blob/b821805165a8f94412c4c399f578319243f29532/docs/architecture.md (adopted CSV/storage/CLI/component boundaries), and https://github.com/fixture/receipt-desk/blob/b821805165a8f94412c4c399f578319243f29532/README.md (actual contributor checks). Use project-owned Corp methods at the same baseline. Preparation evidence is Issue 11; inspect its shared result rather than trusting only closure.\nScope and maintenance: create the missing repository-root kitdesk package, CLI entrypoint, CSV validation/filter logic and inventory storage boundary described in docs/architecture.md; add tests/test_inventory.py and tests/test_cli.py to standard unittest discovery; update README when commands really run. There is currently no application scaffold: creating the minimal runnable package is owned by this work, not an unavailable prerequisite. Preserve tests/test_inputs.py's separate Issue 9 work.\nInterfaces: python3 -m kitdesk --data-dir PATH import CSV; python3 -m kitdesk --data-dir PATH search [--name TEXT] [--category TEXT]. Persist inventory.json in accepted version-1 format. Filters are case-insensitive substrings combined with AND; output id,name,category CSV sorted by ID with a header even for no matches. Every item is available before loan integration.\nAcceptance: import inputs/inventory.csv in a temporary directory then query in another process and obtain K1 for tripod/camera and K2 for audio. No-filter lists both; combined filters and no matches are correct. Duplicate/empty/whitespace IDs, invalid fields, malformed rows and wrong CSV headers fail with nonzero exit and actionable stderr, without changing existing inventory bytes or creating an inventory on first-import failure. Search rejects corrupt/unsupported JSON clearly without resetting state. Inspect persisted JSON with the standard JSON reader to prove accepted schema. No third-party dependency or network is required.\nDirect checks: python3 -m unittest discover -s tests must include the new unit/subprocess scenarios; python3 .agents/corp/check.py; invoke the real entrypoint with --help and the sample import/search round trip. Record exact shared candidate SHA and results. Test results establish only the checked behavior; Milestone 1 acceptance still follows its fixed integrated candidate and independent review trigger.\nBoundaries/unknowns: no checkout, return or loan export implementation in this issue; all remain mandatory in linked Milestone 2. Loan record schema and later command spelling are deliberately deferred. Concurrency beyond sequential separate invocations is outside initial scope. If an existing active holder, changed required pin or true source conflict affects this slice, stop that scope and use the current Corp coordination/Spec procedure; resolve ordinary internal design directly.\nLasting facts: code/tests own implementation and checks; docs/architecture.md owns changed shared interfaces; inputs/format.md retains inventory schema; README owns actually runnable commands; Milestone/Issue comments own progress and exact-version evidence. Local commits and local shared Git publication are authorized by product.md; no real GitHub merge/network or external notifications.\n<!-- spec:end -->",
+      "state": "open",
+      "state_reason": null,
+      "comments": 1,
+      "created_at": "2026-09-10T03:07:19.916471+00:00",
+      "updated_at": "2026-09-10T03:07:20.272500+00:00",
+      "html_url": "https://github.com/fixture/receipt-desk/issues/12",
+      "labels": [
+        {
+          "name": "work:implementation"
+        }
+      ],
+      "milestone": {
+        "number": 1
+      }
+    }
+  },
+  "comments": {
+    "8": [
+      {
+        "id": 1,
+        "body": "SPEC_ACCEPTED issue=8 spec_sha256=55dcfaa1b77c493d9d3bfd77b163dfcffd6721f18bf319109fdc8fb16d338e29 source=https://github.com/fixture/receipt-desk/blob/1ca41261f87b505610a70c5018f2bafac30c4b97/product.md",
+        "created_at": "2026-09-10T03:00:34.989104+00:00",
+        "updated_at": "2026-09-10T03:00:34.989104+00:00",
+        "html_url": "https://github.com/fixture/receipt-desk/issues/8#issuecomment-1",
+        "user": {
+          "login": "fixture-owner"
+        }
+      },
+      {
+        "id": 5,
+        "body": "Bounded preparation/documentation session, up to 50 minutes; checkpoint and release before exit. Issue 11 coordinates, Issue 8 retains contributor-command ownership.\n\n```agent-event\n{\"event\":\"claim\",\"instance\":\"aid-v1-f07b46f3-5bba-438a-af88-0203a32ab6a7\",\"lease_until\":\"2026-09-10T03:53:43.942025+00:00\",\"base_commit\":\"1ca41261f87b505610a70c5018f2bafac30c4b97\",\"branch\":\"codex/prepare-kit-desk\",\"scope\":[\"README.md contributor commands\"]}\n```\n",
+        "created_at": "2026-09-10T03:03:44.092470+00:00",
+        "updated_at": "2026-09-10T03:03:44.092470+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/8#issuecomment-5"
+      },
+      {
+        "id": 9,
+        "body": "```agent-event\n{\"event\":\"checkpoint\",\"instance\":\"aid-v1-f07b46f3-5bba-438a-af88-0203a32ab6a7\",\"claim\":5,\"recovery\":{\"commit\":\"b821805165a8f94412c4c399f578319243f29532\",\"branch\":\"codex/prepare-kit-desk\",\"artifacts\":[\"https://github.com/fixture/receipt-desk/blob/b821805165a8f94412c4c399f578319243f29532/README.md\",\"https://github.com/fixture/receipt-desk/blob/b821805165a8f94412c4c399f578319243f29532/docs/corp/README.md\",\"https://github.com/fixture/receipt-desk/blob/b821805165a8f94412c4c399f578319243f29532/docs/architecture.md\",\"https://github.com/fixture/receipt-desk/issues/12#issuecomment-7\",\"https://github.com/fixture/receipt-desk/milestone/1\",\"https://github.com/fixture/receipt-desk/milestone/2\"],\"done\":\"README current Python/Git/test/discovery commands documented with example-only evidence limit; integrated on local shared/main.\",\"checks\":[\"python3 -m unittest discover -s tests: passed 1 supplied-input test on clean b821805165a8f94412c4c399f578319243f29532 (no application behavior coverage)\",\"python3 .agents/corp/check.py: passed on clean b821805165a8f94412c4c399f578319243f29532; 15 documents, 3 methods, 6 Python helpers; remote routes separately observed with offline repo-context\",\"git diff --check: passed\",\"git ls-remote shared refs/heads/main refs/heads/codex/prepare-kit-desk: both equal b821805165a8f94412c4c399f578319243f29532\",\"repo-context landing and Issue 12: observed without errors, focus 1 discovers work, accepted Spec matched, no claim\"],\"remaining\":\"No remaining contributor-command scope; update runnable application examples when Issue 12 implements them.\",\"next\":\"Continue Issue 12 from the shared baseline after confirming Issue 11 preparation result and native dependency. Read current Spec and claim in a new instance. Missing/scoped input or authority conflicts pause only dependent work.\",\"waiting_on\":[]}}\n```\n",
+        "created_at": "2026-09-10T03:08:39.485116+00:00",
+        "updated_at": "2026-09-10T03:08:39.485116+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/8#issuecomment-9"
+      },
+      {
+        "id": 10,
+        "body": "```agent-event\n{\"event\":\"release\",\"instance\":\"aid-v1-f07b46f3-5bba-438a-af88-0203a32ab6a7\",\"claim\":5,\"checkpoint\":9,\"reason\":\"Bounded preparation/documentation result integrated and handed off; exiting without claiming application development.\"}\n```\n",
+        "created_at": "2026-09-10T03:08:41.003111+00:00",
+        "updated_at": "2026-09-10T03:08:41.003111+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/8#issuecomment-10"
+      },
+      {
+        "id": 11,
+        "body": "README current Python/Git/test/discovery commands documented with example-only evidence limit; integrated on local shared/main.\n\nEvidence/checkpoint: https://github.com/fixture/receipt-desk/issues/8#issuecomment-9; claim released at https://github.com/fixture/receipt-desk/issues/8#issuecomment-10. No remaining contributor-command scope; update runnable application examples when Issue 12 implements them.\n\nRecovery: start at docs/corp/README.md on shared/main b821805165a8f94412c4c399f578319243f29532, then native Issue 12 and its accepted Spec. Fixture main was advanced by authorized local Git push; no PR merge or real network. No stage candidate exists yet, so no stage review or project delivery is asserted.",
+        "created_at": "2026-09-10T03:08:42.343526+00:00",
+        "updated_at": "2026-09-10T03:08:42.343526+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/8#issuecomment-11"
+      }
+    ],
+    "9": [
+      {
+        "id": 2,
+        "body": "SPEC_ACCEPTED issue=9 spec_sha256=7e953bf0e3010671932fe6c1184bda359e60742e7382c86580c3b04e004ed855 source=https://github.com/fixture/receipt-desk/blob/1ca41261f87b505610a70c5018f2bafac30c4b97/product.md",
+        "created_at": "2026-09-10T03:00:34.989104+00:00",
+        "updated_at": "2026-09-10T03:00:34.989104+00:00",
+        "html_url": "https://github.com/fixture/receipt-desk/issues/9#issuecomment-2",
+        "user": {
+          "login": "fixture-owner"
+        }
+      }
+    ],
+    "11": [
+      {
+        "id": 3,
+        "body": "SPEC_ACCEPTED issue=11 spec_sha256=78cda7fa884c0c7d3711adddd8b616c44ab91bc224d9e6cf0b64aa315cd24a3e source=https://github.com/fixture/receipt-desk/blob/1ca41261f87b505610a70c5018f2bafac30c4b97/product.md",
+        "created_at": "2026-09-10T03:03:20.903390+00:00",
+        "updated_at": "2026-09-10T03:03:20.903390+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/11#issuecomment-3"
+      },
+      {
+        "id": 4,
+        "body": "Bounded preparation/documentation session, up to 50 minutes; checkpoint and release before exit. Issue 11 coordinates, Issue 8 retains contributor-command ownership.\n\n```agent-event\n{\"event\":\"claim\",\"instance\":\"aid-v1-f07b46f3-5bba-438a-af88-0203a32ab6a7\",\"lease_until\":\"2026-09-10T03:53:43.441579+00:00\",\"base_commit\":\"1ca41261f87b505610a70c5018f2bafac30c4b97\",\"branch\":\"codex/prepare-kit-desk\",\"scope\":[\"docs/architecture.md\",\"docs/corp/\",\"native milestone route and executable work\"]}\n```\n",
+        "created_at": "2026-09-10T03:03:43.580170+00:00",
+        "updated_at": "2026-09-10T03:03:43.580170+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/11#issuecomment-4"
+      },
+      {
+        "id": 6,
+        "body": "Planning convergence: no competing coordination entry or active holder was found. Issue 8 is retained and claimed for README command documentation; Issue 9 remains a nonblocking example-check improvement. Native Milestone 1 now owns import/search; Milestone 2 owns the lending cycle and export. CSV is the user import boundary and inputs/format.md remains the accepted JSON persistence owner, so both supplied inputs are adopted without replacing their distinct contracts.",
+        "created_at": "2026-09-10T03:04:34.785677+00:00",
+        "updated_at": "2026-09-10T03:04:34.785677+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/11#issuecomment-6"
+      },
+      {
+        "id": 8,
+        "body": "First executable work is Issue 12, accepted at https://github.com/fixture/receipt-desk/issues/12#issuecomment-7, in the actual focus Milestone 1. It owns missing runnable scaffolding and the import/search behavior slice; it is natively blocked by this preparation result, not Issue 9. Fixed inputs are available at shared commit b821805165a8f94412c4c399f578319243f29532. All remaining accepted capabilities are retained in Milestone 2, where executable work is refined from actual inventory interfaces at stage entry.",
+        "created_at": "2026-09-10T03:07:20.598360+00:00",
+        "updated_at": "2026-09-10T03:07:20.598360+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/11#issuecomment-8"
+      },
+      {
+        "id": 12,
+        "body": "```agent-event\n{\"event\":\"checkpoint\",\"instance\":\"aid-v1-f07b46f3-5bba-438a-af88-0203a32ab6a7\",\"claim\":4,\"recovery\":{\"commit\":\"b821805165a8f94412c4c399f578319243f29532\",\"branch\":\"codex/prepare-kit-desk\",\"artifacts\":[\"https://github.com/fixture/receipt-desk/blob/b821805165a8f94412c4c399f578319243f29532/README.md\",\"https://github.com/fixture/receipt-desk/blob/b821805165a8f94412c4c399f578319243f29532/docs/corp/README.md\",\"https://github.com/fixture/receipt-desk/blob/b821805165a8f94412c4c399f578319243f29532/docs/architecture.md\",\"https://github.com/fixture/receipt-desk/issues/12#issuecomment-7\",\"https://github.com/fixture/receipt-desk/milestone/1\",\"https://github.com/fixture/receipt-desk/milestone/2\"],\"done\":\"Whole accepted scope mapped to native Milestones 1 and 2; required CSV/JSON inputs adopted into shared technical Canon; maintenance/interface/check boundaries published; executable Issue 12 accepted and discoverable. Preparation handoff recorded; application not implemented.\",\"checks\":[\"python3 -m unittest discover -s tests: passed 1 supplied-input test on clean b821805165a8f94412c4c399f578319243f29532 (no application behavior coverage)\",\"python3 .agents/corp/check.py: passed on clean b821805165a8f94412c4c399f578319243f29532; 15 documents, 3 methods, 6 Python helpers; remote routes separately observed with offline repo-context\",\"git diff --check: passed\",\"git ls-remote shared refs/heads/main refs/heads/codex/prepare-kit-desk: both equal b821805165a8f94412c4c399f578319243f29532\",\"repo-context landing and Issue 12: observed without errors, focus 1 discovers work, accepted Spec matched, no claim\"],\"remaining\":\"Application CLI and behavior tests remain unimplemented in Issue 12, lending/returns/export remain Milestone 2. Issue 9 example diagnostics unchanged/open. Independent successor consumption, application stage review, Python 3.9 execution, real GitHub/CI and concurrency are unexercised.\",\"next\":\"Continue Issue 12 from the shared baseline after confirming Issue 11 preparation result and native dependency. Read current Spec and claim in a new instance. Missing/scoped input or authority conflicts pause only dependent work.\",\"waiting_on\":[]}}\n```\n",
+        "created_at": "2026-09-10T03:08:43.784716+00:00",
+        "updated_at": "2026-09-10T03:08:43.784716+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/11#issuecomment-12"
+      },
+      {
+        "id": 13,
+        "body": "```agent-event\n{\"event\":\"release\",\"instance\":\"aid-v1-f07b46f3-5bba-438a-af88-0203a32ab6a7\",\"claim\":4,\"checkpoint\":12,\"reason\":\"Bounded preparation/documentation result integrated and handed off; exiting without claiming application development.\"}\n```\n",
+        "created_at": "2026-09-10T03:08:45.197712+00:00",
+        "updated_at": "2026-09-10T03:08:45.197712+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/11#issuecomment-13"
+      },
+      {
+        "id": 14,
+        "body": "Whole accepted scope mapped to native Milestones 1 and 2; required CSV/JSON inputs adopted into shared technical Canon; maintenance/interface/check boundaries published; executable Issue 12 accepted and discoverable. Preparation handoff recorded; application not implemented.\n\nEvidence/checkpoint: https://github.com/fixture/receipt-desk/issues/11#issuecomment-12; claim released at https://github.com/fixture/receipt-desk/issues/11#issuecomment-13. Application CLI and behavior tests remain unimplemented in Issue 12, lending/returns/export remain Milestone 2. Issue 9 example diagnostics unchanged/open. Independent successor consumption, application stage review, Python 3.9 execution, real GitHub/CI and concurrency are unexercised.\n\nRecovery: start at docs/corp/README.md on shared/main b821805165a8f94412c4c399f578319243f29532, then native Issue 12 and its accepted Spec. Fixture main was advanced by authorized local Git push; no PR merge or real network. No stage candidate exists yet, so no stage review or project delivery is asserted. One initial work-state invocation failed because --at was omitted; it was rerun using fresh local UTC before any claim. No native stream edit or state-file edit was made.",
+        "created_at": "2026-09-10T03:08:46.548072+00:00",
+        "updated_at": "2026-09-10T03:08:46.548072+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/11#issuecomment-14"
+      }
+    ],
+    "12": [
+      {
+        "id": 7,
+        "body": "SPEC_ACCEPTED issue=12 spec_sha256=4b7bf3b2ff2ecd99add03c63f1f601d8bd974bb5a28adcf17ca2a943a6295aaf source=https://github.com/fixture/receipt-desk/blob/b821805165a8f94412c4c399f578319243f29532/docs/architecture.md",
+        "created_at": "2026-09-10T03:07:20.272500+00:00",
+        "updated_at": "2026-09-10T03:07:20.272500+00:00",
+        "user": {
+          "login": "fixture-corpo"
+        },
+        "html_url": "https://github.com/fixture/receipt-desk/issues/12#issuecomment-7"
+      }
+    ]
+  },
+  "pulls": {},
+  "reviews": {},
+  "live_default": true,
+  "milestones": {
+    "1": {
+      "number": 1,
+      "title": "Import durable inventory and find available equipment",
+      "description": "Outcome: establish a usable development handoff, then let a volunteer import the supplied CSV and find inventory by name/category in later command invocations. Product source: https://github.com/fixture/receipt-desk/blob/1ca41261f87b505610a70c5018f2bafac30c4b97/product.md; inventory persistence source: https://github.com/fixture/receipt-desk/blob/1ca41261f87b505610a70c5018f2bafac30c4b97/inputs/format.md.\nNear-term acceptance: the project contains a runnable Python standard-library CLI; validated CSV import atomically writes version-1 inventory JSON; duplicate/empty IDs and malformed rows fail clearly without partial state updates; search filters by name/category after process restart. All items are available before loans exist, with the availability boundary reserved for the following stage. New behavior tests must run through python3 -m unittest discover -s tests.\nPreparation Issue 11 is a prerequisite handoff result, distinct from application implementation. Existing contributor-command Issue 8 and example-diagnostic Issue 9 remain discoverable but do not provide application behavior. First executable development work: https://github.com/fixture/receipt-desk/issues/12 owns the missing package/scaffold and complete import/search slice, pinned to shared architecture b821805165a8f94412c4c399f578319243f29532.\nEvidence: local preparation checks only establish their direct scope. Application-stage acceptance needs a fixed obtainable integrated candidate, relevant behavior/regression evidence and an independent non-implementer review under docs/corp/milestone-delivery.md; record unresolved blockers/rechecks on native work.\nNext stage: https://github.com/fixture/receipt-desk/milestone/2 covers borrower checkout, return, durable loan state and export of active loans, completing every remaining product capability. Stages own outcomes; no optional tidy-up may substitute for missing mandatory behavior.",
+      "state": "open",
+      "html_url": "https://github.com/fixture/receipt-desk/milestone/1"
+    },
+    "2": {
+      "number": 2,
+      "title": "Complete a durable lending cycle and active-loan export",
+      "description": "Outcome: a volunteer finds an available item, checks it out to a fictional borrower alias, observes it unavailable in a new process, returns it, and exports active loans. Preserve inventory import/search from stage 1. Product source: https://github.com/fixture/receipt-desk/blob/1ca41261f87b505610a70c5018f2bafac30c4b97/product.md.\nPrerequisite: usable persistent inventory/lookup boundary from https://github.com/fixture/receipt-desk/milestone/1; begin integration after that result is obtainable, not merely after a closed flag. At stage entry create/refine executable work using actual stage-1 code and accepted pins.\nAcceptance scenarios: separate invocations persist checkouts/returns; double checkout and unknown item/invalid alias fail clearly without state changes; available search excludes active loans and includes returned items; CSV export contains exactly active loans and item/borrower identity, with a header for an empty set. Import cannot orphan active loans. Run subprocess integration tests in the standard unittest entry and full regression from a fixed shared candidate.\nEvidence: application behavior checks plus independent integrated-stage review under docs/corp/milestone-delivery.md. No real deployment, service or notifications. Only after applicable review/corrections/integration and final-version checks can the accepted local-tool scope be recorded delivered. Next direction: explicit project completion against all product.md capabilities, with nonblocking improvements separately identified.",
+      "state": "open",
+      "html_url": "https://github.com/fixture/receipt-desk/milestone/2"
+    }
+  },
+  "blocked_by": {
+    "12": [
+      11
+    ]
+  }
+}

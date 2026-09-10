@@ -1,0 +1,8 @@
+{
+  "source_commit": "5331b0bbab3ece9e94ddac3fe24def2ddf7a2180",
+  "failure_commit": "22b6afb1868cf59018885e4a0fe72f20ecdd4437",
+  "claim": 8,
+  "failure_comment": 9,
+  "checkpoint": 10,
+  "deliberate_evaluator_injection": true
+}

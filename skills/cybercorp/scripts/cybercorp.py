@@ -8,7 +8,7 @@ import re
 import subprocess
 import sys
 
-VERSION = "0.1.0a4"
+VERSION = "0.1.0a5"
 ASSETS = Path(__file__).resolve().parents[1] / "assets/corp"
 MANIFEST = ".agents/corp/install.json"
 START = "<!-- cybercorp:entry:start -->"

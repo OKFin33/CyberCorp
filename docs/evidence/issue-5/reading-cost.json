@@ -1,0 +1,25 @@
+{
+  "baseline": "15682e2d9ca77dfbd8234cadc803f35557d0f76c",
+  "scenario": "Same minimal generated Receipt Desk entry and complete ordinary-work method files; excludes host, project inputs, native history, code and billing. New verification/setup text is read only when that action needs it.",
+  "paths": [
+    "docs/corp/README.md",
+    "docs/corp/development-loop.md",
+    ".agents/skills/work-corp/SKILL.md",
+    "docs/corp/claim-protocol.md",
+    "docs/corp/spec-protocol.md"
+  ],
+  "measurements": {
+    "a4": {
+      "characters": 13798,
+      "utf8_bytes": 13908,
+      "o200k_base": 2741,
+      "cl100k_base": 2763
+    },
+    "a5": {
+      "characters": 14046,
+      "utf8_bytes": 14156,
+      "o200k_base": 2794,
+      "cl100k_base": 2815
+    }
+  }
+}

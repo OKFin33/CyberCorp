@@ -1,0 +1,20 @@
+{
+  "base": "15682e2d9ca77dfbd8234cadc803f35557d0f76c",
+  "files": {
+    ".agents/corp/check.py": "7366ea237bb113ae0aaf02784fca04950c3244f60c6f3f84e0dee1f632c21b54",
+    ".agents/skills/prepare-corp/SKILL.md": "058da7ff4433bcd29a154fa15101b88d5f1e67a45ea313cf8cf96e163e92088c",
+    ".agents/skills/work-corp/SKILL.md": "930d2746418a5c41b8bc38b70031151275ff272de1273f2e52f8abd424a5b76c",
+    "docs/corp/development-loop.md": "ad4680dd8de92c97656653a8661de1f28f95d36b1ea7e59e1697c7c91337a487",
+    "docs/corp/milestone-delivery.md": "1690cf07388bd729116b468aafc48c528e10a3972997187a434bb693e1f1ed9c",
+    "docs/corp/verification.md": "dc1bbfa0adf34e59694cd7fe8a214f0c0c019630ff027c9192c2e0f28f10c68b",
+    "scripts/check.py": "973d302c05a671864f052bd95d893781557d5a3f072204a62365924bcb1594a1",
+    ".github/workflows/tests.yml": "bee0da3da04cd87b95a7b8754275bece3315720203d58ec18542f6f172519ba2",
+    "tests/test_verification.py": "9ffce7b10bd743952067fe71221829b2a2519bff741d94890f4465d8f3f6c0a7",
+    "tests/test_scenario_environment.py": "863430b9e248d40667dd3b125009316ee9c4b498b21ac0b5d50671b1911a07d2",
+    "tests/scenarios/preparation_fixture.py": "f8b4fb2a7e865ddccc0145f9fe3aa70e4fc93c76e0a6afa96c721e970f2e088d",
+    "tests/scenarios/delivery_fixture.py": "051c34502267aa8bebfae1d0f87f456831606c3b1cbabd4fa114ea8d9ef463bb"
+  },
+  "run": "python3 scripts/check.py --base 15682e2d9ca77dfbd8234cadc803f35557d0f76c",
+  "result": "123 tests passed after local Corp check",
+  "ceiling": "Working-tree source fingerprints, not a published feature commit or hosted CI result."
+}

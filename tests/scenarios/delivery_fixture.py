@@ -15,6 +15,8 @@ GH = r'''#!/usr/bin/env python3
 import base64, datetime, json, pathlib, re, subprocess, sys, urllib.parse
 root=pathlib.Path(__file__).resolve().parents[1]
 p=root/'.scenario/state.json'; s=json.loads(p.read_text()); args=sys.argv[1:]
+if s.get('live_default'):
+ s['main']=subprocess.check_output(['git','-C',str(root),'ls-remote','shared','refs/heads/main'],text=True).split()[0]
 if not args or args.pop(0)!='api': sys.exit('Offline fixture supports gh api only; see .scenario/README.md')
 method='GET'; data={}; endpoint=None; slurp=False; i=0
 while i<len(args):
@@ -43,22 +45,41 @@ if path=='':out={'default_branch':'main'}
 elif path=='/git/ref/heads/main':out={'object':{'sha':s['main']}}
 elif path.startswith('/contents/'):
  ref=q.get('ref',[s['main']])[0];f=urllib.parse.unquote(path[len('/contents/'):]);b=subprocess.check_output(['git','-C',str(root),'show',ref+':'+f]);out={'encoding':'base64','content':base64.b64encode(b).decode()}
-elif path=='/milestones/1':
- if method=='PATCH':s['milestone'].update(data)
- out=s['milestone']
+elif path=='/milestones':
+ milestones=s.setdefault('milestones',{'1':s['milestone']})
+ if method=='POST':
+  n=max(int(x) for x in milestones)+1;out={'number':n,'title':data['title'],'description':data.get('description',''),'state':'open','html_url':url('milestone',n)};milestones[str(n)]=out
+ else:out=[r for r in milestones.values() if q.get('state',['open'])[0]=='all' or r['state']==q.get('state',['open'])[0]]
+elif re.fullmatch('/milestones/[0-9]+',path):
+ n=path.split('/')[2];out=s.get('milestones',{'1':s['milestone']})[n]
+ if method=='PATCH':out.update(data)
 elif path=='/issues':
  if method=='POST':
-  n=max([int(x) for x in s['issues']]+[10])+1;r={'number':n,'title':data['title'],'body':data['body'],'state':'open','state_reason':None,'comments':0,'created_at':now,'updated_at':now,'html_url':url('issues',n),'labels':[{'name':x} for x in data.get('labels',[])],'milestone':{'number':int(data.get('milestone',1))}};s['issues'][str(n)]=r;out=r
+  n=max([int(x) for x in s['issues']]+[10])+1;r={'id':1000+n,'number':n,'title':data['title'],'body':data['body'],'state':'open','state_reason':None,'comments':0,'created_at':now,'updated_at':now,'html_url':url('issues',n),'labels':[{'name':x} for x in data.get('labels',[])],'milestone':{'number':int(data.get('milestone',1))}};s['issues'][str(n)]=r;out=r
  else:
   out=list(s['issues'].values());state=q.get('state',['open'])[0];out=[r for r in out if state=='all' or r['state']==state]
   if 'labels' in q:out=[r for r in out if q['labels'][0] in [x['name'] for x in r['labels']]]
   if 'milestone' in q:out=[r for r in out if r['milestone']['number']==int(q['milestone'][0])]
 elif re.fullmatch('/issues/[0-9]+',path):
  n=path.split('/')[2];out=s['issues'][n]
- if method=='PATCH':out.update(data);out['updated_at']=now
+ if method=='PATCH':
+  if 'milestone' in data:data['milestone']={'number':int(data['milestone'])}
+  if 'labels' in data:data['labels']=[{'name':x} for x in data['labels']]
+  out.update(data);out['updated_at']=now
 elif re.fullmatch('/issues/[0-9]+/comments',path):
  n=path.split('/')[2];out=comment(n,data['body']) if method=='POST' else s['comments'].get(n,[])
-elif re.fullmatch('/issues/[0-9]+/(sub_issues|dependencies/blocked_by|dependencies/blocking|timeline)',path):out=[]
+elif re.fullmatch('/issues/[0-9]+/(sub_issues|dependencies/blocked_by|dependencies/blocking)',path):
+ n=path.split('/')[2];kind=path.split('/')[-1];key='children' if kind=='sub_issues' else 'blocked_by';links=s.setdefault(key,{})
+ if method=='POST':
+  if kind=='blocking':sys.exit('Write the dependent issue blocked_by relation instead')
+  other=next((r for r in s['issues'].values() if r.get('id',r['number'])==int(data['issue_id'])),None)
+  if other is None:sys.exit('Unknown fixture issue_id')
+  targets=links.setdefault(n,[])
+  if other['number'] not in targets:targets.append(other['number'])
+  out=other
+ elif kind=='blocking':out=[s['issues'][k] for k,v in links.items() if int(n) in v]
+ else:out=[s['issues'][str(k)] for k in links.get(n,[])]
+elif re.fullmatch('/issues/[0-9]+/timeline',path):out=[]
 elif path=='/pulls':
  if method=='POST':
   n=max([int(x) for x in s['pulls']]+[20])+1
