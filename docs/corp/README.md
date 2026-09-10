@@ -6,7 +6,8 @@ Read `docs/product.md` and relevant owners in [canon-map.yaml](canon-map.yaml), 
 
 ## Read for this task
 
-- Work or review: [development-loop.md](development-loop.md), then only its matching method.
+- Start/resume work, plan or review: [development-loop.md](development-loop.md), then only its matching method.
+- Owner communication or reply adoption: [communication.md](communication.md).
 - Establish or complete project preparation: `.agents/skills/prepare-corp/SKILL.md` from the repo root.
 - 接手本项目开发所需的范围、输入、工具链和未验证边界见 [preparation.md](preparation.md)，再按当前工作读取相关来源。
 - Obtain a current checkout from an existing clone: [bootstrap.md](bootstrap.md). For resumed work, use its verified checkpoint instead of restarting from the default branch.

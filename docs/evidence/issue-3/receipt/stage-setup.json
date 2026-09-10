@@ -1,0 +1,11 @@
+{
+  "at": "2026-09-09T18:44:19.585649+00:00",
+  "source": "Evaluator-supplied synthetic review scenario; not an observed defect in the main CyberCorp package.",
+  "parent": "131414ea2ec063b880e2d1bce20d0c516e5d98c6",
+  "candidate": "565c3944438fc431fa8d23d44d89797fa108d4f4",
+  "branch": "codex/receipt-stage-candidate",
+  "fault": "Changed category iteration from sorted(totals) to sorted(totals, reverse=True) without changing agreement or tests.",
+  "optional_input": "Unaccepted future JSON-output suggestion.",
+  "consumer_input": "Only project entry and ordinary whole-candidate review request; no fault description or desired findings supplied.",
+  "prior_claims": "Issue 7 and 11 verified released before setup change."
+}

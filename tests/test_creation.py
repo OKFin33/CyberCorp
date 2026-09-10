@@ -2,6 +2,7 @@ import base64
 import importlib.util
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -62,6 +63,50 @@ class CreationTests(unittest.TestCase):
         self.assertRegex(result.stdout.strip(), r"^[0-9a-f]{64}$")
         self.assertFalse((self.repo / ".agents/skills/corpo-launcher").exists())
         self.assertFalse((self.repo / "brief.json").exists())
+
+    def test_generated_method_links_survive_package_transport(self):
+        portable = self.base / "portable-skill"
+        shutil.copytree(SKILL, portable, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+        transported = load("transported_creator", portable / "scripts/cybercorp.py")
+        transported.install(self.repo, self.brief)
+        shutil.rmtree(portable)
+        for name in ("milestone-delivery.md", "communication.md", "owner-communication.md"):
+            self.assertTrue((self.repo / "docs/corp" / name).is_file(), name)
+        for document in self.repo.rglob("*.md"):
+            for destination in re.findall(r"\[[^\]]+\]\(([^)]+)\)", document.read_text()):
+                if "://" in destination or destination.startswith("#"):
+                    continue
+                target = (document.parent / destination.split("#", 1)[0]).resolve()
+                self.assertTrue(target.is_relative_to(self.repo), (document, destination))
+                self.assertTrue(target.exists(), (document, destination))
+        for name in ("work-corp", "review-corp", "prepare-corp"):
+            self.assertTrue((self.repo / ".agents/skills" / name / "SKILL.md").is_file())
+
+    def test_project_card_edits_are_preserved_by_identical_reinstall(self):
+        creator.install(self.repo, self.brief)
+        card = self.repo / "docs/corp/owner-communication.md"
+        card.write_text("# Existing Owner preference\nUse our own technical examples.\n")
+        check = self.repo / "project-check.py"
+        check.write_text("print('existing project check')\n")
+        before = {p.relative_to(self.repo): p.read_bytes() for p in self.repo.rglob("*")
+                  if p.is_file() and ".git" not in p.parts}
+        result = creator.install(self.repo, self.brief)
+        self.assertEqual(result["status"], "already_installed")
+        self.assertIn("docs/corp/owner-communication.md", result["preserved_project_edits"])
+        after = {p.relative_to(self.repo): p.read_bytes() for p in self.repo.rglob("*")
+                 if p.is_file() and ".git" not in p.parts}
+        self.assertEqual(after, before)
+
+    def test_existing_owner_card_collision_does_not_partially_install(self):
+        card = self.repo / "docs/corp/owner-communication.md"
+        card.parent.mkdir(parents=True)
+        card.write_text("# Existing card\nProject owns this preference.\n")
+        before = {p.relative_to(self.repo): p.read_bytes() for p in self.repo.rglob("*") if p.is_file()}
+        with self.assertRaisesRegex(creator.InstallError, "owner-communication"):
+            creator.install(self.repo, self.brief)
+        after = {p.relative_to(self.repo): p.read_bytes() for p in self.repo.rglob("*") if p.is_file()}
+        self.assertEqual(after, before)
+        self.assertFalse((self.repo / ".git").exists())
 
     def test_existing_root_bytes_and_application_files_are_preserved(self):
         self.existing()

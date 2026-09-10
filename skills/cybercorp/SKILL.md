@@ -17,6 +17,8 @@ python3 scripts/cybercorp.py /path/to/project --brief /path/to/brief.json
 
 `--dry-run` shows the file plan. The installer initializes Git if needed, adds repo-local methods/helpers and appends root entry links; it does not commit, publish, create GitHub work or declare readiness. If existing files conflict, adapt their actual owners within the request rather than overwriting them or making a second system. For an already organized Corp, use its own entry and only add the missing capability.
 
+Before handoff, read the generated communication method and adapt its project-owned card from known Owner instructions. Reuse an existing equivalent by pointing the method at its actual path. Missing preferences use the neutral starting point; no profile or new input schema is required. Keep existing channels and permissions; the installer does not connect notifications.
+
 Continue through the generated `docs/corp/README.md` and `.agents/skills/prepare-corp/SKILL.md`. Installing files alone does not complete the user's request. Establish the real shared entry and native work within existing authorization; verify its discoverability and run the relevant actual helpers. Then carry out the whole-project preparation or leave its unfinished work discoverable for another Corpo when the user requested a bounded creation slice.
 
 Preparation covers the agreed project and its dependencies broadly. The depth of design follows actual need and value; do not exhaust every implementation choice or replicate another project's documents. Retain useful unknowns with their impact and acquisition path. Never make the creator's private history a required input.

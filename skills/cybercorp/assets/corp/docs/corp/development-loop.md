@@ -1,6 +1,6 @@
 # Work in the Corp
 
-Recover assigned work from the entry's goal, required inputs and actual results. If no work is assigned, discover the native delivery focus and its gaps:
+Advance the accepted project goal within authority. plan, work and review are actions an instance can change; independence depends on its actual participation in the judged result. Recover a narrow assignment within its scope. Otherwise discover the current native stage and its actual gaps:
 
 ```sh
 python3 .agents/corp/repo-context.py              # focus, work and open PRs
@@ -9,12 +9,26 @@ python3 .agents/corp/repo-context.py --issue 7    # actual assigned Issue
 
 Replace `7` with the actual Issue. Read relevant discussions/artifacts behind the output. Helpers neither grant rights nor rank work; failure is not empty work. An unresolved focus needs a real shared goal, but does not block unrelated assigned work.
 
+## Choose the next action
+
+| Actual gap | Action and exit |
+| --- | --- |
+| Applicable implementation/correction exists | work: finish the remaining result and self-check |
+| Unfinished goal lacks near-term work or dependency continuity | plan: form executable work, then advance it |
+| A reviewable integrated stage lacks independent judgment | review: fix the object and undertake one bounded review |
+| Review found acceptance blockers | work: repair and recheck; plan only for real cross-Issue needs |
+| Final results and evidence hold | plan: verify delivery, shared records and next entry |
+| Necessary input, decision or authority is missing | state impact/resume condition; continue independent work, otherwise hand off |
+
+An ordinary PR without review does not itself create review work. Independent review is triggered by a ready stage candidate, an explicit request or an accepted commitment; preserve existing explicit review promises. Waiting in one scope does not freeze independent work or require an instance to stay online.
+
 ## Choose the needed method
 
 - Implementation/investigation: `.agents/skills/work-corp/SKILL.md`.
-- Fixed candidate review: `.agents/skills/review-corp/SKILL.md`.
+- Triggered independent review: `.agents/skills/review-corp/SKILL.md`.
 - Preparation gap: `.agents/skills/prepare-corp/SKILL.md`.
-- Before expensive cross-Issue planning or generating downstream work: [coordination.md](coordination.md), then the work method for the converged Issue.
+- Stage planning, candidate/recheck or delivery: [milestone-delivery.md](milestone-delivery.md); before expensive cross-Issue work use [coordination.md](coordination.md).
+- Owner communication or reply adoption: [communication.md](communication.md), which routes to the current project card.
 
 Read files directly if native skill discovery is unavailable. A fact owner identifies responsibility, not an automatic human approver. Return shared premise changes to affected existing owners before their dependent execution continues.
 
