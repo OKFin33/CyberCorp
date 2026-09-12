@@ -8,6 +8,8 @@ This is not one rule among many. It decides whether any other rule may demand Ow
 
 **The burden of proof sits on the side that wants to escalate.** To route something to the Owner, name the list entry it hits. If you cannot name one, act. "Might affect", "unclear whether" and "to be safe" are not entries on the list.
 
+**Advancing the delivery outranks improving the conditions for advancing it.** Tightening a check, tidying infrastructure, completing a document or reviewing something already done is work when a delivery needs it — **if you cannot name the delivery it unblocks, it is not the next thing to do.** The rules below exist to remove guesses that would otherwise stop you; a rule that has you tending to the rules instead of to the result is being read wrongly.
+
 ### This project's irreversible-action list
 
 - Merging into the default branch.
