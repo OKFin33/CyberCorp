@@ -124,7 +124,7 @@ Native carriers: Milestone, Label.
 
 **Mechanism**. The project declares its irreversible-action list. Branch protection and permissions enforce exactly that list and nothing else. Everything outside it executes without approval.
 
-When an action does fall inside the list, the Owner's decision cost is part of the design: state the facts, the recommendation, the consequence, and the exact response needed. A pluggable presentation component adapts this to the Owner — an Owner who reads code wants the diff; an Owner who does not wants the consequence in plain language.
+When an action does fall inside the list, the Owner's decision cost is part of the design: state the facts, the recommendation, the consequence, and the exact response needed. A pluggable presentation component adapts this to the Owner — an Owner who reads code wants the diff; an Owner who does not wants the consequence in plain language. **The card is a project-owned file and may live anywhere**: route to it through the entry rather than hardcoding its path.
 
 Native carriers: Branch protection rules, repository permissions.
 
@@ -213,6 +213,8 @@ Native carriers: Git files, Milestone description, Issue attribution comments.
 **Guess removed**: what is true, what is merely current, and where to look for either.
 
 **Changing this rule set itself.** These rules are one of the durable facts this section governs, so amending them is a Canon change — but S1, S2 and S6 do not apply: the object is the rule set rather than a deliverable, the acceptance tooling may be replaced within the same change, and the layer cannot be half-replaced.
+
+When you amend it, the rule goes here and its reason goes to the record. This layer carries rules, the guess each removes, and reproducible failure shapes — not past incidents, justification, or argument that persuades rather than instructs. **The same holds for any method file that routes into this one**: it sequences and points, it does not restate rules or repeat their failure lists.
 
 What still applies unchanged: S5, S7 and this section. The completion evidence is the test suite, the structure check and the record of the decision, plus the PR and its checks once pushed. **Say plainly in the PR that it is a mechanism change** — it is breaking for any project already running the previous layout, and that project's migration is its own change under its own agreement.
 
