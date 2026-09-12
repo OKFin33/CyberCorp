@@ -137,6 +137,7 @@ def render(brief):
              if brief.get("milestone") else None)
     entries = [
         {"id": "project-direction", "target": project_ref, "status": "active"},
+        {"id": "corp-mechanics", "target": "docs/corp/mechanics.md", "status": "active"},
         {"id": "active-change-specs", "target": f"https://github.com/{brief['github']}/issues" if brief.get("github") else None,
          "status": "active" if brief.get("github") else "unresolved"},
         {"id": "current-delivery-focus", "target": focus, "status": "active" if focus else "unresolved"},

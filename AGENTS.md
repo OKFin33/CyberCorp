@@ -1,6 +1,6 @@
 # CyberCorp development
 
-Read `docs/product.md` for the product contract, `docs/plan.md` for current implementation scope, and the relevant package before editing. If `docs/anchor/TODO.md` exists, it contains optional local workline context; its absence does not block development. Shared product decisions and required development information belong in the versioned source.
+Read `docs/product.md` for the product contract, `CHANGELOG.md` for what has been delivered, `docs/verification-status.md` for which capabilities have evidence, and the relevant package before editing. Shared product decisions and required development information belong in the versioned source.
 
 This repository uses `docs/corp/` and the root `.agents/` for its own collaboration. `skills/cybercorp/assets/corp/` is the product's distribution source; changing those assets does not automatically change this repository's installed methods. Apply changes to the actual owner, and adopt method revisions for this Corp through its own normal change process.
 

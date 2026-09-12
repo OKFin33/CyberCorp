@@ -1,0 +1,57 @@
+# 参与开发
+
+## 开始前需要知道的一件事
+
+**这个仓库用它自己的方法开发它自己。** 因此同一类内容会出现两次，位置不同、owner 不同：
+
+| 你看到的 | 它是什么 | 谁拥有它 |
+|---|---|---|
+| `skills/cybercorp/assets/corp/` | **分发源**。安装到目标项目的模板 | 本项目。改它不会改变本仓库自己已安装的方法 |
+| 根 `.agents/` 与 `docs/corp/` | **本仓库自己的安装结果**。CyberCorp 把自己装了一遍 | 本仓库作为一个 Corp。更新分发源不会自动升级它 |
+| `docs/evidence/`、`CHANGELOG.md`、`docs/verification-status.md` | 开发过程与验证记录 | 维护者 |
+
+改了分发源要不要同步到自身安装，是一次显式决定，不是自动的。这两处目前对 `mechanics.md` 与三份 skill 保持逐字节一致，对入口和沟通卡有意不同（模板带占位符）。
+
+`.agents/` 的点前缀容易让人以为是编辑器或工具的私有目录。它不是——那是**交付给使用者的运行期方法与脚本**，属于产品内容。
+
+## 开发环境
+
+Python 3.9+ 与 Git，无第三方 Python 运行依赖。读取原生 GitHub 工作另需正常认证的 `gh`。
+
+```sh
+python3 scripts/check.py
+```
+
+这一条依次跑本仓 Corp 结构检查与根 unittest 入口（`python3 -m unittest discover -s tests`），任一失败即停止。可用 `--base <commit>` 指定差量基线。根测试已包含启动器测试；单独跑 `python3 -m unittest discover -s skills/corpo-launcher/scripts/tests` 只用于局部复核，结果不与根入口相加。
+
+测试使用临时仓库与合成数据，不调用业务环境。[CI](.github/workflows/tests.yml) 在 Linux 的 Python 3.9 与 3.13 上跑同一个根入口。它不验证真实 CLI 的账号、模型调用或长期接续。
+
+## 提交变化
+
+本项目按自己的机制运作，所以贡献流程就是那套机制：交付约定由 Issue 持有，完成的凭证是 PR 加检查通过，合入默认分支需要 Owner。[入口](docs/corp/README.md)是完整说明，规则定义在 [mechanics.md](docs/corp/mechanics.md)。
+
+最小要求：**一条变化要能说出它服务哪个目标、怎么验证。** 修改机制层的变化另需说明它服务八个子问题中的哪一个、消除了执行者必须猜测的哪一处——指不出来的内容属于"已知故障模式"，放在对应子问题末尾，不进开工必读。
+
+**改机制层之前先读 [决策记录](docs/decisions/)。** 那里记着每条规则是从哪来的——哪些是从真实故障学来的、哪些是从第一性推出的、哪些替代方案被否决过以及为什么。不知道理由而"简化"或"补全"，很容易把已经被否决的东西加回去。
+
+## 产品与维护位置
+
+| 范围 | 事实与实现来源 | 需要理解的边界 |
+|---|---|---|
+| 创建／接入 Corp | [创建 skill](skills/cybercorp/SKILL.md)、[输入格式](skills/cybercorp/references/brief.md)、[安装工具](skills/cybercorp/scripts/cybercorp.py) | Agent 理解目标并适配；工具只落文件，不替用户创建外部资源，也不宣称准备完成 |
+| 分发给目标项目的机制 | `skills/cybercorp/assets/corp/`，入口在[分发说明](skills/cybercorp/assets/corp/docs/corp/README.md) | 目标项目拥有安装结果；后续包修订不得覆盖项目编辑 |
+| 可选 CLI 启动器 | [启动器 skill](skills/corpo-launcher/SKILL.md)、[Kiro 示例](skills/corpo-launcher/references/kiro.md)及该包的 scripts 与测试 | runtime 的安装、登录、模型、权限与原生会话接入由使用者持有；不是 Corp 的必装依赖 |
+| CyberCorp 自身运行 | [自身入口](docs/corp/README.md)、根 `.agents/` 与 `docs/corp/` | 已安装方法与分发源各有 owner；更新产品源不会自动升级自身方法 |
+| 机制的完整要求 | [吸收规格](docs/specs/delivery-communication-verification.md) | 它持有验收场景清单；规则本体已收敛到 mechanics.md，规格中重复的规则正文已移除 |
+
+不要求先读完两个包和全部规则。先核对有效 Spec 的结果与输入，读你要改的维护面及其实际消费者；需要改动共享语义时回到该事实的 owner，并检查受影响路径。
+
+## 可以留到实际任务再定的
+
+文档拆合、最小检查的实现方式、合成场景规模、目标项目特有的阶段划分、CI 适配。**不得修改已有产品承诺来消除实现困难。**
+
+需要新版工具链或外部依赖时，按实际报错与能力目标决定，不为一轮初始化统一安装全部 runtime。公开源码不依赖任何个人凭据库、试点仓库、私人日志或未共享的对话。
+
+## 尚未取得的证据
+
+[验证状态](docs/verification-status.md)逐项记录了哪些能力有证据、哪些没有。提 PR 时如果你的变化触及"尚无证据"的那些项，说明你的证据类型——合成测试不能代替真实场景。

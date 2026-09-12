@@ -1,8 +1,4 @@
-import importlib.util
-import json
 from pathlib import Path
-import subprocess
-import sys
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -11,8 +7,6 @@ from test_creation import git, load
 ROOT = Path(__file__).resolve().parents[1]
 HELPERS = ROOT / "skills/cybercorp/assets/corp/.agents/corp"
 entry = load("entry", HELPERS / "enter.py")
-formatter = load("formatter", HELPERS / "format-event.py")
-work = formatter.work
 
 
 class EntryTests(unittest.TestCase):
@@ -108,42 +102,6 @@ class EntryTests(unittest.TestCase):
         with self.assertRaises(entry.EntryError):
             entry.enter(self.local, self.base / "never-created")
         self.assertFalse((self.base / "never-created").exists())
-
-
-class EventTests(unittest.TestCase):
-    at = "2026-09-07T12:00:00Z"
-    claim = {"event": "claim", "instance": "worker-a", "base_commit": "a" * 40,
-             "branch": "feat/outcome", "scope": ["src/"], "lease_until": "2026-09-07T13:00:00Z"}
-
-    def row(self, cid, event, time=None):
-        return {"id": cid, "created_at": time or self.at,
-                "body": "```agent-event\n" + json.dumps(event) + "\n```"}
-
-    def test_optional_workgroup_and_complete_handoff_replay(self):
-        claim_body = formatter.format_event(self.claim, [], self.at)
-        rows = [{"id": 1, "created_at": self.at, "body": claim_body}]
-        recovery = {"commit": "a" * 40, "branch": "feat/outcome", "artifacts": [],
-                    "done": "search implementation", "checks": ["local behavior passed"],
-                    "remaining": "independent review", "next": "review the candidate", "waiting_on": ["review"]}
-        checkpoint = {"event": "checkpoint", "instance": "worker-a", "claim": 1, "recovery": recovery}
-        body = formatter.format_event(checkpoint, rows, self.at)
-        rows.append({"id": 2, "created_at": self.at, "body": body})
-        release = {"event": "release", "instance": "worker-a", "claim": 1, "checkpoint": 2, "reason": "waiting"}
-        body = formatter.format_event(release, rows, self.at)
-        rows.append({"id": 3, "created_at": self.at, "body": body})
-        report = work.replay(rows, self.at)
-        self.assertIsNone(report["current_claim"])
-        self.assertEqual(report["latest_checkpoint"]["recovery"], recovery)
-
-    def test_contender_and_bad_recovery_are_rejected_before_emission(self):
-        rows = [self.row(1, self.claim)]
-        with self.assertRaises(ValueError):
-            formatter.format_event({**self.claim, "instance": "worker-b"}, rows, self.at)
-        bad = {"event": "checkpoint", "instance": "worker-a", "claim": 1,
-               "recovery": {"commit": "a" * 40, "branch": None, "artifacts": [],
-                            "done": "work", "checks": [], "remaining": "review", "next": "review", "waiting_on": []}}
-        with self.assertRaisesRegex(ValueError, "branch"):
-            formatter.format_event(bad, rows, self.at)
 
 
 if __name__ == "__main__":

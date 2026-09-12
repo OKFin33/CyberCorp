@@ -3,14 +3,23 @@ canonical_targets:
   - id: project-direction
     target: "docs/product.md"
     status: active
+  - id: corp-mechanics
+    target: "docs/corp/mechanics.md"
+    status: active
+  - id: decision-records
+    target: "docs/decisions/"
+    status: active
   - id: active-change-specs
     target: "https://github.com/OKFin33/CyberCorp/issues"
     status: active
   - id: current-delivery-focus
     target: "https://github.com/OKFin33/CyberCorp/milestone/1"
     status: active
-  - id: implementation-plan
-    target: "docs/plan.md"
+  - id: delivery-history
+    target: "CHANGELOG.md"
+    status: active
+  - id: verification-status
+    target: "docs/verification-status.md"
     status: active
   - id: creation-package
     target: "skills/cybercorp/SKILL.md"
@@ -18,7 +27,7 @@ canonical_targets:
   - id: launcher-package
     target: "skills/corpo-launcher/SKILL.md"
     status: active
-  - id: mechanism-iteration-spec
+  - id: absorbed-spec
     target: "docs/specs/delivery-communication-verification.md"
     status: active
   - id: development-checks
