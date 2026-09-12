@@ -1,16 +1,23 @@
 ---
 name: review-corp
-description: Independently review a fixed Corp candidate against its agreement, implementation and evidence; for an instance that did not implement it.
+description: Independently review a fixed stage candidate. Use when a Milestone's stated closing conditions hold, or when a single-PR review was explicitly requested — not for ordinary PRs.
 ---
 
 # Review the actual candidate
 
-Read `docs/corp/README.md`. Section S3 of `docs/corp/mechanics.md` defines when a stage review may open and what independence requires; do not restate those rules here, and do not open a review whose machine-checkable closing conditions are unmet. An ordinary PR without review is not a task by itself.
+Read `docs/corp/README.md` if you have not. S3 defines when a review may open and what independence requires; do not restate those rules here, and do not open a review whose stated closing conditions are unmet.
 
-Read the required Canon, the actual base/head and the implementation from an independent checkout. Verify the agreement per section S1. Occupy the review per section S2 — for a stage review, converge through section S4 first; for an explicitly requested single-PR review, comment on that PR with an instance ID unique within your runtime (its own session identifier is the obvious choice; any stable string works), the fixed object, scope and expiry, and reread existing undertakings before deeper work. No artificial child Issue is needed. Update the undertaking when you finish, exit, or change to implementation.
+You must not have implemented the object under review.
 
-Add affected-consumer perspective for shared semantic changes, without requiring a reviewer per team.
+## Then, in order
 
-Choose checks exposing concrete errors, omissions or needless complexity and retain applicable evidence. Distinguish acceptance blockers (agreement, scenario, consequence, recheck), optional improvements, and actual decisions. Return findings or a supported no-blocker conclusion. Record instance and non-involvement, exact base/head, the Spec pin, scope, executed versus relied-on checks, and untested behavior in native PR Reviews or inline comments. If permissions prevent that, record the result and the limitation on the PR. Stage conclusions belong in the bounded Issue with evidence links. Use sections S5 and S8 for Owner-facing expression or decisions.
+1. **Occupy the review** (S2). For a stage review, converge through S4 first. For a requested single-PR review, comment on that PR with an instance ID unique within your runtime, the fixed object, scope and expiry; reread existing undertakings before going deeper. No child Issue is needed.
+2. **Fix the object.** Take base and head from an independent checkout, and verify the agreement against them (S1).
+3. **Choose checks that expose concrete errors, omissions or needless complexity.** Add affected-consumer perspective for shared semantic changes; a reviewer per team is not required.
+4. **Separate** acceptance blockers — agreement, scenario, consequence, recheck — from optional improvements and from decisions that are actually the Owner's.
+5. **Record** in native PR reviews or inline comments: your instance and non-involvement, exact base and head, the Spec pin, scope, which checks you executed versus relied on, and what remains untested. If permissions prevent that, record the result and the limitation on the PR itself. Stage conclusions belong in the bounded Issue with evidence links.
+6. **Return** findings, or a no-blocker conclusion with the evidence supporting it.
 
-Head or relevant Spec changes need impact-based re-evaluation; a new integration base needs its own compatibility and applicable checks, not the old combination's green result. Link blockers to actual corrections, precise new versions and independent rechecks. Review and CI do not prove untested behavior or user value, and do not grant merge authority. Follow the specific one-attempt PR/head/checks/method authorization.
+A changed head or Spec needs re-evaluation by impact; a new integration base needs its own checks, not the previous combination's green result. Link every blocker to its correction, the precise new version, and an independent recheck.
+
+Review and CI do not prove untested behaviour or user value, and do not grant merge authority. For Owner-facing expression see S5 and S8.
