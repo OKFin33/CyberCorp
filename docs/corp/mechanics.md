@@ -219,6 +219,7 @@ When you amend it, the rule goes here and its reason goes to the record. This la
 What still applies unchanged: S5, S7 and this section. The completion evidence is the test suite, the structure check and the record of the decision, plus the PR and its checks once pushed. **Say plainly in the PR that it is a mechanism change** — it is breaking for any project already running the previous layout, and that project's migration is its own change under its own agreement.
 
 **Known failures**
+- A criterion formed while doing the work, applied to that work, and never written down. The next instance re-derives it or contradicts it.
 - Announcing a changed goal by pointing at code that was already written.
 - Letting retrieval relevance decide which of two conflicting sources is authoritative.
 - Summary caches claiming to be more current than their source.

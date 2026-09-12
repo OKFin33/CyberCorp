@@ -191,6 +191,12 @@ def main(argv=None):
         report["git"] = git_difference(root, args.base, report)
         check_difference(root, report["git"])
         check_structure(root, report)
+        changed = report["git"]["tracked_changes"] + report["git"]["untracked"]
+        if ((root / "docs/decisions").is_dir()
+                and any(name.startswith("docs/corp/") for name in changed)
+                and not any(name.startswith("docs/decisions/") for name in changed)):
+            report["notes"] = ["Mechanism layer changed without docs/decisions/;"
+                               " confirm no criterion from this work needs recording."]
         report["status"] = "passed"
     except (OSError, ValueError, SyntaxError) as exc:
         report["errors"].append(str(exc))
