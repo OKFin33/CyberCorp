@@ -1,106 +1,174 @@
 #!/usr/bin/env python3
-"""Hash the unique normative Spec area of a GitHub Issue body (no network)."""
-from __future__ import annotations
-
+"""Hash the spec region of a GitHub Issue body to pin what was accepted (S1)."""
 import argparse
 import hashlib
 import re
 import sys
-from pathlib import Path
 from urllib.parse import urlsplit
 
 START = "<!-- spec:start -->"
 END = "<!-- spec:end -->"
-SHA256_RE = re.compile(r"[0-9a-f]{64}")
+
+_SHA256_RE = re.compile(r"[0-9a-f]{64}")
+_FORBIDDEN_SOURCE_CHARS = re.compile(r"[\s<>\"`\\]|[\x00-\x1f\x7f]")
 
 
-def valid_source(value: str) -> bool:
-    """Shared record syntax only; does not prove reachability or decision authority."""
-    if (not isinstance(value, str) or not value.startswith("https://")
-            or re.search(r'[\s<>"`\\\x00-\x1f\x7f]', value)):
-        return False
-    try:
-        parts = urlsplit(value)
-        parts.port  # Validate malformed/out-of-range ports without connecting.
-        return bool(parts.hostname) and parts.username is None and parts.password is None
-    except ValueError:
-        return False
+class SpecCheckpointError(ValueError):
+    pass
 
 
-def normalize_body(raw: bytes) -> bytes:
-    text = raw.decode("utf-8").replace("\r\n", "\n").replace("\r", "\n")
-    lines = [line.rstrip(" \t") for line in text.split("\n")]
-    while lines and lines[-1] == "":
-        lines.pop()
-    return ("\n".join(lines) + "\n").encode("utf-8") if lines else b""
+def _to_text(data):
+    if isinstance(data, bytes):
+        data = data.decode("utf-8")
+    return data.replace("\r\n", "\n").replace("\r", "\n")
 
 
-def spec_area(raw: bytes) -> bytes:
-    text = raw.decode("utf-8").replace("\r\n", "\n").replace("\r", "\n")
+def extract_spec_area(data):
+    text = _to_text(data)
     if text.count(START) != 1 or text.count(END) != 1:
-        raise ValueError("expected exactly one spec:start and one spec:end marker")
+        raise SpecCheckpointError("expected exactly one spec:start and one spec:end marker")
     lines = text.split("\n")
-    if START not in lines or END not in lines:
-        raise ValueError("Spec markers must occupy their own lines")
-    start, end = lines.index(START), lines.index(END)
-    if start >= end:
-        raise ValueError("Spec markers are out of order")
-    result = normalize_body("\n".join(lines[start + 1:end]).encode("utf-8"))
-    if not result.strip():
-        raise ValueError("Spec area is empty")
-    return result
+    start_indexes = [i for i, line in enumerate(lines) if line == START]
+    end_indexes = [i for i, line in enumerate(lines) if line == END]
+    if len(start_indexes) != 1 or len(end_indexes) != 1:
+        raise SpecCheckpointError("Spec markers must occupy their own lines")
+    start_index, end_index = start_indexes[0], end_indexes[0]
+    if start_index >= end_index:
+        raise SpecCheckpointError("Spec markers are out of order")
+    area_lines = lines[start_index + 1:end_index]
+    normalized = normalize_spec_area(area_lines)
+    if not normalized.decode("utf-8").strip():
+        raise SpecCheckpointError("Spec area is empty")
+    return normalized
 
 
-def digest_body(raw: bytes) -> str:
-    return hashlib.sha256(spec_area(raw)).hexdigest()
+def normalize_spec_area(lines):
+    stripped = [line.rstrip(" \t") for line in lines]
+    while stripped and stripped[-1] == "":
+        stripped.pop()
+    if not stripped:
+        return b""
+    return ("\n".join(stripped) + "\n").encode("utf-8")
 
 
-def self_test() -> None:
-    a = f"{START}\nOutcome: one\n{END}\n".encode()
-    b = f"Progress outside\n{START}\r\nOutcome: one  \r\n{END}\r\n".encode()
-    assert digest_body(a) == digest_body(b)
-    assert digest_body(a) != digest_body(a.replace(b"one", b"two"))
-    for invalid in (b"", f"{START}\n{END}".encode(), a + a):
+def spec_hash(data):
+    return hashlib.sha256(extract_spec_area(data)).hexdigest()
+
+
+def validate_source(source):
+    if not isinstance(source, str) or not source.startswith("https://"):
+        raise SpecCheckpointError("Invalid --source: must be an https:// URL")
+    if _FORBIDDEN_SOURCE_CHARS.search(source):
+        raise SpecCheckpointError("Invalid --source: contains forbidden characters")
+    try:
+        parsed = urlsplit(source)
+    except ValueError:
+        raise SpecCheckpointError("Invalid --source: could not be parsed")
+    if not parsed.hostname:
+        raise SpecCheckpointError("Invalid --source: missing hostname")
+    if parsed.username or parsed.password:
+        raise SpecCheckpointError("Invalid --source: must not carry credentials")
+    try:
+        parsed.port
+    except ValueError:
+        raise SpecCheckpointError("Invalid --source: invalid port")
+    return source
+
+
+def read_input(path):
+    if path == "-":
+        return sys.stdin.buffer.read()
+    with open(path, "rb") as handle:
+        return handle.read()
+
+
+def self_test():
+    body = "before\n" + START + "\nOutcome: X\nBoundary: Y\n" + END + "\nafter\n"
+    digest = spec_hash(body)
+    if spec_hash(body.replace("\n", "\r\n")) != digest:
+        raise AssertionError("CRLF input changed the hash")
+    trailing_ws = body.replace("Outcome: X", "Outcome: X   \t")
+    if spec_hash(trailing_ws) != digest:
+        raise AssertionError("trailing whitespace changed the hash")
+    trailing_blank = body.replace(END, "\n\n\n" + END)
+    if spec_hash(trailing_blank) != digest:
+        raise AssertionError("trailing blank lines changed the hash")
+    if not re.fullmatch(r"[0-9a-f]{64}", digest):
+        raise AssertionError("hash is not a lowercase hex sha256")
+
+    def expect_error(bad, message):
         try:
-            digest_body(invalid)
-        except ValueError:
-            continue
-        raise AssertionError("invalid Spec accepted")
+            spec_hash(bad)
+        except SpecCheckpointError as exc:
+            if message not in str(exc):
+                raise AssertionError("wrong error for %r: %s" % (bad, exc))
+        else:
+            raise AssertionError("expected error for %r" % (bad,))
+
+    expect_error("no markers here", "expected exactly one spec:start and one spec:end marker")
+    expect_error(START + "\nA\n" + END + "\n" + START + "\nB\n" + END,
+                "expected exactly one spec:start and one spec:end marker")
+    expect_error(END + "\nA\n" + START, "Spec markers are out of order")
+    expect_error("prefix " + START + "\nA\n" + END, "Spec markers must occupy their own lines")
+    expect_error(START + "\nA\n" + END + " suffix", "Spec markers must occupy their own lines")
+    expect_error(START + "\n" + END, "Spec area is empty")
+    expect_error(START + "\n   \n\t\n" + END, "Spec area is empty")
+
+    if validate_source("https://github.com/o/r/issues/1") != "https://github.com/o/r/issues/1":
+        raise AssertionError("valid source was rejected")
+    for bad_source in ("http://github.com/o/r", "https://user:pass@github.com/o/r",
+                       "https://github.com/o r", "not-a-url", "https://"):
+        try:
+            validate_source(bad_source)
+        except SpecCheckpointError:
+            pass
+        else:
+            raise AssertionError("expected rejection for source %r" % (bad_source,))
+    return True
 
 
-def main() -> int:
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("path", nargs="?", default="-", help="UTF-8 Issue body file or stdin")
+    parser.add_argument("path", nargs="?", help="File path, or - for stdin")
     parser.add_argument("--check", metavar="SHA256")
     parser.add_argument("--checkpoint", action="store_true")
     parser.add_argument("--issue", type=int)
-    parser.add_argument("--source", help="shared decision locator")
+    parser.add_argument("--source")
     parser.add_argument("--self-test", action="store_true")
-    args = parser.parse_args()
-    if args.self_test:
-        self_test()
-        print("Spec checkpoint self-test passed.")
-        return 0
+    args = parser.parse_args(argv)
+
     try:
-        raw = sys.stdin.buffer.read() if args.path == "-" else Path(args.path).read_bytes()
-        digest = digest_body(raw)
-        if args.check is not None:
-            if not SHA256_RE.fullmatch(args.check):
-                raise ValueError("--check must be 64 lowercase hexadecimal characters")
-            if digest != args.check:
-                print(f"ERROR: Spec hash mismatch (actual {digest})", file=sys.stderr)
-                return 1
-        if args.checkpoint:
-            if args.issue is None or args.issue < 1:
-                raise ValueError("--checkpoint requires a positive --issue")
-            if not valid_source(args.source):
-                raise ValueError("--checkpoint requires a shared HTTPS --source without credentials or unsafe characters")
-            print(f"SPEC_ACCEPTED issue={args.issue} spec_sha256={digest} source={args.source}")
+        if args.self_test:
+            self_test()
+            print("Spec checkpoint self-test passed.")
+            return 0
+
+        if args.path is None:
+            data = read_input("-")
         else:
-            print(digest)
+            data = read_input(args.path)
+        actual = spec_hash(data)
+
+        if args.checkpoint:
+            if args.issue is None or args.issue <= 0:
+                raise SpecCheckpointError("--checkpoint requires a positive --issue")
+            source = validate_source(args.source)
+            print("SPEC_ACCEPTED issue=%d spec_sha256=%s source=%s" % (args.issue, actual, source))
+            return 0
+
+        if args.check is not None:
+            if not _SHA256_RE.fullmatch(args.check):
+                raise SpecCheckpointError("--check value must be a 64-character lowercase hex sha256")
+            if args.check != actual:
+                print("ERROR: Spec hash mismatch (actual %s)" % actual, file=sys.stderr)
+                return 1
+            print(actual)
+            return 0
+
+        print(actual)
         return 0
     except (OSError, UnicodeError, ValueError) as exc:
-        print(f"ERROR: {exc}", file=sys.stderr)
+        print("ERROR: %s" % exc, file=sys.stderr)
         return 2
 
 

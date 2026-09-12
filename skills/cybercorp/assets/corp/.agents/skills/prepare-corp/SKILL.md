@@ -1,22 +1,30 @@
 ---
 name: prepare-corp
-description: Establish or complete whole-project Corp preparation, required input adoption and shared handoff.
+description: Establish a project's delivery route and its first executable work. Use right after installation, or when a project has methods but no route and nothing an executor can take.
 ---
 
-# Prepare a project another Corpo can advance
+# Prepare a project another instance can advance
 
-Read `docs/corp/README.md`, the goal and `docs/corp/development-loop.md`. Preserve the whole agreed scope and existing results. For local-only creation, verify that result and leave missing shared setup/resume conditions in the entry.
+Read `docs/corp/README.md` and the project's goal. Each step names the `mechanics.md` section holding the rule; this file gives the order.
 
-Within authorization, verify the real GitHub repository, delivery Milestone and classification; map their owners in `docs/corp/canon-map.yaml`. Before creating an Issue or publishing its first or replacement Spec acceptance, read `docs/corp/spec-authoring.md`. Reuse existing preparation work, creating a minimal discoverable entry only if needed. Read it back natively. Before deeper cross-Issue planning, use `docs/corp/coordination.md`; use the work method for executing the converged Issue.
+Installation put the methods in place. What is missing is a route and work to take. Preserve the agreed scope and any existing results — do not restart what already works.
 
-Use `docs/corp/milestone-delivery.md` to form the development route and stage agreements. Before communicating or adopting an Owner reply, use `docs/corp/communication.md` and its current card.
+## Then, in order
 
-Work from accepted goals, acceptance scenarios and existing results. Reuse, complete and adopt the necessary Canon in its shared owners; preserve private material. Check affected consumers, not just copied files. Design may expose input gaps: resolve ordinary choices, return factual conflicts to their owners, and obtain only decisions that change commitments or authority. Future inputs and internal designs need not all be settled now.
+1. **Verify the native work surface** within your authorization: the actual repository, the delivery Milestone, its classification. Map their owners in `docs/corp/canon-map.yaml`. A route that cannot be established yet stays `unresolved` rather than guessed.
 
-Develop the near-term outcomes into an actionable starting point: component responsibilities, necessary interfaces/data ownership and integration boundaries, actual maintenance locations, and build/check commands. Reuse working structures; clarify shared boundaries enough for consistent implementation without designing every internal detail or creating empty future modules. For non-code projects use the corresponding artifact structure, production tools and checks.
+2. **Keep the unconditionally-read file lean.** Whatever the host reads on entry without being asked — `AGENTS.md` or its equivalent — is paid for by every executor on every task, and content aimed at someone else blurs which constraints apply. It carries only what any instance working here needs: local-data and authorization boundaries, plus the route to the Corp entry. Contributor guidance — layout, environment, checks, maintenance locations — belongs in a separate file, and the entry file should say plainly that an executor does not need it.
 
-Establish the first executable work in the relevant Milestones, with obtainable inputs, actual dependencies, an explicit result, maintenance location and direct check. It must advance the near-term delivery or a necessary prerequisite. Missing runnable scaffolding belongs in that prerequisite work; label it unfinished and make the starting point clear. Integrate and run applicable checks through `docs/corp/verification.md`; installation or an empty test run does not establish project behavior.
+3. **Adopt only the Canon this project needs** (S8). Material existing is not material adopted. Place it with its owners and check affected consumers, not copied files. Design will expose input gaps: resolve ordinary choices, return factual conflicts to their owners, and obtain only the decisions that change commitments or authority.
 
-Record results and remaining gaps in existing preparation work. Phase 1 establishes usable collaboration; Phase 2 hands off when a successor can understand the whole scope and coarse route, explain what to deliver next and why, locate the implementation/inputs/checks, and begin useful work or identify a scoped stop. Cover the whole agreement broadly; deepen by actual need. Received inputs, adopted Canon and verified results remain distinct. No extra planning role, document checklist or approval stage is required.
+4. **Derive the route**: overall scope and acceptance, then near-term focus, then the development boundaries that follow (S3, S4). A stage agreement states its closing conditions in machine-checkable form. Keep distant work coarse — Specs written far ahead of their inputs are invalidated before use.
 
-When available and authorized, let an independent consumer enter only from the repo/native work, without private answers. Record its actual result/hidden dependencies; if unexercised, retain that limit in Phase 1/2 claims.
+5. **Develop the near-term outcome into a startable shape**: component responsibilities, the interfaces and data ownership crossing them, actual maintenance locations, and the build and check commands. Reuse working structures. Clarify shared boundaries enough for consistent implementation without designing every internal detail or creating empty future modules. For a non-code project, use its corresponding artifact structure, tools and checks.
+
+6. **Establish the first executable work** in the relevant Milestone: each unit carrying its own acceptance (S1), sized to one instance's reach (S6), advancing either the near-term delivery or a necessary prerequisite. Missing scaffolding belongs in that prerequisite work, labelled unfinished with its starting point clear. Integrate and run the applicable checks (S3) — an installation or an empty test run establishes nothing.
+
+7. **Hand off.** Preparation is done when a successor who does not know your process can read the scope and route, say what to deliver next and why, locate the implementation, inputs and checks, and begin — or identify a scoped stop. Record what remains missing. Received inputs, adopted Canon and verified results stay distinct.
+
+Cover the agreed scope broadly; deepen only where the near-term work needs it. No extra planning role, document checklist or approval stage is required.
+
+When an independent consumer is available and authorized, let it enter from the repository and native work alone, without private answers. Record its actual result and any hidden dependency it hit. If unexercised, keep that limit in any claim about readiness.

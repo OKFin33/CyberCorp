@@ -153,9 +153,9 @@ class VerificationTests(unittest.TestCase):
 
     def test_broken_method_link_can_be_located_fixed_and_rechecked(self):
         self.commit("baseline")
-        path = self.repo / "docs/corp/development-loop.md"
+        path = self.repo / "docs/corp/mechanics.md"
         original = path.read_text()
-        path.write_text(original.replace("(verification.md)", "(missing-method.md)"))
+        path.write_text(original.replace("(README.md)", "(missing-method.md)"))
         report = self.check(expect=1)
         self.assertIn("missing-method.md", report["errors"][0])
         path.write_text(original)
@@ -186,8 +186,8 @@ class VerificationTests(unittest.TestCase):
         default = self.repo / "docs/corp/owner-communication.md"
         destination = self.repo / "owner.md"
         default.rename(destination)
-        communication = self.repo / "docs/corp/communication.md"
-        communication.write_text(communication.read_text().replace("(owner-communication.md)", "(../../owner.md)"))
+        entry = self.repo / "docs/corp/README.md"
+        entry.write_text(entry.read_text().replace("(owner-communication.md)", "(../../owner.md)"))
         self.check()
 
     def test_unrelated_project_skill_is_outside_corp_method_check(self):

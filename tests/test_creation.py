@@ -70,7 +70,7 @@ class CreationTests(unittest.TestCase):
         transported = load("transported_creator", portable / "scripts/cybercorp.py")
         transported.install(self.repo, self.brief)
         shutil.rmtree(portable)
-        for name in ("milestone-delivery.md", "communication.md", "owner-communication.md"):
+        for name in ("README.md", "mechanics.md", "owner-communication.md"):
             self.assertTrue((self.repo / "docs/corp" / name).is_file(), name)
         for document in self.repo.rglob("*.md"):
             for destination in re.findall(r"\[[^\]]+\]\(([^)]+)\)", document.read_text()):
@@ -144,7 +144,7 @@ class CreationTests(unittest.TestCase):
         self.assertEqual(list(self.base.iterdir()), before)
 
     def test_all_collisions_checked_before_git_init_or_root_edit(self):
-        target = self.repo / "docs/corp/claim-protocol.md"
+        target = self.repo / "docs/corp/mechanics.md"
         target.parent.mkdir(parents=True)
         target.write_text("existing contract")
         before = {p.relative_to(self.repo): p.read_bytes() for p in self.repo.rglob("*") if p.is_file()}
