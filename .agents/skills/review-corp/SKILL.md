@@ -7,7 +7,7 @@ description: Independently review a fixed Corp candidate against its agreement, 
 
 Read `docs/corp/README.md`. Section S3 of `docs/corp/mechanics.md` defines when a stage review may open and what independence requires; do not restate those rules here, and do not open a review whose machine-checkable closing conditions are unmet. An ordinary PR without review is not a task by itself.
 
-Read the required Canon, the actual base/head and the implementation from an independent checkout. Verify the agreement per section S1. Occupy the review per section S2 — for a stage review, converge through section S4 first; for an explicitly requested single-PR review, comment on that PR with a runtime-unique instance ID, the fixed object, scope and expiry, and reread existing undertakings before deeper work. No artificial child Issue is needed. Update the undertaking when you finish, exit, or change to implementation.
+Read the required Canon, the actual base/head and the implementation from an independent checkout. Verify the agreement per section S1. Occupy the review per section S2 — for a stage review, converge through section S4 first; for an explicitly requested single-PR review, comment on that PR with an instance ID unique within your runtime (its own session identifier is the obvious choice; any stable string works), the fixed object, scope and expiry, and reread existing undertakings before deeper work. No artificial child Issue is needed. Update the undertaking when you finish, exit, or change to implementation.
 
 Add affected-consumer perspective for shared semantic changes, without requiring a reviewer per team.
 

@@ -6,7 +6,7 @@
 
 This is not one rule among many. It decides whether any other rule may demand Owner involvement: a rule that does must first show that its action is on the list.
 
-**The burden of proof sits on the side that wants to escalate.** To route something to the Owner, name the list entry it hits. If you cannot name one, act. "Might affect", "unclear whether", and "to be safe" are not entries on the list, and improving the conditions for starting is not starting.
+**The burden of proof sits on the side that wants to escalate.** To route something to the Owner, name the list entry it hits. If you cannot name one, act. "Might affect", "unclear whether" and "to be safe" are not entries on the list.
 
 ### This project's irreversible-action list
 
@@ -32,7 +32,7 @@ You do not need to know how stage review works in order to start work. That belo
 
 ## Read for what you are doing
 
-**Just installed, with no shared work yet?** Start from `.agents/skills/prepare-corp/SKILL.md`. Rules S1–S4 assume there is work to take; in a fresh install there is not yet, and establishing it is the first task. An `unresolved` route in [canon-map.yaml](canon-map.yaml) means that fact has not been established yet — not that something is broken. A project with no native work surface at all can still be prepared locally; the entry states what remains missing rather than blocking.
+**Just installed, with no shared work yet?** Start from `.agents/skills/prepare-corp/SKILL.md`. Rules S1–S4 assume there is work to take; in a fresh install there is not yet, and establishing it is the first task. A route in [canon-map.yaml](canon-map.yaml) is `active`, `pending-relocation` or `unresolved` — the latter two mean that fact has not been established yet or has moved, not that something is broken. A project with no native work surface at all can still be prepared locally; the entry states what remains missing rather than blocking.
 
 Rules are defined once, in [mechanics.md](mechanics.md). This table routes; it does not restate.
 

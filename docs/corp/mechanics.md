@@ -57,7 +57,7 @@ Native carriers: `assignee`, `requested_reviewers`.
 **Guess removed**: whether someone is already doing the thing I am about to do.
 
 **Known failures**
-- Two instances independently notice "not enough upcoming work" and each start planning the next batch. Neither is visible to the other, because the planning had no carrier. This is why planning creates its carrier first.
+- Two instances independently notice "not enough upcoming work" and each start planning the next batch. Neither is visible to the other, because the planning had no carrier.
 - Three instances each independently review the same PR to completion before discovering the duplication. Reviewing is an action; it needs occupation like any other.
 - A non-atomic read-then-write claim does not prove exclusivity. Visible occupation reduces collisions; it does not eliminate them.
 
@@ -73,7 +73,7 @@ Native carriers: `assignee`, `requested_reviewers`.
 
 Evidence has two parts. The automatable part is CI. The non-automatable part — whether the implementation satisfies the intent — cannot be produced by checks. At Issue granularity the cost of judging intent exceeds its return; at Milestone granularity it is both necessary and affordable. **Independent review is therefore this section's mechanism at Milestone granularity, not a separate quality process.**
 
-The Plan that designs a stage states the stage's closing conditions **in machine-checkable form**: which Issues closed, which PRs merged, which checks green. When those conditions hold, review may open. No instance judges whether the stage is "near done" — that judgement does not exist in this design. The reviewer then judges only substance: does the result satisfy the intent.
+The Plan that designs a stage states the stage's closing conditions **in machine-checkable form**: named Issues closed, named PRs merged, named checks green. Write them as a list a reader can verify without judgement — `closes #12, #14`, `merges #15`, `checks: tests` — not as prose like "when the export path is solid". When those conditions hold, review may open. No instance judges whether the stage is "near done" — that judgement does not exist in this design. The reviewer then judges only substance: does the result satisfy the intent.
 
 A reviewer must not have implemented the object under review and must not modify it during review. Sharing a model or an account with the implementer is not the disqualifier; having implemented it is. After ending review, the same instance may take on a repair, but the repair's recheck needs an instance that did not perform it.
 
@@ -108,7 +108,7 @@ Native carriers: Milestone, Label.
 **Guess removed**: whether to stop and wait.
 
 **Known failures**
-- Instances that have identified real product work but classify it as "might change a delivery commitment" and turn to infrastructure tidying instead. The authorisation to proceed was already written; it did not become behaviour. See the governing rule's burden of proof in [README.md](README.md).
+- Identifying real product work, then classifying it as "might change a delivery commitment" and turning to infrastructure tidying instead. See the governing rule's burden of proof in [README.md](README.md).
 - Improving the conditions for starting is not starting.
 - Two planning efforts running in parallel because neither declared a carrier.
 
@@ -167,13 +167,18 @@ Native carriers: sub-Issues, native blocked-by relationships.
 
 **Mechanism**. An occupation whose object has not changed for longer than the threshold may be taken over: verify the last state, existing PRs and remaining work, then self-assign. A returning former holder must stop its now-invalid execution rather than continue.
 
-Detection uses fields GitHub maintains — `updated_at`, `assignee`, Issue events — not a record the executor writes. **This is deliberate: a self-maintained recovery record introduces its own failure mode.** One mistyped field has been enough to make an execution history unreplayable, forcing the work to move to a new Issue rather than be repaired. Fields the executor cannot mistype cannot be mistyped.
+Detection uses fields GitHub maintains — `updated_at`, `assignee`, Issue events — not a record the executor writes.
 
 A new occupation inherits nothing from the old one: not its check applicability, not its authorisations.
 
 Native carriers: `updated_at`, `assignee`, Issue events.
 
 **Guess removed**: whether this work is dead and whether I may take it.
+
+**Known failures**
+- An occupation that looks alive because someone edited a label or a title, while the work itself has not moved. Activity on the object is not progress on the work.
+- Taking over on the threshold alone, without checking the last state and existing PRs first. The previous holder may have merged something.
+- A returning former holder continuing from where it stopped, unaware its occupation lapsed and the work moved on.
 
 **Empirical, not derived**: the threshold. The first principle yields the need for a release path, not a number. Calibrate from observed runs; no default is set here.
 
@@ -207,9 +212,9 @@ Native carriers: Git files, Milestone description, Issue attribution comments.
 
 **Guess removed**: what is true, what is merely current, and where to look for either.
 
-**Changing this rule set itself.** These rules are part of the project's authoritative facts, so amending them is a Canon change — but S1, S2 and S6 do not apply to it. There is no Issue to occupy, because the object is the rule set rather than a deliverable. The acceptance tooling may be replaced within the same change, so an acceptance hash computed by an implementation that no longer exists proves nothing. And the layer cannot be half-replaced, so splitting by grain does not apply.
+**Changing this rule set itself.** These rules are one of the durable facts this section governs, so amending them is a Canon change — but S1, S2 and S6 do not apply: the object is the rule set rather than a deliverable, the acceptance tooling may be replaced within the same change, and the layer cannot be half-replaced.
 
-What still applies: merging into the default branch needs the Owner (S5); the decision and its reasons enter the record; and the completion evidence is the test suite, the structure check and the decision record, plus the PR and its checks once pushed. **Say plainly in the PR that it is a mechanism change** — it is breaking for any project already running the previous layout, and that project's migration is its own change under its own agreement.
+What still applies unchanged: S5, S7 and this section. The completion evidence is the test suite, the structure check and the record of the decision, plus the PR and its checks once pushed. **Say plainly in the PR that it is a mechanism change** — it is breaking for any project already running the previous layout, and that project's migration is its own change under its own agreement.
 
 **Known failures**
 - Announcing a changed goal by pointing at code that was already written.
