@@ -21,8 +21,8 @@ Reviewing a PR rather than implementing is `review-corp/SKILL.md`, not this file
 2. **Check it carries its own acceptance.** If it does not, fix the body within your authority, or take the missing decision to the Owner under the entry's governing rule. Do not implement against unverifiable acceptance.
 3. **Check it fits one instance's lifetime**: independently deliverable, then completable within one context window. Split now if either fails — mid-way splits cost you a write-up to the shared layer first.
 4. **Implement.** Ordinary engineering choices are yours. A change to a shared premise goes to that fact's owner and to affected consumers before you build on it. For setup, version evidence, or continuing after a failure, see the rule on completion resting on evidence that is not self-reported.
-5. **Close out.** Run your checks rather than asserting they would pass. A PR with passing checks is completion. Whether the stage is near done is not a judgement that exists here.
+5. **Close out.** Run your checks rather than asserting they would pass. A PR with passing checks is completion. Whether the stage is near done is not a judgement that exists here. Ending the occupation and ending the branches, worktrees and temporary checkouts this execution created are separate acts with their own conditions — see the rule that the work, the occupation and the execution site end separately.
 6. **Report back only** when something changes a shared agreement, widens your authorization, or overturns a premise this work depends on. Otherwise continue; independent parts do not wait. For Owner-facing communication see the rules on the irreversible-action boundary and on the durable home for facts, and use the card the entry routes to.
-7. **Stopping early** means leaving a shared checkpoint and releasing the occupation, not holding it silently.
+7. **Stopping early** means leaving a shared checkpoint and releasing the occupation, not holding it silently. Say which sites you kept for the successor and on what condition; that same rule covers what may go now.
 
 Report implemented, reviewed, merged and accepted strictly by the evidence each word has.

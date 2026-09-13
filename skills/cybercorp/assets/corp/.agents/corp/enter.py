@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Observe a remote baseline and optionally create an independent working tree."""
+"""Observe a remote baseline and optionally add an isolated worktree of this clone."""
 import argparse
 import json
 from pathlib import Path
@@ -23,6 +23,8 @@ def git(root, *args):
 
 def enter(root, destination=None, remote="origin", branch=None, dry_run=False):
     root = Path(root).expanduser().resolve(strict=True)
+    if dry_run and not destination:
+        raise EntryError("--dry-run plans a checkout; observation alone never writes")
     if Path(git(root, "rev-parse", "--show-toplevel")).resolve() != root:
         raise EntryError("Use the actual Git root")
     if remote not in git(root, "remote").splitlines():
@@ -55,7 +57,9 @@ def enter(root, destination=None, remote="origin", branch=None, dry_run=False):
     destination = destination.resolve()
     if destination == root or root in destination.parents:
         raise EntryError("Put the new worktree outside the original checkout")
-    result.update(status="planned", checkout=str(destination))
+    result.update(status="planned", checkout=str(destination),
+                  continues="Nothing: the checkout starts a new branch at remote_commit, so it is isolation, not a continuation of an existing branch or PR head.",
+                  closeout="The checkout is registered in `repo`: end it with `git worktree remove` there, then decide its branch separately, and read both back. Deleting the directory leaves a registered, prunable entry. Ending this site is neither finishing the work nor releasing an occupation.")
     if dry_run:
         return result
     git(root, "fetch", "--no-write-fetch-head", url, sha)
@@ -69,6 +73,7 @@ def enter(root, destination=None, remote="origin", branch=None, dry_run=False):
         raise EntryError("Original checkout changed during entry; reconcile concurrent changes before working")
     result.update(status="checkout_created", branch=work_branch,
                   entry=str(destination / "AGENTS.md"),
+                  ceiling="Additional worktree of `repo`, pinned to remote_commit. That repository's working tree, index and untracked files are unchanged; it now holds the fetched commit and the new branch ref. Task inputs and runtime rule reload remain separate.",
                   next="Read the new checkout's root/path rules in the worker runtime, then verify the actual task and execution rights.")
     return result
 
@@ -76,10 +81,10 @@ def enter(root, destination=None, remote="origin", branch=None, dry_run=False):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", default=str(Path(__file__).resolve().parents[2]))
-    parser.add_argument("--worktree", help="New independent checkout destination; omit for read-only observation")
+    parser.add_argument("--worktree", help="Destination for an additional worktree of --repo on a new branch; omit for read-only observation")
     parser.add_argument("--remote", default="origin")
-    parser.add_argument("--branch", help="Remote branch; defaults to its native HEAD")
-    parser.add_argument("--dry-run", action="store_true", help="Read the live remote and plan; no fetch or worktree writes")
+    parser.add_argument("--branch", help="Remote branch to observe; defaults to its native HEAD")
+    parser.add_argument("--dry-run", action="store_true", help="Read the live remote and plan the checkout; no fetch or worktree writes")
     args = parser.parse_args(argv)
     try:
         print(json.dumps(enter(args.repo, args.worktree, args.remote, args.branch, args.dry_run),

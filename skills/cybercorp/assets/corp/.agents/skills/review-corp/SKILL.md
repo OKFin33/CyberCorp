@@ -16,7 +16,7 @@ You must not have implemented the object under review.
 3. **Choose checks that expose concrete errors, omissions or needless complexity.** Add affected-consumer perspective for shared semantic changes; a reviewer per team is not required.
 4. **Separate** acceptance blockers — agreement, scenario, consequence, recheck — from optional improvements and from decisions that are actually the Owner's.
 5. **Record** in native PR reviews or inline comments: your instance and non-involvement, exact base and head, the Spec pin, scope, which checks you executed versus relied on, and what remains untested. If permissions prevent that, record the result and the limitation on the PR itself. Stage conclusions belong in the bounded Issue with evidence links.
-6. **Return** findings, or a no-blocker conclusion with the evidence supporting it.
+6. **Return** findings, or a no-blocker conclusion with the evidence supporting it. The checkout you fixed base and head in ends under the rule that the work, the occupation and the execution site end separately — concluding the review does not end it.
 
 A changed head or Spec needs re-evaluation by impact; a new integration base needs its own checks, not the previous combination's green result. Link every blocker to its correction, the precise new version, and an independent recheck.
 

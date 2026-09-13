@@ -15,6 +15,7 @@ Sections follow the order an execution meets them.
 | A work unit carries its own acceptance | how far to take this |
 | A work unit fits inside one instance's lifetime | whether I can finish this in one go |
 | Completion rests on evidence that is not self-reported | whether this "done" can be relied on |
+| The work, the occupation and the execution site end separately | whether this branch or checkout may go, and what my release proved |
 | Irreversible actions have a small, explicit boundary | whether I may decide this myself |
 | Direction and cross-cutting facts have a durable home | what is true, and where to look |
 
@@ -159,6 +160,42 @@ Native carriers: Pull Request, Checks, Milestone.
 - A recorded request, a successful send, and a received reply are three different facts.
 - Self-review, internal critique and adversarial passes are implementation methods. They do not open a stage review and do not constitute acceptance.
 - Existing evidence that already covers the same candidate, agreement and required independence may be adopted by a stage review. The same content is not re-examined because a process has a different name.
+
+---
+
+## The work, the occupation and the execution site end separately
+
+**Stops delivery when missing**: an execution ends and leaves branches, worktrees and temporary checkouts nobody can classify. The next instance either treats an abandoned half-state as live work, or clears the site holding the only copy of a result. The first wastes a run; the second is unrecoverable.
+
+**Derives from**: executors are unreliable, and the site an execution runs in outlives it.
+
+**Mechanism**. Three endings, each with its own evidence and its own remaining action:
+
+| Ending | Its evidence | What it does not establish |
+|---|---|---|
+| The result | what the rule above on evidence that is not self-reported requires | that any local object may now go |
+| The occupation | a release, or a takeover recorded on the object | that a process stopped, or that the candidate is discardable |
+| The execution site | the object absent on readback, nothing reachable only from it lost | that the work is finished, or that another site is clean |
+
+Verify before acting, against the current state rather than your memory of it: who occupies the object now, which commits exist only there, which shared result supersedes it, and what still reads it. Then act on that one object and read the result back.
+
+Continuing is the default: take over the existing branch and its PR rather than opening a parallel site. A candidate handed back stays open and findable, or the successor has nothing to continue. Isolate only from a verified result, and record on both objects which replaced which and where the superseded result went. Whatever you keep states its purpose or the condition for resuming it — a retained object with no stated reason cannot be told from a forgotten one.
+
+Closeout belongs to the work that created the site; it is not a routine-cleanup Issue. A cleanup claim carries the scope it was observed in: one machine says nothing about another, and an unrecovered site does not subtract from a delivered result.
+
+Native carriers: branches, PR head refs, `git worktree list`, the Issue or PR comment recording what was kept, why, and what replaced it.
+
+**Guess removed**: whether this branch, worktree or checkout may go, and what my release actually proved.
+
+**Known failures**
+- `git clean` leaves ignored content untouched, and `-x` destroys local data the project deliberately keeps untracked. Neither outcome is "the site is empty".
+- Reading a release, an expired lease or a closed Issue as evidence that a process stopped.
+- Reading "it was merged", or a delete command's exit status, as evidence about the remaining state: the tip may carry commits made after the merge, and the command describes itself.
+- Assuming a squash or a rebase preserved the content. Compare the actual result against the tip before dropping the source.
+- Removing a checkout directory while leaving its worktree registered in the repository that owns it — or pruning that registration while something is still writing there.
+- Declaring everything clean from the one machine you can see.
+
+**Empirical, not derived**: which sites a project treats as disposable. Absent a declared policy, recover the sites this execution created whose unique content is reachable from a shared result, and keep the rest with the reason stated.
 
 ---
 
