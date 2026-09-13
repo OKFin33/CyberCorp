@@ -8,7 +8,11 @@ This file is version-independent. **The list of what actually changed between tw
 
 **What is installed.** Read the files, not the version. `.agents/corp/install.json` records where the first install came from, which is not evidence of what is present now — the project may have edited generated files, and earlier migrations may have been partial.
 
-**What you are moving to.** Pin one commit of the target package and work against that. A migration against a moving default branch cannot be reviewed, and cannot be repeated if it fails.
+**What you are moving to.** Pin a **released version**, not an arbitrary commit. The upstream default branch carries unreleased changes at all times, so pinning a commit from it means adopting a state its author may still be revising — and then re-adopting when they finish. A release is the author's statement that this state is meant to be depended on.
+
+This puts an obligation on the upstream side too: **improvements reach adopters only when they are released.** An upstream that leaves finished work unreleased is the reason its adopters run old rules, and no amount of diligence on the adopting side compensates for it.
+
+Where a release is genuinely unavailable and waiting is not an option, pin the exact commit, record why, and state what you will do when the next release lands. Do not treat that as the normal path.
 
 **The difference between them.** Take it from the target's change record. Breaking changes are the ones that matter: renamed outputs, changed check behaviour, rules that now require something they did not. Anything you infer rather than read is a guess you are about to build on.
 
