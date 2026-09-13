@@ -29,7 +29,7 @@ Read `docs/corp/README.md` if you have not. Each step names the `mechanics.md` s
 
 5. **Make the checks pass.** Run them rather than asserting they would. Setup problems, missing versions and failures you did not cause are part of the work — see the rule on completion resting on evidence that is not self-reported for what counts as continuing after a failure.
 
-6. **Deliver the candidate.** A PR whose checks pass is completion. Whether the stage is near done is not a judgement that exists here.
+6. **Deliver the candidate** as a PR, and let its checks speak — the rule on completion resting on evidence that is not self-reported says what that establishes. How close the stage is to done is not yours to weigh.
 
 7. **Note anything you found outside this unit** in one line on the Issue. Bounded planning reads those; it is what turns them into units.
 
