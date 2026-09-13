@@ -165,7 +165,7 @@ Native carriers: sub-Issues, native blocked-by relationships.
 
 **Derives from**: executors are unreliable, and no one is patrolling.
 
-**Mechanism**. An occupation whose object has not changed for longer than the threshold may be taken over: verify the last state, existing PRs and remaining work, then self-assign. A returning former holder must stop its now-invalid execution rather than continue.
+**Mechanism**. Takeover is conditioned on a recorded observation, not on a waiting period. Read the object's last change time, its open PRs and the remaining work; record what you found on the object; then self-assign. A returning former holder must stop its now-invalid execution rather than continue — that obligation is what bounds the cost of taking over early, so the decision never requires proving the predecessor is dead. A project may declare a threshold as a shortcut past the recorded observation; where none is declared, the observation is the condition.
 
 Detection uses fields GitHub maintains — `updated_at`, `assignee`, Issue events — not a record the executor writes.
 
@@ -173,14 +173,15 @@ A new occupation inherits nothing from the old one: not its check applicability,
 
 Native carriers: `updated_at`, `assignee`, Issue events.
 
-**Guess removed**: whether this work is dead and whether I may take it.
+**Guess removed**: whether I may take over work that looks stalled, and what I must do before I do.
 
 **Known failures**
 - An occupation that looks alive because someone edited a label or a title, while the work itself has not moved. Activity on the object is not progress on the work.
 - Taking over on the threshold alone, without checking the last state and existing PRs first. The previous holder may have merged something.
 - A returning former holder continuing from where it stopped, unaware its occupation lapsed and the work moved on.
+- Treating an undeclared threshold as a reason to wait. Where no threshold is declared the recorded observation is the condition; the absence of a number does not block takeover.
 
-**Empirical, not derived**: the threshold. The first principle yields the need for a release path, not a number. Calibrate from observed runs; no default is set here.
+**Empirical, not derived**: any threshold a project declares as a shortcut. The first principle yields the need for a release path and a visible takeover record, not a number. Calibrate one from observed runs if the shortcut is worth it; the recorded observation works without it.
 
 ---
 

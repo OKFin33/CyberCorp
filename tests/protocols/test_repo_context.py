@@ -194,14 +194,16 @@ class ObserveGlobalTests(unittest.TestCase):
         self.assertEqual(pr["head_sha"], "b" * 40)
         self.assertEqual(pr["base_sha"], "a" * 40)
 
-    def test_canon_routes_are_included_with_non_active_marked_unverified(self):
+    def test_canon_routes_report_declared_status_without_claiming_verification(self):
         routes = base_routes()
         routes["repos/o/r/issues?milestone=4&state=open&per_page=100"] = [[]]
         reader = FakeReader(routes)
         report = repo_context.observe(ROOT, reader, repo="o/r")
         by_id = {r["id"]: r for r in report["canon"]}
-        self.assertTrue(by_id["project-direction"]["verified"])
-        self.assertFalse(by_id["pending-thing"]["verified"])
+        self.assertTrue(by_id["project-direction"]["declared_active"])
+        self.assertFalse(by_id["pending-thing"]["declared_active"])
+        # The field must not be named or shaped as a verified fact: nothing read the target.
+        self.assertNotIn("verified", by_id["project-direction"])
 
     def test_atomic_snapshot_is_false_when_any_paginated_read_occurred(self):
         routes = base_routes()
@@ -218,19 +220,45 @@ class ObserveGlobalTests(unittest.TestCase):
         self.assertEqual(report["errors"], [])
 
 
+def issue_routes():
+    routes = base_routes()
+    routes["repos/o/r/issues/11"] = {"number": 11, "title": "Fix X", "body": "<!-- spec:start -->\nY\n<!-- spec:end -->",
+                                     "state": "open", "assignees": [{"login": "bob"}],
+                                     "labels": [{"name": "bug"}], "updated_at": "2026-02-02T00:00:00Z"}
+    routes["repos/o/r/issues/11/comments"] = [[
+        {"user": {"login": "carol"}, "created_at": "2026-02-03T00:00:00Z", "body": "SPEC_ACCEPTED issue=11 ..."},
+    ]]
+    routes["repos/o/r/issues/11/dependencies/blocked_by"] = [[]]
+    routes["repos/o/r/issues/11/dependencies/blocking"] = [[]]
+    routes["repos/o/r/issues/11/sub_issues"] = [[]]
+    return routes
+
+
+class FocusDegradationTests(unittest.TestCase):
+    """A background Milestone must not decide whether a requested Issue can be read."""
+
+    def test_unreadable_focus_milestone_does_not_block_the_requested_issue(self):
+        routes = issue_routes()
+        routes["repos/o/r/milestones/4"] = repo_context.RepoContextError(
+            "gh api failed for repos/o/r/milestones/4: HTTP 404")
+        report = repo_context.observe(ROOT, FakeReader(routes), repo="o/r", issue=11)
+        self.assertEqual(report["issue"]["number"], 11)
+        self.assertIsNone(report["focus"])
+        self.assertEqual([e["scope"] for e in report["errors"]], ["focus"])
+        self.assertEqual(report["errors"][0]["milestone"], 4)
+
+    def test_inconsistent_focus_read_still_aborts_the_whole_observation(self):
+        routes = issue_routes()
+        pages = iter([{"number": 4, "title": "One", "state": "open"},
+                      {"number": 4, "title": "Changed", "state": "open"}])
+        routes["repos/o/r/milestones/4"] = lambda: next(pages)
+        with self.assertRaises(repo_context.InconsistentObservation):
+            repo_context.observe(ROOT, FakeReader(routes), repo="o/r", issue=11)
+
+
 class ObserveIssueTests(unittest.TestCase):
     def _issue_routes(self):
-        routes = base_routes()
-        routes["repos/o/r/issues/11"] = {"number": 11, "title": "Fix X", "body": "<!-- spec:start -->\nY\n<!-- spec:end -->",
-                                         "state": "open", "assignees": [{"login": "bob"}],
-                                         "labels": [{"name": "bug"}], "updated_at": "2026-02-02T00:00:00Z"}
-        routes["repos/o/r/issues/11/comments"] = [[
-            {"user": {"login": "carol"}, "created_at": "2026-02-03T00:00:00Z", "body": "SPEC_ACCEPTED issue=11 ..."},
-        ]]
-        routes["repos/o/r/issues/11/dependencies/blocked_by"] = [[]]
-        routes["repos/o/r/issues/11/dependencies/blocking"] = [[]]
-        routes["repos/o/r/issues/11/sub_issues"] = [[]]
-        return routes
+        return issue_routes()
 
     def test_single_issue_context_includes_body_and_comments(self):
         reader = FakeReader(self._issue_routes())

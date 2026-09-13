@@ -163,23 +163,11 @@ def infer_repo(root):
 # Canon routing
 # ---------------------------------------------------------------------------
 
-def canon_routes(root):
-    path = root / "docs/corp/canon-map.yaml"
-    rows = parse_map(path.read_text(encoding="utf-8"))
-    routes = []
-    for row in rows:
-        if row["status"] != "active":
-            routes.append({**row, "verified": False})
-        else:
-            routes.append({**row, "verified": True})
-    return routes
-
-
 def focus_milestone_number(routes, explicit):
     if explicit is not None:
         return explicit
     focus = next((r for r in routes if r["id"] == "current-delivery-focus"), None)
-    if focus is None or not focus["verified"] or not isinstance(focus["target"], str):
+    if focus is None or not focus["declared_active"] or not isinstance(focus["target"], str):
         return None
     match = re.search(r"/milestone/([0-9]+)$", focus["target"])
     if not match:
@@ -266,12 +254,17 @@ def observe(root, reader, repo=None, issue=None, milestone=None):
     report = {"repo": repo_name, "remote_branch": default_branch,
               "remote_head": remote_head, "canon": routes, "errors": []}
 
+    report["focus"] = None
     if milestone_number is not None:
-        focus = _read_consistent(tracked, "%s/milestones/%d" % (repo_path, milestone_number))
-        report["focus"] = {"number": focus["number"], "title": focus.get("title"),
-                           "state": focus.get("state")}
-    else:
-        report["focus"] = None
+        # Focus is context, not the requested object. A missing or unreadable Milestone must not
+        # keep an explicitly requested Issue from being read.
+        try:
+            focus = _read_consistent(tracked, "%s/milestones/%d" % (repo_path, milestone_number))
+        except RepoContextError as exc:
+            report["errors"].append({"scope": "focus", "milestone": milestone_number, "error": str(exc)})
+        else:
+            report["focus"] = {"number": focus["number"], "title": focus.get("title"),
+                               "state": focus.get("state")}
 
     if issue is not None:
         report["mode"] = "issue"
@@ -289,7 +282,9 @@ def observe(root, reader, repo=None, issue=None, milestone=None):
 
 def canon_routes_from_text(text):
     rows = parse_map(text)
-    return [dict(row, verified=(row["status"] == "active")) for row in rows]
+    # "declared_active" is what the map says, not a verified fact: nothing here reads the
+# target. check.py owns target resolution and reports "remote; not contacted" separately.
+    return [dict(row, declared_active=(row["status"] == "active")) for row in rows]
 
 
 def main(argv=None):
