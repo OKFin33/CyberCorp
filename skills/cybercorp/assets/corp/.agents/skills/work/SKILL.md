@@ -1,5 +1,5 @@
 ---
-name: work-corp
+name: work
 description: Take, resume or finish one Issue's work. Use when you have an Issue to implement, investigate or resume, or when the Milestone queue has nothing left to take.
 ---
 
@@ -10,10 +10,10 @@ Read `docs/corp/README.md` once per session if you have not. Each step names the
 ## Pick your unit
 
 - Told which Issue, or resuming your own: use it.
-- Not told: the highest-priority open Issue in the current Milestone without the Owner-decision label.
+- Not told: any Issue in the current Milestone whose native prerequisites are satisfied and which carries no Owner-decision label. Several may qualify; take either rather than ranking them.
 - Nothing qualifies: the deficit is the work. Converge on an existing planning carrier or create one, then treat that as your unit.
 
-Reviewing a PR rather than implementing is `review-corp/SKILL.md`, not this file.
+Reviewing a PR rather than implementing is `review/SKILL.md`, not this file.
 
 ## Then, in order
 
@@ -23,6 +23,6 @@ Reviewing a PR rather than implementing is `review-corp/SKILL.md`, not this file
 4. **Implement.** Ordinary engineering choices are yours. A change to a shared premise goes to that fact's owner and to affected consumers before you build on it. For setup, version evidence, or continuing after a failure, see the rule on completion resting on evidence that is not self-reported.
 5. **Close out.** Run your checks rather than asserting they would pass. A PR with passing checks is completion. Whether the stage is near done is not a judgement that exists here. Ending the occupation and ending the branches, worktrees and temporary checkouts this execution created are separate acts with their own conditions — see the rule that the work, the occupation and the execution site end separately.
 6. **Report back only** when something changes a shared agreement, widens your authorization, or overturns a premise this work depends on. Otherwise continue; independent parts do not wait. For Owner-facing communication see the rules on the irreversible-action boundary and on the durable home for facts, and use the card the entry routes to.
-7. **Stopping early** means leaving a shared checkpoint and releasing the occupation, not holding it silently. Say which sites you kept for the successor and on what condition; that same rule covers what may go now.
+7. **Stopping early** means leaving a shared checkpoint and releasing the occupation, not holding it silently. **One comment carries both** — what was delivered, where the candidate is, what remains, what resumes it, and that the occupation is released. Say which sites you kept for the successor and on what condition; that same rule covers what may go now.
 
 Report implemented, reviewed, merged and accepted strictly by the evidence each word has.

@@ -6,7 +6,7 @@
 
 | 能力 | 证据类型 | 位置 |
 |---|---|---|
-| 确定性安装、重装保护项目编辑 | 自动化测试（123 项根 unittest） | `tests/test_creation.py` |
+| 确定性安装、重装保护项目编辑 | 自动化测试（150 项根 unittest） | `tests/test_creation.py` |
 | 本地结构检查发现悬空引用、缺失路由、无效 helper | 自动化测试 | `tests/test_verification.py` |
 | 原生对象读取的协议行为（离线回放） | 自动化测试 | `tests/protocols/` |
 | 启动器的显式命令与 fake-CLI 启动／恢复 | 自动化测试 | `skills/corpo-launcher/scripts/tests/` |

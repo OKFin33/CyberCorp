@@ -1,5 +1,5 @@
 ---
-name: review-corp
+name: review
 description: Independently review a fixed stage candidate. Use when a Milestone's stated closing conditions hold, or when a single-PR review was explicitly requested — not for ordinary PRs.
 ---
 

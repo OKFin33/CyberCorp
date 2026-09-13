@@ -19,6 +19,18 @@ class RepoContextError(ValueError):
     pass
 
 
+class Unreachable(RepoContextError):
+    """The shared work surface exists but could not be read right now — credentials, network,
+    permissions. Unlike a repository that is not a Corp, this says nothing about whether work
+    may proceed: suspend the decisions that depend on this read, and let independent work
+    continue. Retrying later is meaningful; concluding "not a Corp" from it is not."""
+
+    hint = ("Could not reach the shared work surface. This does not establish that the repository "
+            "is not a Corp — it establishes that this read failed. Suspend the decisions that "
+            "depend on it; independent work may continue. Check credentials, network and "
+            "repository access, then retry.")
+
+
 class InconsistentObservation(RepoContextError):
     """Repeated reads disagreed. Unlike an unreadable object, this invalidates the
     observation method itself, so it must never be downgraded into a report error."""
@@ -76,7 +88,7 @@ def parse_map(text):
             current = {"id": value}
             entries.append(current)
             continue
-        field_match = re.match(r"^    (target|status): (.*)$", line)
+        field_match = re.match(r"^    (target|status|answers): (.*)$", line)
         if field_match:
             if current is None:
                 raise RepoContextError("unsupported or duplicate Canon map field")
@@ -90,7 +102,10 @@ def parse_map(text):
     if not entries:
         raise RepoContextError("Canon map entries must have unique IDs and id/target/status")
     for entry in entries:
-        if set(entry) != {"id", "target", "status"}:
+        # `answers` says what question this route answers, so an executor can tell which
+        # entry it needs without opening several. Optional: routes written before it existed
+        # stay valid, and a project adds it where the id alone is not self-evident.
+        if set(entry) - {"answers"} != {"id", "target", "status"}:
             raise RepoContextError("Canon map entries must have unique IDs and id/target/status")
         if entry["status"] not in _STATUSES:
             raise RepoContextError("unsupported Canon map status")
@@ -116,9 +131,9 @@ class GhReader:
             result = subprocess.run(args, cwd=self.root, capture_output=True, text=True,
                                     timeout=self.timeout)
         except (OSError, subprocess.TimeoutExpired) as exc:
-            raise RepoContextError("gh api failed for %s: %s" % (endpoint, exc))
+            raise Unreachable("gh api failed for %s: %s" % (endpoint, exc))
         if result.returncode != 0:
-            raise RepoContextError("gh api failed for %s: %s" % (endpoint, result.stderr.strip()))
+            raise Unreachable("gh api failed for %s: %s" % (endpoint, result.stderr.strip()))
         try:
             data = json.loads(result.stdout)
         except ValueError:
@@ -157,7 +172,12 @@ def infer_repo(root):
     result = subprocess.run(["git", "remote", "get-url", "origin"], cwd=root,
                             capture_output=True, text=True)
     if result.returncode != 0:
-        raise RepoContextError("Could not read the origin remote: " + result.stderr.strip())
+        raise RepoContextError(
+            "No origin remote, so there is no shared work surface to observe. Every carrier this "
+            "mechanism uses — Issues, Pull Requests, Milestones, assignees — lives on the hosted "
+            "repository, so a Corp cannot operate without one. If you are a worker: stop and report "
+            "that this repository is not a Corp yet. If you are establishing it: create the hosted "
+            "repository and its remote first. (git: " + result.stderr.strip() + ")")
     url = result.stdout.strip()
     match = re.search(r"[:/]([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+?)(?:\.git)?$", url)
     if not match:
@@ -233,6 +253,9 @@ def issue_context(reader, repo_path, number):
             "relations": issue_relations(reader, repo_path, number)}
 
 
+_ISSUE_REF = re.compile(r"#(\d+)")
+
+
 def open_pull_requests(reader, repo_path):
     pulls = _read_consistent(reader, "%s/pulls?state=open&per_page=100" % repo_path, paginated=True)
     summaries = []
@@ -240,7 +263,13 @@ def open_pull_requests(reader, repo_path):
         summaries.append({"number": pull["number"], "title": pull["title"], "state": pull["state"],
                           "head_sha": pull.get("head", {}).get("sha"),
                           "base_sha": pull.get("base", {}).get("sha"),
-                          "checks": pull.get("checks") or pull.get("mergeable_state")})
+                          "checks": pull.get("checks") or pull.get("mergeable_state"),
+                          # Issue numbers this candidate mentions. A mention is not a link:
+                          # it means "check this before taking that Issue", not "that Issue is
+                          # closed by this". The same read already returned the body, so this
+                          # costs no extra round trip.
+                          "mentions_issues": sorted({int(n) for n in _ISSUE_REF.findall(
+                              (pull.get("body") or "") + " " + (pull.get("title") or ""))})})
     return summaries
 
 
@@ -282,6 +311,16 @@ def observe(root, reader, repo=None, issue=None, milestone=None):
         report["issues"] = discover_global(tracked, repo_path, milestone_number)
     report["open_pull_requests"] = open_pull_requests(tracked, repo_path)
 
+    # An Issue with an unmerged candidate is not takeable as new work, whether or not anyone
+    # remembered to label it: the work may already be delivered and waiting, or in progress
+    # elsewhere. Attach it here so choosing work needs one read, not a pass over every PR.
+    by_issue = {}
+    for pull in report["open_pull_requests"]:
+        for number in pull.get("mentions_issues", []):
+            by_issue.setdefault(number, []).append(pull["number"])
+    for issue_row in report.get("issues", []) or ([report["issue"]] if report.get("issue") else []):
+        issue_row["open_candidates"] = sorted(by_issue.get(issue_row["number"], []))
+
     # This report is assembled from several sequential reads and is never a point-in-time
     # snapshot. The flag reports only whether any read spanned pages, which widens the gap
     # further because GitHub gives no cross-page guarantee.
@@ -307,7 +346,11 @@ def main(argv=None):
     try:
         report = observe(root, reader, repo=args.repo, issue=args.issue, milestone=args.milestone)
     except (RepoContextError, OSError, ValueError) as exc:
-        print(json.dumps({"error": str(exc)}, ensure_ascii=False), file=sys.stderr)
+        payload = {"error": str(exc)}
+        hint = getattr(exc, "hint", None) or getattr(type(exc), "hint", None)
+        if hint:
+            payload["what_this_means"] = hint
+        print(json.dumps(payload, ensure_ascii=False), file=sys.stderr)
         return 2
     print(json.dumps(report, ensure_ascii=False, indent=2))
     return 0

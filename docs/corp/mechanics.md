@@ -27,7 +27,15 @@ Sections follow the order an execution meets them.
 
 **Derives from**: delivery must not depend on the Owner assigning each task.
 
-**Mechanism**. Take the highest-priority open Issue in the current Milestone that is not marked as requiring an Owner decision. If none remains, the deficit is itself the work: create the planning carrier, occupy it, and generate the next batch.
+**Mechanism**. Take **any Issue that is takeable now**: in the current Milestone, not marked as requiring an Owner decision, and with every native prerequisite satisfied. More than one qualifies — take either. If none does, the deficit is itself the work: create the planning carrier, occupy it, and generate the next batch.
+
+**There is no priority order to read, and none to maintain.** An Issue being in the current Milestone already says this stage delivers it, so which one goes first does not change whether the stage completes. Sequencing that does matter is already in the dependency relations. Ranking beyond that would be a judgement no one else can recheck, held in an instance that will be replaced — and throughput comes from starting more instances, not from ordering one instance's queue.
+
+**Open does not mean takeable.** An open Issue may be unstarted work, or work already delivered and waiting on an Owner decision. Two signals carry the difference, and neither alone is enough: **an unmerged candidate referencing the Issue** — reported per Issue by the observation, so it holds even when nobody labelled anything — and **the Owner-decision label**, which is the only one that survives the candidate being closed or merged while the Issue stays open for a remaining acceptance criterion. A rule that depends on an executor remembering an extra action is a rule that will be unenforced somewhere; the candidate signal is there for exactly that case.
+
+**Bounded planning is bounded by four limits.** It arranges work under an accepted outcome, and those limits are what keep it from becoming a second decision-maker: it does not implement; it does not change the accepted outcome or its acceptance; it does not judge whether a stage is near done, only states the conditions by which anyone can check; and its output must be takeable by an instance that never spoke to it. **That last one is its completion — not a PR, which this kind of work does not produce.**
+
+Parallelism is derived from the native dependency relations, not from a stored batch. An instance starts anything whose prerequisites are met; it does not wait for a round to close. A separate list of what is in this round is a second source of truth that goes stale as soon as an Issue moves.
 
 Before generating work that spans Issues, inspect existing planning carriers and converge on them rather than opening a parallel one.
 
@@ -35,12 +43,15 @@ Near-term work is refined to the point of being executable. Distant work keeps i
 
 Native carriers: Milestone, Label.
 
-**Guess removed**: whether to stop and wait.
+**Guess removed**: whether to stop and wait, and which of several open Issues to take.
 
 **Known failures**
 - Identifying real product work, then classifying it as "might change a delivery commitment" and turning to infrastructure tidying instead. See the governing rule's burden of proof in [README.md](README.md).
 - Improving the conditions for starting is not starting.
+- Ranking the open Issues before starting, or waiting for someone to rank them. Every one whose prerequisites are met is takeable; the ordering that matters is already expressed as dependencies.
 - Two planning efforts running in parallel because neither declared a carrier.
+- Planning around work that was already delivered and only waiting for an authorisation, because open was read as unstarted.
+- Adding units to a stage whose closing conditions were already declared, without updating them: the stale conditions stay satisfiable and review reopens on a stage that has moved.
 
 **Empirical, not derived**: which situations warrant the "requires Owner decision" label. The first principle yields the need for the distinction, not its content. Let it form in use.
 
@@ -175,6 +186,8 @@ Native carriers: Pull Request, Checks, Milestone.
 |---|---|---|
 | The result | what the rule above on evidence that is not self-reported requires | that any local object may now go |
 | The occupation | a release, or a takeover recorded on the object | that a process stopped, or that the candidate is discardable |
+
+**One comment can end an occupation.** The checkpoint — what was delivered, where the candidate is, what remains, what would resume it — and the release are the same act seen from two sides; splitting them into two comments adds a round trip and a second thing to read without adding a fact. Say both in one, and say plainly that the occupation is released.
 | The execution site | the object absent on readback, nothing reachable only from it lost | that the work is finished, or that another site is clean |
 
 Verify before acting, against the current state rather than your memory of it: who occupies the object now, which commits exist only there, which shared result supersedes it, and what still reads it. Then act on that one object and read the result back.
@@ -211,7 +224,13 @@ When an action does fall inside the list, the Owner's decision cost is part of t
 
 **The reply is the other half of the same exchange.** An Owner reply keeps its attribution wherever it lands: responder, channel, time, applicable scope, available source. An attributable direct reply may be transcribed by an executor; the Owner need not publish the same decision twice. Received, adopted and executed are three distinct states.
 
-The Owner also supplies input with no request pending — a meeting produced new information, a direction changed. That input arrives through the same attribution, and its lifecycle ends either in adoption or in **explicit rejection recorded with its reason**. A rejected option with its reason belongs in Canon: without it, the next instance proposes the same option again.
+The Owner also supplies input with no request pending — a meeting produced new information, a direction changed, a technology was swapped. **This is the main way Canon changes**, not a side effect of doing the work: most of what makes a fact non-derivable arrives from outside the repository. That input takes the same attribution, and its lifecycle ends either in adoption or in **explicit rejection recorded with its reason**. A rejected option with its reason belongs in Canon: without it, the next instance proposes the same option again. An input in neither state is the one a successor rediscovers and re-asks about.
+
+**Record the input before judging it, and take it before other work.** It exists only in a conversation until it is written to a native object, so an instance that evaluates first and dies loses it. And a stage whose premise has changed produces work that must be redone — discovering that after three Issues close costs all three.
+
+**The material and the fact are different things.** What arrives may be fifty pages; what cannot be re-derived may be three sentences. Requirement descriptions, interaction details and acceptance scenarios regenerate from intent plus constraints. External constraints, settled trade-offs and rejected options do not. **Material does not automatically enter the repository**: what enters is the extracted fact plus a reference to an available source — and that reference may be *none*, recorded as such. Whether the material itself may live here is an authorisation question, not a convenience one. A copy also drifts from its own source, and a drifted copy is worse than none because the next instance believes it.
+
+Naming what a change invalidates is part of adopting it: Canon entries now wrong, Issues whose fixed inputs no longer describe the agreement, consumers built against the old contract, closing conditions that assumed the old direction. **Listing them and repairing them are separate acts** — anything spanning several objects is organised as work rather than swept through in one execution.
 
 Native carriers: Branch protection rules, repository permissions, attribution comments.
 
@@ -234,7 +253,7 @@ Native carriers: Branch protection rules, repository permissions, attribution co
 
 **Mechanism**. Canon is a routing table plus the authoritative content that has nowhere else to live. Both are files in Git.
 
-The routing table answers: for this scope, which source is authoritative. Scope is expressed as a path prefix, optionally with a domain tag for constraints that cut across directories. Its targets are contract-bearing code, current delivery agreements (Issues), direction (Milestones), and evidence (checks, PRs).
+The routing table answers: for this scope, which source is authoritative. Scope is expressed as a path prefix, optionally with a domain tag for constraints that cut across directories. **Each entry says what question it answers**, so an executor can tell which one it needs without opening several — the cost of a vague route is paid by every instance that has to guess. Its targets are contract-bearing code, current delivery agreements (Issues), direction (Milestones), and evidence (checks, PRs).
 
 Canon holds directly only what no single Issue or Milestone can hold: contracts spanning modules, architectural decisions with their reasons and revisiting conditions, and options explicitly rejected with why. Everything else is a pointer. Canon does not contain implementation code; it routes to the code that is authoritative for behaviour.
 
@@ -259,6 +278,8 @@ Native carriers: Git files, Milestone description, Issue attribution comments.
 - Summary caches claiming to be more current than their source.
 - An unmerged candidate treated as overriding the accepted baseline.
 - Reading `unknown` as "undecided" when it means "not yet written down".
+- Storing arriving material because it was easier than extracting the fact from it, leaving a copy that drifts from its own source.
+- Adopting an Owner's answer without its scope, then applying it where it was never given.
 - A remote object linking to a method file that has since moved. The link reads as valid until someone follows it.
 
 ---

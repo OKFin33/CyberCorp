@@ -195,7 +195,13 @@ class VerificationTests(unittest.TestCase):
         path = self.repo / ".agents/skills/unrelated/SKILL.md"
         path.parent.mkdir()
         path.write_text("Project-owned unrelated notes without skill front matter.\n")
-        self.assertEqual(self.check()["structure"]["methods"], 3)
+        # Count only files carrying skill front matter: the unrelated one has none and
+        # must stay outside the count. Deriving the number keeps this test about that
+        # distinction rather than about how many methods the Corp happens to ship.
+        expected = sum(
+            1 for path in (self.repo / ".agents/skills").glob("*/SKILL.md")
+            if path.read_text(encoding="utf-8").startswith("---"))
+        self.assertEqual(self.check()["structure"]["methods"], expected)
 
     def test_angle_link_and_title_in_project_owned_card(self):
         target = self.repo / "owner context.md"

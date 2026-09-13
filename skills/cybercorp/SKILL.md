@@ -9,6 +9,8 @@ Help the user's Agent establish a project that can continue after the creator le
 
 Start from the user's goal, agreed project scope, existing owners/materials and actual authorization. Inspect the repository before choosing what to add. Reuse existing Canon and task systems. Ask only for missing decisions that change the product or permitted actions; ordinary engineering choices remain yours.
 
+**Precondition.** The target must be a repository hosted on GitHub. Every carrier this mechanism uses is a GitHub-native object, so there is nothing to install onto without one — this is a boundary, not an unimplemented feature. Other hosts are not adapted.
+
 A project that already has a Corp entry is **replacing** its mechanism layer, not installing one — read [migration.md](references/migration.md) and stop here; the installer refuses to overwrite changed files.
 
 For a Git/GitHub project without an existing Corp entry, prepare the small input described in [brief.md](references/brief.md), then run:
@@ -21,7 +23,7 @@ python3 scripts/cybercorp.py /path/to/project --brief /path/to/brief.json
 
 Before handoff, read the generated communication method and adapt its project-owned card from known Owner instructions. Reuse an existing equivalent by pointing the method at its actual path. Missing preferences use the neutral starting point; no profile or new input schema is required. Keep existing channels and permissions; the installer does not connect notifications.
 
-Continue through the generated `docs/corp/README.md` and `.agents/skills/prepare-corp/SKILL.md`. Installing files alone does not complete the user's request. Establish the real shared entry and native work within existing authorization; verify its discoverability and run the relevant actual helpers. Then carry out the whole-project preparation or leave its unfinished work discoverable for another Corpo when the user requested a bounded creation slice.
+Continue through the generated `docs/corp/README.md` and `establish.md` in the creation package. Installing files alone does not complete the user's request. Establish the real shared entry and native work within existing authorization; verify its discoverability and run the relevant actual helpers. Then carry out the whole-project preparation or leave its unfinished work discoverable for another Corpo when the user requested a bounded creation slice.
 
 Preparation covers the agreed project and its dependencies broadly. The depth of design follows actual need and value; do not exhaust every implementation choice or replicate another project's documents. Retain useful unknowns with their impact and acquisition path. Never make the creator's private history a required input.
 
