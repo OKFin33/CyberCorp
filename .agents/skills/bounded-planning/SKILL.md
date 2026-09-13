@@ -23,7 +23,7 @@ Read `docs/corp/README.md` if you have not. Each step names the `mechanics.md` s
 
 5. **Create each unit so it carries its own acceptance and fits one instance's lifetime.** Reference required inputs at a fixed version. Express real prerequisites as native dependency relations, not as prose. Set the actual Milestone — a parent link alone does not put work in a stage.
 
-6. **Let parallelism come from the dependencies.** An instance reads the relations and starts anything whose prerequisites are met; it does not wait for a round to close. Do not maintain a batch list beside the relations — it becomes a second authority that goes stale the moment an Issue moves.
+6. **Let both order and parallelism come from the dependencies.** There is no priority field to fill in — an executor takes anything whose prerequisites are met, so a real sequencing constraint has to be a real relation. It does not wait for a round to close. Do not maintain a batch list beside the relations — it becomes a second authority that goes stale the moment an Issue moves.
 
 7. **State or update the stage's closing conditions** in machine-checkable form: named Issues closed, named PRs merged, named checks green. If you added units to a stage whose conditions were already declared, **update them** — stale conditions stay satisfiable, and review then opens on a stage that has moved.
 

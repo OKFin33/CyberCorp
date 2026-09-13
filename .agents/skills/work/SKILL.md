@@ -10,7 +10,7 @@ Read `docs/corp/README.md` once per session if you have not. Each step names the
 ## Pick your unit
 
 - Told which Issue, or resuming your own: use it.
-- Not told: the highest-priority open Issue in the current Milestone without the Owner-decision label.
+- Not told: any Issue in the current Milestone whose native prerequisites are satisfied and which carries no Owner-decision label. Several may qualify; take either rather than ranking them.
 - Nothing qualifies: the deficit is the work. Converge on an existing planning carrier or create one, then treat that as your unit.
 
 Reviewing a PR rather than implementing is `review/SKILL.md`, not this file.

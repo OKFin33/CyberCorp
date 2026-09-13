@@ -27,7 +27,9 @@ Sections follow the order an execution meets them.
 
 **Derives from**: delivery must not depend on the Owner assigning each task.
 
-**Mechanism**. Take the highest-priority open Issue in the current Milestone that is not marked as requiring an Owner decision. If none remains, the deficit is itself the work: create the planning carrier, occupy it, and generate the next batch.
+**Mechanism**. Take **any Issue that is takeable now**: in the current Milestone, not marked as requiring an Owner decision, and with every native prerequisite satisfied. More than one qualifies — take either. If none does, the deficit is itself the work: create the planning carrier, occupy it, and generate the next batch.
+
+**There is no priority order to read, and none to maintain.** An Issue being in the current Milestone already says this stage delivers it, so which one goes first does not change whether the stage completes. Sequencing that does matter is already in the dependency relations. Ranking beyond that would be a judgement no one else can recheck, held in an instance that will be replaced — and throughput comes from starting more instances, not from ordering one instance's queue.
 
 **Open does not mean takeable.** An open Issue may be unstarted work, or work already delivered and waiting on an Owner decision. Mark the second as requiring an Owner decision — a merge authorisation is one — so the distinction is readable without cross-reading PRs and comments.
 
@@ -41,11 +43,12 @@ Near-term work is refined to the point of being executable. Distant work keeps i
 
 Native carriers: Milestone, Label.
 
-**Guess removed**: whether to stop and wait.
+**Guess removed**: whether to stop and wait, and which of several open Issues to take.
 
 **Known failures**
 - Identifying real product work, then classifying it as "might change a delivery commitment" and turning to infrastructure tidying instead. See the governing rule's burden of proof in [README.md](README.md).
 - Improving the conditions for starting is not starting.
+- Ranking the open Issues before starting, or waiting for someone to rank them. Every one whose prerequisites are met is takeable; the ordering that matters is already expressed as dependencies.
 - Two planning efforts running in parallel because neither declared a carrier.
 - Planning around work that was already delivered and only waiting for an authorisation, because open was read as unstarted.
 - Adding units to a stage whose closing conditions were already declared, without updating them: the stale conditions stay satisfiable and review reopens on a stage that has moved.

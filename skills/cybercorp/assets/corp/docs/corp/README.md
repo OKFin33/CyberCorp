@@ -6,8 +6,8 @@
 
 | What the observation shows | Do this |
 |---|---|
-| The current Milestone has an open Issue not marked as needing an Owner decision | [`work`](../../.agents/skills/work/SKILL.md) — take the highest-priority one |
-| It has none takeable, and its closing conditions do not hold | [`bounded-planning`](../../.agents/skills/bounded-planning/SKILL.md) — the gap is the work |
+| The current Milestone has an Issue whose prerequisites are met and which is not marked as needing an Owner decision | [`work`](../../.agents/skills/work/SKILL.md) — take any of them |
+| Nothing there is takeable, and its closing conditions do not hold | [`bounded-planning`](../../.agents/skills/bounded-planning/SKILL.md) — the gap is the work |
 | Its declared closing conditions **hold** | [`review`](../../.agents/skills/review/SKILL.md) — this is the only way review opens |
 | No Milestone is current, or the current one is closed | [`bounded-planning`](../../.agents/skills/bounded-planning/SKILL.md) — design the next stage |
 | Methods are installed but there is no route and nothing to take | [`prepare`](../../.agents/skills/prepare/SKILL.md) — a fresh install starts here |
