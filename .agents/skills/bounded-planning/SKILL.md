@@ -17,6 +17,8 @@ Read `docs/corp/README.md` if you have not. Each step names the `mechanics.md` s
 
 2. **Read the accepted outcome and the current state.** The outcome and its acceptance; the current Milestone with its declared closing conditions; every open Issue in it; open PRs; and the native dependency relations. One bounded observation is enough.
 
+   **Also read what the other work types left for you**, because none of them turns findings into units: lines implementers noted on Issues about things outside their unit, review findings that named a missing unit rather than a blocker, and invalidation lists from adopted input. Those are inputs to step 4, not separate obligations — an unread one is a gap nobody else will close.
+
 3. **Classify what already exists, before looking for gaps.** For each open Issue: takeable, delivered and awaiting an Owner decision, or blocked by a real prerequisite. **Work already delivered and waiting is not a gap** — planning around it duplicates it. A candidate gone stale against the default branch is that Issue's own remaining work, not a new unit.
 
 4. **Find what the outcome needs and nothing covers.** Compare the accepted acceptance against what existing units deliver. Separate a missing implementation from a missing decision and from a missing input: the first is work you create, the other two are returned to whoever owns them with what they block stated plainly.
