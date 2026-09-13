@@ -36,7 +36,7 @@ A layer change alters the context **every** in-flight Spec was written against â
 
 Anything pointing at the layer from outside it breaks when the layer is reorganised: native object descriptions, project documentation, CI configuration, external notes. **Checks that run inside the repository cannot see a remote object**, so nothing will report those.
 
-Enumerate them, and repoint them at the entry or the routing table rather than at a file. That way the next migration cannot break them again.
+Enumerate them, and repoint them according to the target layer's own rule about referencing from outside â€” read it there rather than assuming this file states it. A layer worth adopting will tell you what is stable enough to point at.
 
 ## Acceptance has three layers, and they are not substitutes
 
