@@ -79,7 +79,7 @@ class CreationTests(unittest.TestCase):
                 target = (document.parent / destination.split("#", 1)[0]).resolve()
                 self.assertTrue(target.is_relative_to(self.repo), (document, destination))
                 self.assertTrue(target.exists(), (document, destination))
-        for name in ("work", "review", "prepare"):
+        for name in ("intake", "bounded-planning", "work", "review"):
             self.assertTrue((self.repo / ".agents/skills" / name / "SKILL.md").is_file())
 
     def test_project_card_edits_are_preserved_by_identical_reinstall(self):

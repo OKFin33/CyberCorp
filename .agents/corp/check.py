@@ -78,6 +78,16 @@ def check_structure(root, report):
         else:
             local_target(root, root, target)
 
+    # Phase 2 of establishing a Corp resolves these; the installer cannot know them.
+    # Until then the repository is half a Corp, and passing silently hides that.
+    pending = sorted(row["id"] for row in rows
+                     if row["id"] in {"current-delivery-focus", "active-change-specs"}
+                     and row["status"] == "unresolved")
+    if pending:
+        report.setdefault("notes", []).append(
+            "Corp not established: %s still unresolved. Complete Phase 2 (establish.md in the "
+            "creation package) before starting work Corpos here." % ", ".join(pending))
+
     entry = root / "docs/corp/README.md"
     if not entry.is_file():
         raise CheckError("Missing Corp entry: docs/corp/README.md")

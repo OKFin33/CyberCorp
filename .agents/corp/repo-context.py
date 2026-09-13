@@ -76,7 +76,7 @@ def parse_map(text):
             current = {"id": value}
             entries.append(current)
             continue
-        field_match = re.match(r"^    (target|status): (.*)$", line)
+        field_match = re.match(r"^    (target|status|answers): (.*)$", line)
         if field_match:
             if current is None:
                 raise RepoContextError("unsupported or duplicate Canon map field")
@@ -90,7 +90,10 @@ def parse_map(text):
     if not entries:
         raise RepoContextError("Canon map entries must have unique IDs and id/target/status")
     for entry in entries:
-        if set(entry) != {"id", "target", "status"}:
+        # `answers` says what question this route answers, so an executor can tell which
+        # entry it needs without opening several. Optional: routes written before it existed
+        # stay valid, and a project adds it where the id alone is not self-evident.
+        if set(entry) - {"answers"} != {"id", "target", "status"}:
             raise RepoContextError("Canon map entries must have unique IDs and id/target/status")
         if entry["status"] not in _STATUSES:
             raise RepoContextError("unsupported Canon map status")

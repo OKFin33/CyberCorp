@@ -3,24 +3,30 @@ canonical_targets:
   - id: project-direction
     target: "docs/product.md"
     status: active
+    answers: "What this product commits to, and what is deliberately out of scope"
   - id: corp-mechanics
     target: "docs/corp/mechanics.md"
     status: active
+    answers: "Every rule of how work is organised here, defined once"
   - id: decision-records
     target: "docs/decisions/"
     status: active
+    answers: "Why each rule is as it is, and which alternatives were rejected"
   - id: active-change-specs
     target: "https://github.com/OKFin33/CyberCorp/issues"
     status: active
+    answers: "The agreements currently being delivered against"
   - id: current-delivery-focus
     target: "https://github.com/OKFin33/CyberCorp/milestone/1"
     status: active
+    answers: "Which stage is being delivered now, and what closes it"
   - id: delivery-history
     target: "CHANGELOG.md"
     status: active
   - id: verification-status
     target: "docs/verification-status.md"
     status: active
+    answers: "Which capabilities have evidence, of what kind, and which do not"
   - id: creation-package
     target: "skills/cybercorp/SKILL.md"
     status: active
