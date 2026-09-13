@@ -4,7 +4,10 @@
 
 版本号形如 `0.1.0a5` 的是创建包候选，不代表默认分支已采用或行为已验收。
 
-## 未发布
+## 0.1.0a6 — 机制层重构与首次真实采纳
+
+**对已运行上一版布局的项目是破坏性的。** 五处需要采纳者动手：`repo-context.py` 输出中 `verified` 改名为 `declared_active`、`atomic_snapshot` 改名为 `paginated_reads`（**语义反转**，`true` 现在表示发生过分页读取）、`check.py` 新增标题锚点校验（此前通过的项目可能开始报错）、`S1`–`S8` 代号与对应节标题取消（旧锚点全部失效）、占用要求一条带实例 ID 的评论（仅 self-assign 不再构成完整占用）。换代方法见 [migration.md](skills/cybercorp/references/migration.md)，逐项差异见本节以下内容。
+
 
 ### 收尾：结果、占用、执行现场分开结束
 
