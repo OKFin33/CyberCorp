@@ -6,6 +6,28 @@
 
 ## 未发布
 
+### 从更早布局升级时的对应关系
+
+版本特定信息，换代方法本身见 [migration.md](skills/cybercorp/references/migration.md)。
+
+持有 2026-09-12 之前布局（`docs/corp/` 下十一份方法文档）的项目，删除它们并保留自己的 Owner 卡；规则的新位置：
+
+| 退役文档 | 规则现在的位置 |
+|---|---|
+| `spec-authoring.md`、`spec-protocol.md` | 工作单元自含验收 |
+| `claim-protocol.md` | 占用与接管 |
+| `coordination.md` | 总有下一件事（规划载体的收敛）与占用（规划先建载体） |
+| `development-loop.md` | 总有下一件事，顺序见 `work-corp/SKILL.md` |
+| `verification.md`、`milestone-delivery.md` | 完成以非自证的证据为准 |
+| `communication.md` | 不可逆动作的边界——请求与答复现在同属一节 |
+| `bootstrap.md` | 入口 `README.md` 与 `prepare-corp/SKILL.md` |
+| `preparation.md` | `prepare-corp/SKILL.md` |
+| `damaged-history.md` | **无，且是有意的。** 它恢复的是可能变得不可重放的自维护事件流；该事件流已删除，占用改用 GitHub 维护的字段，竞争占用由服务器顺序裁定而非重放。 |
+
+另有两处是行为变化而非文件搬迁：阶段审查不再由"普通 PR 默认触发"开启，改为规划声明的机器可核对关闭条件成立时开启（已接受的明确审查承诺继续有效）；`lease_until`、`renew` 与事件状态机取消，`work-state.py` 与 `format-event.py` 已删除，项目中调用它们的接线需一并移除。
+
+持有 2026-09-12 布局的项目，除本文件其余各节列出的破坏性变更外，注意 `S1`–`S8` 代号已取消、节标题改变导致 `mechanics.md#…` 锚点全部失效。
+
 ### 机制层按执行顺序重构
 
 节序原为推导顺序；去掉代号只去掉了表层，排列才是底层。理由、被否决的合并与判据见[决策记录 0007](docs/decisions/0007-restructure-by-execution-order.md)。
