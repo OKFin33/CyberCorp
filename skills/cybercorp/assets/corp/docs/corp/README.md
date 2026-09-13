@@ -44,7 +44,7 @@ Rules are defined once, in [mechanics.md](mechanics.md). This table routes; it d
 | Generate the next batch of work, or reorganise priorities | `.agents/skills/work-corp/SKILL.md` |
 | Review a stage candidate | `.agents/skills/review-corp/SKILL.md` |
 | Communicate with the Owner, or adopt a reply | The [Owner communication card](owner-communication.md) |
-| Take over work that looks stalled, or recover a damaged task | [mechanics.md](mechanics.md#abandoned-occupation-is-discoverable-and-releasable) |
+| Take over work that looks stalled, or recover a damaged task | [mechanics.md](mechanics.md#occupation-is-visible-and-an-abandoned-one-can-be-taken-over) |
 | Record a decision, a rejected option, or a cross-module contract | [mechanics.md](mechanics.md#direction-and-cross-cutting-facts-have-a-durable-home) |
 | Establish or complete project preparation | `.agents/skills/prepare-corp/SKILL.md` from the repo root |
 
