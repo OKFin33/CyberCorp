@@ -6,20 +6,20 @@ Each section is one sub-problem: something that must be solved or delivery stops
 
 The governing rule lives in [README.md](README.md). It decides which rules may demand Owner involvement. Nothing here overrides it.
 
-| # | Sub-problem | The guess it removes |
-|---|---|---|
-| S1 | A work unit carries its own acceptance | how far to take this |
-| S2 | Occupation is visible before work starts | whether someone is already on it |
-| S3 | Completion rests on evidence that is not self-reported | whether this "done" can be relied on |
-| S4 | There is always a next thing to do | whether to stop and wait |
-| S5 | Irreversible actions have a small, explicit boundary | whether I may decide this myself |
-| S6 | A work unit fits inside one instance's lifetime | whether I can finish this in one go |
-| S7 | Abandoned occupation is discoverable and releasable | whether this work is dead |
-| S8 | Direction and cross-cutting facts have a durable home | what is true, and where to look |
+| Sub-problem | The guess it removes |
+|---|---|
+| A work unit carries its own acceptance | how far to take this |
+| Occupation is visible before work starts | whether someone is already on it |
+| Completion rests on evidence that is not self-reported | whether this "done" can be relied on |
+| There is always a next thing to do | whether to stop and wait |
+| Irreversible actions have a small, explicit boundary | whether I may decide this myself |
+| A work unit fits inside one instance's lifetime | whether I can finish this in one go |
+| Abandoned occupation is discoverable and releasable | whether this work is dead |
+| Direction and cross-cutting facts have a durable home | what is true, and where to look |
 
 ---
 
-## S1 · A work unit carries its own acceptance
+## A work unit carries its own acceptance
 
 **Stops delivery when missing**: context is compressed, the next instance picks up the Issue, cannot read the previous instance's unstated understanding, and guesses what "done" means. A wrong guess produces waste that nobody detects.
 
@@ -40,30 +40,33 @@ Editing a Spec invalidates its old pin. Stop affected writes, resolve the inputs
 
 ---
 
-## S2 · Occupation is visible before work starts
+## Occupation is visible before work starts
 
 **Stops delivery when missing**: two instances — or one instance and its own restarted successor — take the same work, produce duplicate or conflicting output, and someone has to decide afterwards whose work to discard.
 
 **Derives from**: executors are unreliable.
 
-**Mechanism**. Before starting any action, leave a visible occupation on a native object.
+**Mechanism**. Before starting any action, leave a visible occupation on a native object: a self-assignment **plus a comment naming an instance ID unique within your runtime**. The assignment shows that this account has something running; only the ID distinguishes you from another instance on the same account — or from your own earlier run.
 
-- Work on an Issue: self-assign it.
-- Review of a change: add yourself to the PR's requested reviewers.
-- Work whose object does not exist yet — generating the next batch of work, reorganising priorities, any planning that will create Issues: **create the carrier Issue first, self-assign it, then begin.** Occupation cannot be expressed on an object that has not been created, so create it.
+- Work on an Issue: self-assign it, then comment with your instance ID, the object and the scope.
+- Review of a change: add yourself to the PR's requested reviewers, then comment the same way.
+- Work whose object does not exist yet — generating the next batch of work, reorganising priorities, any planning that will create Issues: **create the carrier Issue first, occupy it, then begin.** Occupation cannot be expressed on an object that has not been created, so create it.
 
-Native carriers: `assignee`, `requested_reviewers`.
+Read the existing occupation comments before adding yours: an ID that is not yours means another instance holds this; your own earlier ID means you are resuming your own work rather than colliding with anyone.
 
-**Guess removed**: whether someone is already doing the thing I am about to do.
+Native carriers: `assignee`, `requested_reviewers`, and occupation comments.
+
+**Guess removed**: whether someone is already doing the thing I am about to do, and whether that someone is me.
 
 **Known failures**
 - Two instances independently notice "not enough upcoming work" and each start planning the next batch. Neither is visible to the other, because the planning had no carrier.
 - Three instances each independently review the same PR to completion before discovering the duplication. Reviewing is an action; it needs occupation like any other.
 - A non-atomic read-then-write claim does not prove exclusivity. Visible occupation reduces collisions; it does not eliminate them.
+- Reading `assignee` alone on a shared account and concluding either "someone else has this" or "that was me". Accounts cannot tell those apart; instance IDs can.
 
 ---
 
-## S3 · Completion rests on evidence that is not self-reported
+## Completion rests on evidence that is not self-reported
 
 **Stops delivery when missing**: with nobody checking, an instance reports completion that did not happen, downstream work builds on it, and the waste spreads along the dependency chain until it surfaces late and expensively.
 
@@ -91,13 +94,13 @@ Native carriers: Pull Request, Checks, Milestone.
 
 ---
 
-## S4 · There is always a next thing to do
+## There is always a next thing to do
 
 **Stops delivery when missing**: an instance finishes and finds nothing to take, and the project stalls until someone assigns work.
 
 **Derives from**: delivery must not depend on the Owner assigning each task.
 
-**Mechanism**. Take the highest-priority open Issue in the current Milestone that is not marked as requiring an Owner decision. If none remains, the deficit is itself the work: create the planning carrier per S2 and generate the next batch.
+**Mechanism**. Take the highest-priority open Issue in the current Milestone that is not marked as requiring an Owner decision. If none remains, the deficit is itself the work: create the planning carrier as visible occupation requires, and generate the next batch.
 
 Before generating work that spans Issues, inspect existing planning carriers and converge on them rather than opening a parallel one.
 
@@ -116,7 +119,7 @@ Native carriers: Milestone, Label.
 
 ---
 
-## S5 · Irreversible actions have a small, explicit boundary
+## Irreversible actions have a small, explicit boundary
 
 **Stops delivery when missing**: either every action waits for the Owner, which is indistinguishable from stalling, or an instance performs something unrecoverable.
 
@@ -137,9 +140,9 @@ Native carriers: Branch protection rules, repository permissions.
 
 ---
 
-## S6 · A work unit fits inside one instance's lifetime
+## A work unit fits inside one instance's lifetime
 
-**Stops delivery when missing**: the unit outlives the instance. It dies mid-way and leaves a state nobody can safely resume — S1's acceptance criteria cannot rescue it, because not even "how far did it get" is readable.
+**Stops delivery when missing**: the unit outlives the instance. It dies mid-way and leaves a state nobody can safely resume — the unit's own acceptance criteria cannot rescue it, because not even "how far did it get" is readable.
 
 **Derives from**: executors are unreliable.
 
@@ -159,7 +162,7 @@ Native carriers: sub-Issues, native blocked-by relationships.
 
 ---
 
-## S7 · Abandoned occupation is discoverable and releasable
+## Abandoned occupation is discoverable and releasable
 
 **Stops delivery when missing**: an instance dies mid-task without releasing its occupation. The task shows as taken, other instances route around it, and it stalls while the state reads as healthy.
 
@@ -185,7 +188,7 @@ Native carriers: `updated_at`, `assignee`, Issue events.
 
 ---
 
-## S8 · Direction and cross-cutting facts have a durable home
+## Direction and cross-cutting facts have a durable home
 
 **Stops delivery when missing**: a new instance cannot read where the project is going, and picks work that is locally valid but off-direction. Contracts spanning modules, decisions and their reasons, and rejected options have nowhere to live, so each instance re-derives or re-proposes them.
 
@@ -213,11 +216,11 @@ Native carriers: Git files, Milestone description, Issue attribution comments.
 
 **Guess removed**: what is true, what is merely current, and where to look for either.
 
-**Changing this rule set itself.** These rules are one of the durable facts this section governs, so amending them is a Canon change — but S1, S2 and S6 do not apply: the object is the rule set rather than a deliverable, the acceptance tooling may be replaced within the same change, and the layer cannot be half-replaced.
+**Changing this rule set itself.** These rules are one of the durable facts this section governs, so amending them is a Canon change — but the rules on carrying acceptance, visible occupation and fitting one lifetime do not apply: the object is the rule set rather than a deliverable, the acceptance tooling may be replaced within the same change, and the layer cannot be half-replaced.
 
 When you amend it, the rule goes here and its reason goes to the record. This layer carries rules, the guess each removes, and reproducible failure shapes — not past incidents, justification, or argument that persuades rather than instructs. **The same holds for any method file that routes into this one**: it sequences and points, it does not restate rules or repeat their failure lists.
 
-What still applies unchanged: S5, S7 and this section. The completion evidence is the test suite, the structure check and the record of the decision, plus the PR and its checks once pushed. **Say plainly in the PR that it is a mechanism change** — it is breaking for any project already running the previous layout, and that project's migration is its own change under its own agreement.
+What still applies unchanged: the irreversible-action boundary, the release of abandoned occupation, and this section. The completion evidence is the test suite, the structure check and the record of the decision, plus the PR and its checks once pushed. **Say plainly in the PR that it is a mechanism change** — it is breaking for any project already running the previous layout, and that project's migration is its own change under its own agreement.
 
 **Known failures**
 - A criterion formed while doing the work, applied to that work, and never written down. The next instance re-derives it or contradicts it.

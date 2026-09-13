@@ -19,6 +19,12 @@ class RepoContextError(ValueError):
     pass
 
 
+class InconsistentObservation(RepoContextError):
+    """Repeated reads disagreed. Unlike an unreadable object, this invalidates the
+    observation method itself, so it must never be downgraded into a report error."""
+
+
+
 # ---------------------------------------------------------------------------
 # Canon map parsing (docs/corp/canon-map.yaml narrow format)
 # ---------------------------------------------------------------------------
@@ -190,7 +196,7 @@ def _read_consistent(reader, endpoint, **kwargs):
     first = reader.read(endpoint, **kwargs)
     second = reader.read(endpoint, **kwargs)
     if first != second:
-        raise RepoContextError("Observation was inconsistent for %s; rerun" % endpoint)
+        raise InconsistentObservation("Observation was inconsistent for %s; rerun" % endpoint)
     return first
 
 
@@ -260,6 +266,8 @@ def observe(root, reader, repo=None, issue=None, milestone=None):
         # keep an explicitly requested Issue from being read.
         try:
             focus = _read_consistent(tracked, "%s/milestones/%d" % (repo_path, milestone_number))
+        except InconsistentObservation:
+            raise
         except RepoContextError as exc:
             report["errors"].append({"scope": "focus", "milestone": milestone_number, "error": str(exc)})
         else:
@@ -274,9 +282,10 @@ def observe(root, reader, repo=None, issue=None, milestone=None):
         report["issues"] = discover_global(tracked, repo_path, milestone_number)
     report["open_pull_requests"] = open_pull_requests(tracked, repo_path)
 
-    # Pagination spans multiple round-trips with no cross-page snapshot guarantee from
-    # GitHub; any paginated read in this observation means it cannot be certified atomic.
-    report["atomic_snapshot"] = not tracked.used_pagination
+    # This report is assembled from several sequential reads and is never a point-in-time
+    # snapshot. The flag reports only whether any read spanned pages, which widens the gap
+    # further because GitHub gives no cross-page guarantee.
+    report["paginated_reads"] = tracked.used_pagination
     return report
 
 

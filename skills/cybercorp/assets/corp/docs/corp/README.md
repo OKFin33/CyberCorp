@@ -20,32 +20,32 @@ Add the entries this project actually has: deployment, external release, data mi
 
 Five rules. Each is a mechanism from [mechanics.md](mechanics.md) in its operative form; nothing else is required before you begin.
 
-1. **Before starting any action, leave a visible occupation on a native object.** Self-assign the Issue; add yourself to a PR's requested reviewers; if the work has no object yet — generating the next batch, reorganising priorities — create its carrier Issue first, then self-assign. *(S2)*
+1. **Before starting any action, leave a visible occupation on a native object** — a self-assignment plus a comment naming an instance ID unique within your runtime. Self-assign the Issue; add yourself to a PR's requested reviewers; if the work has no object yet — generating the next batch, reorganising priorities — create its carrier Issue first, then occupy it. On a shared account the assignment alone cannot tell another instance from your own earlier run; the ID can. Read existing occupation comments before adding yours.
 
-2. **Completion means a PR exists and its checks pass.** No prose asserts completion, including your own. *(S3)*
+2. **Completion means a PR exists and its checks pass.** No prose asserts completion, including your own.
 
-3. **Only actions on the list above need the Owner.** To escalate, name the entry. Ordinary engineering judgement is yours. *(S5, governing rule)*
+3. **Only actions on the list above need the Owner.** To escalate, name the entry. Ordinary engineering judgement is yours. *(the governing rule)*
 
-4. **Draw the unit's boundary by independent deliverability, then check the grain against one context window.** If it does not fit, split into sub-Issues before starting rather than carrying a half-state. *(S6)*
+4. **Draw the unit's boundary by independent deliverability, then check the grain against one context window.** If it does not fit, split into sub-Issues before starting rather than carrying a half-state.
 
-5. **`unknown` means either undecided or unrecorded — establish which.** *Undecided* needs a decision; *unrecorded* needs you to find the decision, not make it. And a retrieval that returns nothing establishes only that this retrieval found nothing, never that no constraint exists. *(S8)*
+5. **`unknown` means either undecided or unrecorded — establish which.** *Undecided* needs a decision; *unrecorded* needs you to find the decision, not make it. And a retrieval that returns nothing establishes only that this retrieval found nothing, never that no constraint exists.
 
 You do not need to know how stage review works in order to start work. That belongs to Milestone closing, not to your entry.
 
 ## Read for what you are doing
 
-**Just installed, with no shared work yet?** Start from `.agents/skills/prepare-corp/SKILL.md`. Rules S1–S4 assume there is work to take; in a fresh install there is not yet, and establishing it is the first task. A route in [canon-map.yaml](canon-map.yaml) is `active`, `pending-relocation` or `unresolved` — the latter two mean that fact has not been established yet or has moved, not that something is broken. A project with no native work surface at all can still be prepared locally; the entry states what remains missing rather than blocking.
+**Just installed, with no shared work yet?** Start from `.agents/skills/prepare-corp/SKILL.md`. The rules about taking and sizing work assume there is work to take; in a fresh install there is not yet, and establishing it is the first task. A route in [canon-map.yaml](canon-map.yaml) is `active`, `pending-relocation` or `unresolved` — the latter two mean that fact has not been established yet or has moved, not that something is broken. A project with no native work surface at all can still be prepared locally; the entry states what remains missing rather than blocking.
 
 Rules are defined once, in [mechanics.md](mechanics.md). This table routes; it does not restate.
 
 | What you are doing | Sections |
 |---|---|
-| Start or resume work on an Issue | S1, S2, S3, S6 · `.agents/skills/work-corp/SKILL.md` |
-| Generate the next batch of work, or reorganise priorities | S2, S4, S6 · `.agents/skills/work-corp/SKILL.md` |
-| Review a stage candidate | S2, S3 · `.agents/skills/review-corp/SKILL.md` |
-| Communicate with the Owner, or adopt a reply | S5, S8, and the [Owner communication card](owner-communication.md) |
-| Take over work that looks stalled, or recover a damaged task | S7 |
-| Record a decision, a rejected option, or a cross-module contract | S8 |
+| Start or resume work on an Issue | `.agents/skills/work-corp/SKILL.md` |
+| Generate the next batch of work, or reorganise priorities | `.agents/skills/work-corp/SKILL.md` |
+| Review a stage candidate | `.agents/skills/review-corp/SKILL.md` |
+| Communicate with the Owner, or adopt a reply | The [Owner communication card](owner-communication.md) |
+| Take over work that looks stalled, or recover a damaged task | [mechanics.md](mechanics.md#abandoned-occupation-is-discoverable-and-releasable) |
+| Record a decision, a rejected option, or a cross-module contract | [mechanics.md](mechanics.md#direction-and-cross-cutting-facts-have-a-durable-home) |
 | Establish or complete project preparation | `.agents/skills/prepare-corp/SKILL.md` from the repo root |
 
 The card changes how things are expressed. It does not change facts, acceptance, or authority. Effective direct Owner instructions take precedence over it; lasting preference changes go back to the card.

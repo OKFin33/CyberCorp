@@ -205,12 +205,14 @@ class ObserveGlobalTests(unittest.TestCase):
         # The field must not be named or shaped as a verified fact: nothing read the target.
         self.assertNotIn("verified", by_id["project-direction"])
 
-    def test_atomic_snapshot_is_false_when_any_paginated_read_occurred(self):
+    def test_paginated_reads_is_reported_without_claiming_a_snapshot(self):
         routes = base_routes()
         routes["repos/o/r/issues?milestone=4&state=open&per_page=100"] = [[]]
         reader = FakeReader(routes)
         report = repo_context.observe(ROOT, reader, repo="o/r")
-        self.assertFalse(report["atomic_snapshot"])
+        self.assertTrue(report["paginated_reads"])
+        # The field must not imply the observation was atomic; nothing here guarantees that.
+        self.assertNotIn("atomic_snapshot", report)
 
     def test_report_includes_an_empty_errors_list_on_success(self):
         routes = base_routes()

@@ -282,9 +282,10 @@ def observe(root, reader, repo=None, issue=None, milestone=None):
         report["issues"] = discover_global(tracked, repo_path, milestone_number)
     report["open_pull_requests"] = open_pull_requests(tracked, repo_path)
 
-    # Pagination spans multiple round-trips with no cross-page snapshot guarantee from
-    # GitHub; any paginated read in this observation means it cannot be certified atomic.
-    report["atomic_snapshot"] = not tracked.used_pagination
+    # This report is assembled from several sequential reads and is never a point-in-time
+    # snapshot. The flag reports only whether any read spanned pages, which widens the gap
+    # further because GitHub gives no cross-page guarantee.
+    report["paginated_reads"] = tracked.used_pagination
     return report
 
 
