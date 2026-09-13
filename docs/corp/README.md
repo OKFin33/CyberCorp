@@ -10,6 +10,10 @@ This is not one rule among many. It decides whether any other rule may demand Ow
 
 **Advancing the delivery outranks improving the conditions for advancing it.** Tightening a check, tidying infrastructure, completing a document or reviewing something already done is work when a delivery needs it — **if you cannot name the delivery it unblocks, it is not the next thing to do.** The rules below exist to remove guesses that would otherwise stop you; a rule that has you tending to the rules instead of to the result is being read wrongly.
 
+### This project's site-recovery policy
+
+A delivery branch is recovered once its tip is an ancestor of the default branch: the branch held nothing the default branch does not, so `main` is the recovery source. Verify ancestry against the actual remote before removing anything, and remove the exact ref rather than a pattern. Unmerged branches are not covered by this policy — they may hold the only copy of something.
+
 ### This project's irreversible-action list
 
 - Merging into the default branch.

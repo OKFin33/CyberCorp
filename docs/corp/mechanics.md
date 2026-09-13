@@ -179,9 +179,9 @@ Native carriers: Pull Request, Checks, Milestone.
 
 Verify before acting, against the current state rather than your memory of it: who occupies the object now, which commits exist only there, which shared result supersedes it, and what still reads it. Then act on that one object and read the result back.
 
-Continuing is the default: take over the existing branch and its PR rather than opening a parallel site. A candidate handed back stays open and findable, or the successor has nothing to continue. Isolate only from a verified result, and record on both objects which replaced which and where the superseded result went. Whatever you keep states its purpose or the condition for resuming it — a retained object with no stated reason cannot be told from a forgotten one.
+Continuing is the default: take over the existing branch and its PR rather than opening a parallel site. **Do not use `--force` or `--ignore-other-worktrees` to get around the same-branch checkout limit** — that limit is what keeps one writer per branch, and bypassing it produces exactly the conflicting writes occupation exists to prevent. A candidate handed back stays open and findable, or the successor has nothing to continue. Isolate only from a verified result, and record on both objects which replaced which and where the superseded result went. Whatever you keep states its purpose or the condition for resuming it — a retained object with no stated reason cannot be told from a forgotten one.
 
-Closeout belongs to the work that created the site; it is not a routine-cleanup Issue. A cleanup claim carries the scope it was observed in: one machine says nothing about another, and an unrecovered site does not subtract from a delivered result.
+Closeout splits along who can see what: **the site's creator ends the local one; whoever integrated the change ends the shared branch and PR.** An integrator who leaves merged branches behind has not finished integrating. Either way it belongs to the work itself, not to a routine-cleanup Issue. A cleanup claim carries the scope it was observed in: one machine says nothing about another, and an unrecovered site does not subtract from a delivered result.
 
 Native carriers: branches, PR head refs, `git worktree list`, the Issue or PR comment recording what was kept, why, and what replaced it.
 
