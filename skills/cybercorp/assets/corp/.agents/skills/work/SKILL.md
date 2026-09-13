@@ -1,5 +1,5 @@
 ---
-name: work-corp
+name: work
 description: Take, resume or finish one Issue's work. Use when you have an Issue to implement, investigate or resume, or when the Milestone queue has nothing left to take.
 ---
 
@@ -13,7 +13,7 @@ Read `docs/corp/README.md` once per session if you have not. Each step names the
 - Not told: the highest-priority open Issue in the current Milestone without the Owner-decision label.
 - Nothing qualifies: the deficit is the work. Converge on an existing planning carrier or create one, then treat that as your unit.
 
-Reviewing a PR rather than implementing is `review-corp/SKILL.md`, not this file.
+Reviewing a PR rather than implementing is `review/SKILL.md`, not this file.
 
 ## Then, in order
 

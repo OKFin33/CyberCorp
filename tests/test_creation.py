@@ -79,7 +79,7 @@ class CreationTests(unittest.TestCase):
                 target = (document.parent / destination.split("#", 1)[0]).resolve()
                 self.assertTrue(target.is_relative_to(self.repo), (document, destination))
                 self.assertTrue(target.exists(), (document, destination))
-        for name in ("work-corp", "review-corp", "prepare-corp"):
+        for name in ("work", "review", "prepare"):
             self.assertTrue((self.repo / ".agents/skills" / name / "SKILL.md").is_file())
 
     def test_project_card_edits_are_preserved_by_identical_reinstall(self):
@@ -156,12 +156,12 @@ class CreationTests(unittest.TestCase):
 
     def test_reinstall_preserves_project_owned_edits(self):
         creator.install(self.repo, self.brief)
-        file = self.repo / ".agents/skills/work-corp/SKILL.md"
+        file = self.repo / ".agents/skills/work/SKILL.md"
         file.write_text(file.read_text() + "\nA project-specific refinement.\n")
         body = file.read_bytes()
         result = creator.install(self.repo, self.brief)
         self.assertEqual(result["status"], "already_installed")
-        self.assertIn(".agents/skills/work-corp/SKILL.md", result["preserved_project_edits"])
+        self.assertIn(".agents/skills/work/SKILL.md", result["preserved_project_edits"])
         self.assertEqual(file.read_bytes(), body)
         self.assertEqual((self.repo / "AGENTS.md").read_text().count(creator.START), 1)
 

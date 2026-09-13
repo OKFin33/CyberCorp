@@ -29,6 +29,12 @@ Sections follow the order an execution meets them.
 
 **Mechanism**. Take the highest-priority open Issue in the current Milestone that is not marked as requiring an Owner decision. If none remains, the deficit is itself the work: create the planning carrier, occupy it, and generate the next batch.
 
+**Open does not mean takeable.** An open Issue may be unstarted work, or work already delivered and waiting on an Owner decision. Mark the second as requiring an Owner decision — a merge authorisation is one — so the distinction is readable without cross-reading PRs and comments.
+
+**Bounded planning is bounded by four limits.** It arranges work under an accepted outcome, and those limits are what keep it from becoming a second decision-maker: it does not implement; it does not change the accepted outcome or its acceptance; it does not judge whether a stage is near done, only states the conditions by which anyone can check; and its output must be takeable by an instance that never spoke to it. **That last one is its completion — not a PR, which this kind of work does not produce.**
+
+Parallelism is derived from the native dependency relations, not from a stored batch. An instance starts anything whose prerequisites are met; it does not wait for a round to close. A separate list of what is in this round is a second source of truth that goes stale as soon as an Issue moves.
+
 Before generating work that spans Issues, inspect existing planning carriers and converge on them rather than opening a parallel one.
 
 Near-term work is refined to the point of being executable. Distant work keeps its intended outcome and known dependencies and nothing more — Specs written far ahead of their inputs are invalidated before they are used.
@@ -41,6 +47,8 @@ Native carriers: Milestone, Label.
 - Identifying real product work, then classifying it as "might change a delivery commitment" and turning to infrastructure tidying instead. See the governing rule's burden of proof in [README.md](README.md).
 - Improving the conditions for starting is not starting.
 - Two planning efforts running in parallel because neither declared a carrier.
+- Planning around work that was already delivered and only waiting for an authorisation, because open was read as unstarted.
+- Adding units to a stage whose closing conditions were already declared, without updating them: the stale conditions stay satisfiable and review reopens on a stage that has moved.
 
 **Empirical, not derived**: which situations warrant the "requires Owner decision" label. The first principle yields the need for the distinction, not its content. Let it form in use.
 

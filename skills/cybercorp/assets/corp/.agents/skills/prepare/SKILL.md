@@ -1,5 +1,5 @@
 ---
-name: prepare-corp
+name: prepare
 description: Establish a project's delivery route and its first executable work. Use right after installation, or when a project has methods but no route and nothing an executor can take.
 ---
 

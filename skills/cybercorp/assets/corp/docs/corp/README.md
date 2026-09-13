@@ -1,5 +1,26 @@
 # Corp entry
 
+## What to do now
+
+**One observation answers this.** Run `python3 .agents/corp/repo-context.py` and read the state off it; do not read the rule set end to end to decide.
+
+| What the observation shows | Do this |
+|---|---|
+| The current Milestone has an open Issue not marked as needing an Owner decision | [`work`](../../.agents/skills/work/SKILL.md) — take the highest-priority one |
+| It has none takeable, and its closing conditions do not hold | [`bounded-planning`](../../.agents/skills/bounded-planning/SKILL.md) — the gap is the work |
+| Its declared closing conditions **hold** | [`review`](../../.agents/skills/review/SKILL.md) — this is the only way review opens |
+| No Milestone is current, or the current one is closed | [`bounded-planning`](../../.agents/skills/bounded-planning/SKILL.md) — design the next stage |
+| Methods are installed but there is no route and nothing to take | [`prepare`](../../.agents/skills/prepare/SKILL.md) — a fresh install starts here |
+| The Owner assigned something explicitly | Honour the assignment |
+
+Two states look alike and are not: an Issue that is **open** may be work nobody has started, or work already delivered and waiting on an Owner decision. The second is not takeable — planning around it duplicates it, and taking it repeats it. Mark delivered-and-waiting work as needing an Owner decision so this stays readable.
+
+These four are the whole set of work types. They form one chain — an accepted outcome becomes units, units become candidates, candidates become a stage that holds — and each hands to the next by changing the state above, not by calling it.
+
+**Review returns findings; it does not create work.** A blocker goes back to the Issue that produced it. A genuinely missing unit goes to `bounded-planning`, which creates it **and updates the stage's closing conditions**. A decision that is the Owner's goes to the Owner.
+
+---
+
 ## The governing rule
 
 > **Outside this project's irreversible-action list, no action requires Owner approval.**
@@ -38,20 +59,17 @@ You do not need to know how stage review works in order to start work. That belo
 
 ## Read for what you are doing
 
-**Just installed, with no shared work yet?** Start from `.agents/skills/prepare-corp/SKILL.md`. The rules about taking and sizing work assume there is work to take; in a fresh install there is not yet, and establishing it is the first task. A route in [canon-map.yaml](canon-map.yaml) is `active`, `pending-relocation` or `unresolved` — the latter two mean that fact has not been established yet or has moved, not that something is broken. A project with no native work surface at all can still be prepared locally; the entry states what remains missing rather than blocking.
+**Just installed, with no shared work yet?** Start from `.agents/skills/prepare/SKILL.md`. The rules about taking and sizing work assume there is work to take; in a fresh install there is not yet, and establishing it is the first task. A route in [canon-map.yaml](canon-map.yaml) is `active`, `pending-relocation` or `unresolved` — the latter two mean that fact has not been established yet or has moved, not that something is broken. A project with no native work surface at all can still be prepared locally; the entry states what remains missing rather than blocking.
 
 Rules are defined once, in [mechanics.md](mechanics.md). This table routes; it does not restate.
 
 | What you are doing | Sections |
 |---|---|
-| Start or resume work on an Issue | `.agents/skills/work-corp/SKILL.md` |
-| Generate the next batch of work, or reorganise priorities | `.agents/skills/work-corp/SKILL.md` |
-| Review a stage candidate | `.agents/skills/review-corp/SKILL.md` |
 | Communicate with the Owner, or adopt a reply | The [Owner communication card](owner-communication.md) |
 | Take over work that looks stalled, or recover a damaged task | [mechanics.md](mechanics.md#occupation-is-visible-and-an-abandoned-one-can-be-taken-over) |
 | End a checkout, branch or other site your execution created | [mechanics.md](mechanics.md#the-work-the-occupation-and-the-execution-site-end-separately) |
 | Record a decision, a rejected option, or a cross-module contract | [mechanics.md](mechanics.md#direction-and-cross-cutting-facts-have-a-durable-home) |
-| Establish or complete project preparation | `.agents/skills/prepare-corp/SKILL.md` from the repo root |
+| Establish or complete project preparation | `.agents/skills/prepare/SKILL.md` from the repo root |
 
 The card changes how things are expressed. It does not change facts, acceptance, or authority. Effective direct Owner instructions take precedence over it; lasting preference changes go back to the card.
 
