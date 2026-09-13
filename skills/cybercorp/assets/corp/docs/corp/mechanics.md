@@ -186,9 +186,9 @@ Native carriers: Pull Request, Checks, Milestone.
 |---|---|---|
 | The result | what the rule above on evidence that is not self-reported requires | that any local object may now go |
 | The occupation | a release, or a takeover recorded on the object | that a process stopped, or that the candidate is discardable |
+| The execution site | the object absent on readback, nothing reachable only from it lost | that the work is finished, or that another site is clean |
 
 **One comment can end an occupation.** The checkpoint — what was delivered, where the candidate is, what remains, what would resume it — and the release are the same act seen from two sides; splitting them into two comments adds a round trip and a second thing to read without adding a fact. Say both in one, and say plainly that the occupation is released.
-| The execution site | the object absent on readback, nothing reachable only from it lost | that the work is finished, or that another site is clean |
 
 Verify before acting, against the current state rather than your memory of it: who occupies the object now, which commits exist only there, which shared result supersedes it, and what still reads it. Then act on that one object and read the result back.
 
