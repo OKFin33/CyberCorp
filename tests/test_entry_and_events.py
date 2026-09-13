@@ -1,4 +1,6 @@
 from pathlib import Path
+import shutil
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -86,6 +88,47 @@ class EntryTests(unittest.TestCase):
         self.assertEqual(result["remote_commit"], self.sha)
         self.assertEqual(git(self.base / "pinned", "rev-parse", "HEAD"), self.sha)
         self.assertNotEqual(git(self.source, "rev-parse", "HEAD"), self.sha)
+
+    def test_created_checkout_is_registered_in_the_origin_repository_it_says_it_is(self):
+        """The created site belongs to the observed repository, and the report has to say so:
+        deleting the directory leaves the worktree registered, so a caller told nothing about
+        the binding ends the site incorrectly and reads success back from `rm`."""
+        destination = self.base / "site"
+        result = entry.enter(self.local, destination)
+        self.assertEqual(result["repo"], str(self.local))
+        self.assertIn("git worktree remove", result["closeout"])
+        self.assertIn("prunable", result["closeout"])
+        self.assertIn("isolation", result["continues"])
+        registered = git(self.local, "worktree", "list", "--porcelain")
+        self.assertIn(str(destination), registered)
+        self.assertIn(result["branch"], git(self.local, "branch", "--list", result["branch"]))
+
+        shutil.rmtree(destination)
+        self.assertIn("prunable", git(self.local, "worktree", "list", "--porcelain"))
+        git(self.local, "worktree", "prune")
+        self.assertNotIn("site", git(self.local, "worktree", "list", "--porcelain"))
+        self.assertIn(result["branch"], git(self.local, "branch", "--list", result["branch"]))
+
+    def test_creation_reports_what_it_changed_in_the_origin_repository(self):
+        """`ceiling` claimed the original checkout was not updated. Its working tree is not,
+        but the repository gains the fetched commit and a branch ref — and the site cannot be
+        ended without knowing that."""
+        observation = entry.enter(self.local)
+        self.assertIn("original checkout is not updated", observation["ceiling"])
+        with self.assertRaises(subprocess.CalledProcessError):
+            git(self.local, "rev-parse", "--verify", self.sha + "^{commit}")
+
+        status = git(self.local, "status", "--porcelain=v1", "--untracked-files=all")
+        result = entry.enter(self.local, self.base / "reported")
+        self.assertNotIn("original checkout is not updated", result["ceiling"])
+        self.assertIn("working tree, index and untracked files are unchanged", result["ceiling"])
+        self.assertIn("fetched commit and the new branch ref", result["ceiling"])
+        self.assertEqual(git(self.local, "status", "--porcelain=v1", "--untracked-files=all"), status)
+        self.assertEqual(git(self.local, "rev-parse", self.sha + "^{commit}"), self.sha)
+
+    def test_dry_run_without_a_destination_is_refused_rather_than_ignored(self):
+        with self.assertRaises(entry.EntryError):
+            entry.enter(self.local, dry_run=True)
 
     def test_existing_or_nested_destination_is_preserved(self):
         target = self.base / "foreign"

@@ -23,7 +23,7 @@ Installation put the methods in place. What is missing is a route and work to ta
 
 6. **Establish the first executable work** in the relevant Milestone: each unit carrying its own acceptance, sized to one instance's reach, advancing either the near-term delivery or a necessary prerequisite. Missing scaffolding belongs in that prerequisite work, labelled unfinished with its starting point clear. Integrate and run the applicable checks — an installation or an empty test run establishes nothing.
 
-7. **Hand off.** Preparation is done when a successor who does not know your process can read the scope and route, say what to deliver next and why, locate the implementation, inputs and checks, and begin — or identify a scoped stop. Record what remains missing. Received inputs, adopted Canon and verified results stay distinct.
+7. **Hand off.** Preparation is done when a successor who does not know your process can read the scope and route, say what to deliver next and why, locate the implementation, inputs and checks, and begin — or identify a scoped stop. Record what remains missing, and what you kept — trial installs, consumer fixtures, temporary checkouts — under the rule that the work, the occupation and the execution site end separately. Received inputs, adopted Canon and verified results stay distinct.
 
 Cover the agreed scope broadly; deepen only where the near-term work needs it. No extra planning role, document checklist or approval stage is required.
 

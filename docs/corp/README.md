@@ -45,6 +45,7 @@ Rules are defined once, in [mechanics.md](mechanics.md). This table routes; it d
 | Review a stage candidate | `.agents/skills/review-corp/SKILL.md` |
 | Communicate with the Owner, or adopt a reply | The [Owner communication card](owner-communication.md) |
 | Take over work that looks stalled, or recover a damaged task | [mechanics.md](mechanics.md#occupation-is-visible-and-an-abandoned-one-can-be-taken-over) |
+| End a checkout, branch or other site your execution created | [mechanics.md](mechanics.md#the-work-the-occupation-and-the-execution-site-end-separately) |
 | Record a decision, a rejected option, or a cross-module contract | [mechanics.md](mechanics.md#direction-and-cross-cutting-facts-have-a-durable-home) |
 | Establish or complete project preparation | `.agents/skills/prepare-corp/SKILL.md` from the repo root |
 
@@ -60,7 +61,7 @@ Shared repository: [OKFin33/CyberCorp](https://github.com/OKFin33/CyberCorp). Ac
 
 ## Getting a working checkout
 
-From an existing clone, verify the actual remote and the pinned version before working, and leave the original working tree as you found it. For resumed work, start from its verified checkpoint rather than the default branch.
+From an existing clone, verify the actual remote and the pinned version before working, and leave the original working tree as you found it. For resumed work, start from its verified checkpoint rather than the default branch. A checkout you create is an object of its own: the table above routes to what ending it requires, which is not the same act as finishing the work.
 
 Installation does not establish shared work and does not start a process. `.agents/corp/install.json` records initial provenance, not later adoption.
 
