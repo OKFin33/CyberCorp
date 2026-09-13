@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Hash the spec region of a GitHub Issue body to pin what was accepted (S1)."""
+"""Hash the spec region of a GitHub Issue body to pin what was accepted."""
 import argparse
 import hashlib
 import re

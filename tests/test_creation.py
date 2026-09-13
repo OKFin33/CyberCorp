@@ -267,7 +267,7 @@ class CreationTests(unittest.TestCase):
         self.assertEqual(report["remote_branch"], "develop")
         self.assertEqual(report["remote_head"], sha)
         self.assertEqual(report["focus"]["number"], 4)
-        self.assertFalse(report["atomic_snapshot"])
+        self.assertTrue(report["paginated_reads"])
 
 
 if __name__ == "__main__":

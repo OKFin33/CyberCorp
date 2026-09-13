@@ -28,6 +28,18 @@ def git(root, *args):
     return command(root, ["git", *args]).stdout.strip()
 
 
+def heading_slugs(path):
+    """GitHub's heading anchors, by its documented rule: lowercase, drop punctuation,
+    spaces to hyphens. Markdown emphasis markers fall out with the punctuation."""
+    slugs = set()
+    for line in path.read_text(encoding="utf-8").splitlines():
+        match = re.match(r"#{1,6} +(.+?)\s*$", line)
+        if match:
+            text = re.sub(r"[^\w\s-]", "", match.group(1).strip().lower())
+            slugs.add(re.sub(r"\s+", "-", text))
+    return slugs
+
+
 def local_target(root, parent, target):
     parsed = urlsplit(target)
     if parsed.scheme or parsed.netloc or not parsed.path:
@@ -37,6 +49,10 @@ def local_target(root, parent, target):
         raise CheckError("Local reference leaves the repository: " + target)
     if not path.exists():
         raise CheckError("Missing local target: " + target)
+    # A renamed heading breaks a link as thoroughly as a moved file, and silently:
+    # the path still resolves, so nothing reports it.
+    if parsed.fragment and path.suffix == ".md" and parsed.fragment not in heading_slugs(path):
+        raise CheckError("Missing heading anchor: " + target)
     return path
 
 

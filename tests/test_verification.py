@@ -1,6 +1,7 @@
 import importlib.util
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -208,6 +209,25 @@ class VerificationTests(unittest.TestCase):
         for payload in ({"pull_request": None}, {"pull_request": {"base": []}}):
             with self.subTest(payload=payload):
                 self.assertIn("Malformed", self.check(event="pull_request", payload=payload, expect=1)["errors"][0])
+
+    def test_a_link_to_a_renamed_heading_is_reported(self):
+        """A renamed heading breaks a link as thoroughly as a moved file, but silently:
+        the path still resolves, so only an anchor check can see it."""
+        mechanics = (self.repo / "docs/corp/mechanics.md").read_text(encoding="utf-8")
+        first_heading = re.search(r"^## (.+)$", mechanics, re.M).group(1)
+        slug = re.sub(r"\s+", "-", re.sub(r"[^\w\s-]", "", first_heading.strip().lower()))
+
+        entry = self.repo / "docs/corp/README.md"
+        original = entry.read_text(encoding="utf-8")
+
+        entry.write_text(original + "\n[there](mechanics.md#%s)\n" % slug, encoding="utf-8")
+        self.commit("link to an existing heading")
+        self.check("--base", "HEAD")
+
+        entry.write_text(original + "\n[gone](mechanics.md#%s-since-renamed)\n" % slug, encoding="utf-8")
+        self.commit("link to a renamed heading")
+        report = self.check("--base", "HEAD", expect=1)
+        self.assertIn("Missing heading anchor", json.dumps(report, ensure_ascii=False))
 
 
 if __name__ == "__main__":

@@ -21,4 +21,4 @@ The preparation fixture supplies an agreed project goal, inputs and existing mai
 
 The card targets use the same facts and independent project-owned cards. Ask for separate Owner drafts through their own entry. Freeze outputs before comparing how expression changes while result, failures, evidence ceilings and needed decisions remain intact. This cannot establish real Owner understanding or actual notification delivery.
 
-Evidence for the first bounded run is in [Issue 3 evidence](../../docs/evidence/issue-3/README.md). Exact transcripts are artifacts, not new product rules. Repeating setup or deterministic tests does not repeat the independent Agent observation.
+The first bounded run's self-reported evidence has been removed from the distributed version; recover it from Git history if needed. Exact transcripts are artifacts, not new product rules. Repeating setup or deterministic tests does not repeat the independent Agent observation.
