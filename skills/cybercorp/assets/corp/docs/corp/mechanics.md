@@ -48,6 +48,8 @@ Editing a Spec invalidates its old pin. Stop affected writes, resolve the inputs
 
 **Mechanism**. Before starting any action, leave a visible occupation on a native object: a self-assignment **plus a comment naming an instance ID unique within your runtime**. The assignment shows that this account has something running; only the ID distinguishes you from another instance on the same account — or from your own earlier run.
 
+Derive the ID from your execution site — the runtime plus the branch or working tree you occupy — rather than from the process or session. Two concurrent instances must differ, and **an instance restarted on the same site must recognise its own earlier occupation**; an ID tied to a process satisfies the first and fails the second.
+
 - Work on an Issue: self-assign it, then comment with your instance ID, the object and the scope.
 - Review of a change: add yourself to the PR's requested reviewers, then comment the same way.
 - Work whose object does not exist yet — generating the next batch of work, reorganising priorities, any planning that will create Issues: **create the carrier Issue first, occupy it, then begin.** Occupation cannot be expressed on an object that has not been created, so create it.
