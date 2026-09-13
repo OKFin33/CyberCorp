@@ -85,8 +85,9 @@ def check_structure(root, report):
                      and row["status"] == "unresolved")
     if pending:
         report.setdefault("notes", []).append(
-            "Corp not established: %s still unresolved. Complete Phase 2 (establish.md in the "
-            "creation package) before starting work Corpos here." % ", ".join(pending))
+            "Not a Corp yet: %s unresolved. A worker that finds this should stop and report it "
+            "rather than proceed — establishing a Corp needs the Owner present and is not this "
+            "repository's work to take." % ", ".join(pending))
 
     entry = root / "docs/corp/README.md"
     if not entry.is_file():

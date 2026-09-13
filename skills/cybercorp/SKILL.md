@@ -9,6 +9,8 @@ Help the user's Agent establish a project that can continue after the creator le
 
 Start from the user's goal, agreed project scope, existing owners/materials and actual authorization. Inspect the repository before choosing what to add. Reuse existing Canon and task systems. Ask only for missing decisions that change the product or permitted actions; ordinary engineering choices remain yours.
 
+**Precondition.** The target must be a repository hosted on GitHub. Every carrier this mechanism uses is a GitHub-native object, so there is nothing to install onto without one — this is a boundary, not an unimplemented feature. Other hosts are not adapted.
+
 A project that already has a Corp entry is **replacing** its mechanism layer, not installing one — read [migration.md](references/migration.md) and stop here; the installer refuses to overwrite changed files.
 
 For a Git/GitHub project without an existing Corp entry, prepare the small input described in [brief.md](references/brief.md), then run:

@@ -13,7 +13,7 @@ One observation answers this: `python3 .agents/corp/repo-context.py`. Read the s
 | No Milestone is current, or the current one is closed | [`bounded-planning`](../../.agents/skills/bounded-planning/SKILL.md) — design the next stage |
 | The Owner assigned something explicitly | Honour the assignment |
 
-**Two states look alike and are not.** An open Issue may be work nobody started, or work already delivered and waiting on an Owner decision — the second is not takeable, and planning around it duplicates it. Mark delivered-and-waiting work as needing an Owner decision so this stays readable.
+**Two states look alike and are not.** An open Issue may be work nobody started, or work already delivered and waiting — the second is not takeable, and both taking it and planning around it repeat what exists. Two things make the difference readable, and you need both: the observation reports `open_candidates` for each Issue, so **an Issue with an unmerged candidate is not new work** whoever forgot to label it; and delivered-and-waiting work carries the Owner-decision label, which is the only signal that survives its candidate being closed or merged. **If neither is present but the Issue's own comments say it was delivered, believe the comments and fix the label** — you have just found the case where the readable signals were not maintained.
 
 These four are the whole set. They form one chain — input becomes fact, fact becomes units, units become candidates, candidates become a stage that holds — and each hands to the next by changing the state above, not by calling it.
 
