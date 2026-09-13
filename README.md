@@ -66,11 +66,12 @@ python3 skills/corpo-launcher/scripts/corpo.py --runtime kiro resume --cwd /path
 |---|---|---|
 | `skills/cybercorp/`、`skills/corpo-launcher/` | **产品本体。** 分发给别人的能力包，`assets/corp/` 是安装到目标项目的模板 | 想改产品行为，改这里 |
 | 根 `.agents/`、`docs/corp/` | **本仓库自己的安装结果。** CyberCorp 把自己装了一遍，用来 dogfood | 想改本仓库自己的工作方式，改这里。改产品源不会自动升级它 |
-| `docs/evidence/`、`CHANGELOG.md`、`docs/verification-status.md` | 开发过程与验证记录 | 只读；提 PR 时按需追加 |
+| `CHANGELOG.md`、`docs/verification-status.md` | 变更与各能力的验证程度 | 只读 |
+| `docs/decisions/` | 每条规则的来源、被否决的替代方案及其理由 | 使用产品时不必读；**改机制层前必读、改完必写** |
 
 `.agents/` 的点前缀容易让人以为是编辑器私有目录。它不是——那是交付给使用者的运行期方法与脚本，属于产品内容。
 
-`docs/evidence/` 保留历史验证的报告、判据与固定提交号，**使用本身完全不需要它们**。原先随仓库分发的 Git bundle、状态快照与压缩 API 记录已移除，理由见[决策记录 0002](docs/decisions/0002-remove-verification-artifacts.md)。
+验证证据不随仓库分发：确定性的部分是测试与检查，可自行运行；非确定性的部分（真实实例消费）以结论与固定提交号记录在[验证状态](docs/verification-status.md)。历史上曾随仓库分发的产物与自述报告已移除，理由见[决策记录 0002](docs/decisions/0002-remove-verification-artifacts.md) 与 [0008](docs/decisions/0008-remove-self-reported-evidence.md)。
 
 ## 开发与验证
 
