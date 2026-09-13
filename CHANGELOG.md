@@ -4,7 +4,12 @@
 
 版本号形如 `0.1.0a5` 的是创建包候选，不代表默认分支已采用或行为已验收。
 
-## 未发布
+## 0.1.0a8 — 四类工作、状态路由与前提声明
+
+**对采纳者的影响较大，逐项列出。** 方法文件从三份变为四份且全部改名：`prepare` 移出运行侧（成为创建包的 `establish.md`），新增 `intake` 与 `bounded-planning`，`work-corp`／`review-corp` 去掉后缀。入口结构重构，必读区由 9206 字符降至 3865。`canon-map` 可加可选的 `answers` 字段。`repo-context.py` 为每个 Issue 附带 `open_candidates`。`check.py` 对未完成建立的项目发提示。**取消「优先级最高」这个概念**——改为取任一前置满足的 Issue。
+
+已运行 `0.1.0a7` 的项目升级时取新版机制层与四份方法文件，并按新入口结构重写自己的入口项目段落；`prepare` 的引用改指创建包。
+
 
 - **四类工作各有方法文件，`-corp` 后缀去掉（破坏性）。** 新增 `bounded-planning`（有界统筹），`prepare-corp`／`work-corp`／`review-corp` 改名为 `prepare`／`work`／`review`。此前机制层有 planning 的规则而无方法文件，`prepare` 的一次性初始化定位占了常态规划的位置。已采纳的项目引用旧路径，需随本版更新。
 - **入口首段改为按可读状态路由**，位于统领规则之前：跑一次 `repo-context.py`，按输出选工作类型。此前一次真实规划执行为决定做什么而读了 `mechanics.md` 全文 25188 字符——入口没给判定表，它只能从规则里推。
