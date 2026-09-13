@@ -46,15 +46,23 @@ Editing a Spec invalidates its old pin. Stop affected writes, resolve the inputs
 
 **Derives from**: executors are unreliable.
 
-**Mechanism**. Before starting any action, leave a visible occupation on a native object: a self-assignment **plus a comment naming an instance ID unique within your runtime**. The assignment shows that this account has something running; only the ID distinguishes you from another instance on the same account — or from your own earlier run.
+**Mechanism**. Before starting any action, leave a visible occupation on a native object: a self-assignment **plus a comment naming an instance ID unique within your runtime**. The assignment shows that this account has something running; only the ID tells one execution from another under it, including an earlier execution of your own.
 
-Derive the ID from your execution site — the runtime plus the branch or working tree you occupy — rather than from the process or session. Two concurrent instances must differ, and **an instance restarted on the same site must recognise its own earlier occupation**; an ID tied to a process satisfies the first and fails the second.
+One ID per execution, generated once and used throughout it:
+
+```sh
+python3 -c 'import uuid; print("aid-v1-" + str(uuid.uuid4()))'
+```
+
+**A new instance gets a new ID.** Context compaction keeps the ID only within the same execution that still holds the occupation. An ID carries no authentication and no rank — it identifies, it does not authorise.
+
+Do not try to make a restarted instance recognise an occupation as "its own". It is a different instance with none of its predecessor's context; treating an earlier occupation as already-mine invites resuming a half-state without checking it. Any existing occupation, including one from your own site, is taken over by the route below.
 
 - Work on an Issue: self-assign it, then comment with your instance ID, the object and the scope.
 - Review of a change: add yourself to the PR's requested reviewers, then comment the same way.
 - Work whose object does not exist yet — generating the next batch of work, reorganising priorities, any planning that will create Issues: **create the carrier Issue first, occupy it, then begin.** Occupation cannot be expressed on an object that has not been created, so create it.
 
-Read the existing occupation comments before adding yours: an ID that is not yours means another instance holds this; your own earlier ID means you are resuming your own work rather than colliding with anyone.
+After posting, reread the complete comments and confirm that the **first valid occupation in server order is yours**. Comments are not atomic locks; server order is what arbitrates, and the loser stops its conflicting writes rather than negotiating. Scopes state expected change boundaries, not directory locks.
 
 Native carriers: `assignee`, `requested_reviewers`, and occupation comments.
 
@@ -65,6 +73,8 @@ Native carriers: `assignee`, `requested_reviewers`, and occupation comments.
 - Three instances each independently review the same PR to completion before discovering the duplication. Reviewing is an action; it needs occupation like any other.
 - A non-atomic read-then-write claim does not prove exclusivity. Visible occupation reduces collisions; it does not eliminate them.
 - Reading `assignee` alone on a shared account and concluding either "someone else has this" or "that was me". Accounts cannot tell those apart; instance IDs can.
+- Posting an occupation and starting work without rereading. Two instances can post before either sees the other; only the reread establishes who holds it.
+- Treating an instance ID as authority. It says which execution is here, not what that execution may do.
 
 ---
 

@@ -20,7 +20,7 @@ That is the whole list. This repository has no deployment and no external releas
 
 Five rules. Each is a mechanism from [mechanics.md](mechanics.md) in its operative form; nothing else is required before you begin.
 
-1. **Before starting any action, leave a visible occupation on a native object** — a self-assignment plus a comment naming an instance ID unique within your runtime. Self-assign the Issue; add yourself to a PR's requested reviewers; if the work has no object yet — generating the next batch, reorganising priorities — create its carrier Issue first, then occupy it. On a shared account the assignment alone cannot tell another instance from your own earlier run; the ID can. Derive it from your execution site — runtime plus branch or working tree — not from the process, so that a restart on the same site still recognises its own occupation. Read existing occupation comments before adding yours.
+1. **Before starting any action, leave a visible occupation on a native object** — a self-assignment plus a comment naming an instance ID unique within your runtime. Self-assign the Issue; add yourself to a PR's requested reviewers; if the work has no object yet — generating the next batch, reorganising priorities — create its carrier Issue first, then occupy it. On a shared account the assignment alone cannot tell another instance from your own earlier run; the ID can. One new ID per execution (`python3 -c 'import uuid; print("aid-v1-" + str(uuid.uuid4()))'`); it identifies, it does not authorise. After posting, reread and confirm the first valid occupation in server order is yours. Read existing occupation comments before adding yours.
 
 2. **Completion means a PR exists and its checks pass.** No prose asserts completion, including your own.
 
