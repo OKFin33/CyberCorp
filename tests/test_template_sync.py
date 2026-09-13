@@ -13,6 +13,7 @@ asserted against what makes it legitimate.
 """
 
 import re
+import subprocess
 import unittest
 from pathlib import Path
 
@@ -31,25 +32,32 @@ EXEMPT_FILES = SUBSTITUTED_FILES | PROJECT_OWNED_FILES
 PLACEHOLDER = re.compile(r"\{\{[A-Z_]+\}\}")
 
 
+def template_files():
+    """What the template ships is decided by version control, not by the filesystem.
+    Walking the directory also picks up whatever a previous step left there — a CI run
+    that imports these helpers first drops `__pycache__` next to them."""
+    listed = subprocess.run(["git", "ls-files", "-z", "--", str(TEMPLATE.relative_to(ROOT))],
+                            cwd=ROOT, capture_output=True, text=True, check=True).stdout
+    return sorted(Path(name) for name in listed.split("\0") if name)
+
+
 class TemplateSyncTests(unittest.TestCase):
     def test_every_template_file_exists_in_this_repository(self):
         missing = [
-            path.relative_to(TEMPLATE).as_posix()
-            for path in sorted(TEMPLATE.rglob("*"))
-            if path.is_file() and not (ROOT / path.relative_to(TEMPLATE)).exists()
+            tracked.relative_to(TEMPLATE.relative_to(ROOT)).as_posix()
+            for tracked in template_files()
+            if not (ROOT / tracked.relative_to(TEMPLATE.relative_to(ROOT))).exists()
         ]
         self.assertEqual(missing, [], "template files with no counterpart in this repository")
 
     def test_shared_files_are_byte_identical(self):
         differing = []
-        for path in sorted(TEMPLATE.rglob("*")):
-            if not path.is_file():
-                continue
-            relative = path.relative_to(TEMPLATE).as_posix()
+        for tracked in template_files():
+            relative = tracked.relative_to(TEMPLATE.relative_to(ROOT)).as_posix()
             if relative in EXEMPT_FILES:
                 continue
-            live = ROOT / relative
-            if live.exists() and live.read_bytes() != path.read_bytes():
+            live, packaged = ROOT / relative, ROOT / tracked
+            if live.exists() and live.read_bytes() != packaged.read_bytes():
                 differing.append(relative)
         self.assertEqual(
             differing, [],
