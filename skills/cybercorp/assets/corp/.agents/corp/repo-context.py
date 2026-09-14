@@ -206,9 +206,13 @@ def focus_milestone_number(routes, explicit):
 # ---------------------------------------------------------------------------
 
 def _person(entry):
+    # The list read already carries issue_dependencies_summary, so unmet prerequisites cost
+    # no extra request. blocked_by counts the ones still open; total_blocked_by counts all.
+    summary = entry.get("issue_dependencies_summary") or {}
     return {"number": entry["number"], "title": entry["title"], "state": entry["state"],
             "assignees": [a["login"] for a in entry.get("assignees", [])],
             "labels": [l["name"] for l in entry.get("labels", [])],
+            "open_prerequisites": summary.get("blocked_by", 0),
             "updated_at": entry.get("updated_at")}
 
 
@@ -320,6 +324,19 @@ def observe(root, reader, repo=None, issue=None, milestone=None):
             by_issue.setdefault(number, []).append(pull["number"])
     for issue_row in report.get("issues", []) or ([report["issue"]] if report.get("issue") else []):
         issue_row["open_candidates"] = sorted(by_issue.get(issue_row["number"], []))
+
+    # Taking work requires prerequisites to be satisfied, so the numbers have to be here:
+    # a count alone cannot be acted on, and a reader that has to fetch them per candidate
+    # will sometimes not. Only Issues that actually have unmet ones cost a read.
+    for issue_row in report.get("issues", []) or ([report["issue"]] if report.get("issue") else []):
+        if not issue_row.get("open_prerequisites"):
+            issue_row["open_prerequisites"] = []
+            continue
+        blocked = _read_consistent(
+            tracked, "%s/issues/%d/dependencies/blocked_by" % (repo_path, issue_row["number"]),
+            paginated=True)
+        issue_row["open_prerequisites"] = sorted(
+            b["number"] for b in blocked if b.get("state") != "closed")
 
     # This report is assembled from several sequential reads and is never a point-in-time
     # snapshot. The flag reports only whether any read spanned pages, which widens the gap

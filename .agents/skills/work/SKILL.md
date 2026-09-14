@@ -14,7 +14,7 @@ Read `docs/corp/README.md` if you have not. Each step names the `mechanics.md` s
 ## Which Issue
 
 - Told which one: that one.
-- Not told: any Issue in the current Milestone whose native prerequisites are satisfied and which carries no Owner-decision label. Several may qualify; take either rather than ranking them.
+- Not told: any Issue in the current Milestone the observation reports with no open prerequisites, no open candidate and no Owner-decision label. Several may qualify; take either rather than ranking them.
 - Nothing qualifies: the state has changed and the entry routes elsewhere.
 
 ## Then, in order

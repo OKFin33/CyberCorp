@@ -180,6 +180,48 @@ class ObserveGlobalTests(unittest.TestCase):
         self.assertEqual(issue["labels"], ["work"])
         self.assertTrue(issue["in_milestone"])
 
+    def test_unmet_prerequisites_are_listed_so_takeability_needs_no_further_read(self):
+        routes = base_routes()
+        routes["repos/o/r/issues?milestone=4&state=open&per_page=100"] = [[
+            {"number": 7, "title": "Foundation", "state": "open", "assignees": [],
+             "labels": [], "updated_at": "2026-01-01T00:00:00Z",
+             "issue_dependencies_summary": {"blocked_by": 0, "total_blocked_by": 0}},
+            {"number": 8, "title": "Builds on it", "state": "open", "assignees": [],
+             "labels": [], "updated_at": "2026-01-01T00:00:00Z",
+             "issue_dependencies_summary": {"blocked_by": 1, "total_blocked_by": 2}},
+        ]]
+        routes["repos/o/r/issues/8/dependencies/blocked_by"] = [[
+            {"number": 7, "title": "Foundation", "state": "open"},
+            {"number": 6, "title": "Already done", "state": "closed"},
+        ]]
+        reader = FakeReader(routes)
+        report = repo_context.observe(ROOT, reader, repo="o/r")
+        rows = {i["number"]: i for i in report["issues"]}
+        self.assertEqual(rows[7]["open_prerequisites"], [])
+        self.assertEqual(rows[8]["open_prerequisites"], [7])
+
+    def test_no_extra_read_is_made_for_issues_without_unmet_prerequisites(self):
+        routes = base_routes()
+        routes["repos/o/r/issues?milestone=4&state=open&per_page=100"] = [[
+            {"number": 7, "title": "Free to take", "state": "open", "assignees": [],
+             "labels": [], "updated_at": "2026-01-01T00:00:00Z",
+             "issue_dependencies_summary": {"blocked_by": 0, "total_blocked_by": 0}},
+        ]]
+        reader = FakeReader(routes)
+        repo_context.observe(ROOT, reader, repo="o/r")
+        self.assertNotIn("repos/o/r/issues/7/dependencies/blocked_by",
+                         [call[0] for call in reader.calls])
+
+    def test_an_issue_without_the_summary_field_reports_no_prerequisites(self):
+        routes = base_routes()
+        routes["repos/o/r/issues?milestone=4&state=open&per_page=100"] = [[
+            {"number": 7, "title": "Older payload", "state": "open", "assignees": [],
+             "labels": [], "updated_at": "2026-01-01T00:00:00Z"},
+        ]]
+        reader = FakeReader(routes)
+        report = repo_context.observe(ROOT, reader, repo="o/r")
+        self.assertEqual(report["issues"][0]["open_prerequisites"], [])
+
     def test_pull_requests_pull_head_and_base_sha_are_included(self):
         routes = base_routes()
         routes["repos/o/r/issues?milestone=4&state=open&per_page=100"] = [[]]
