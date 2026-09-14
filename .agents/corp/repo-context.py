@@ -258,6 +258,13 @@ def issue_context(reader, repo_path, number):
 
 
 _ISSUE_REF = re.compile(r"#(\d+)")
+# What makes a pull request the candidate for an Issue, as opposed to merely naming it in
+# passing. Both signals are free — the list read returns body, title and head ref — and either
+# alone suffices, so a project that words its descriptions differently still gets the branch,
+# and one that names branches freely still gets the closing keyword.
+_DELIVERY_REF = re.compile(
+    r"(?:clos(?:e|es|ed)|fix(?:es|ed)?|resolv(?:e|es|ed))\s+#(\d+)", re.IGNORECASE)
+_BRANCH_ISSUE_REF = re.compile(r"issues?[-_/]?(\d+)", re.IGNORECASE)
 
 
 def open_pull_requests(reader, repo_path):
@@ -268,12 +275,18 @@ def open_pull_requests(reader, repo_path):
                           "head_sha": pull.get("head", {}).get("sha"),
                           "base_sha": pull.get("base", {}).get("sha"),
                           "checks": pull.get("checks") or pull.get("mergeable_state"),
-                          # Issue numbers this candidate mentions. A mention is not a link:
-                          # it means "check this before taking that Issue", not "that Issue is
-                          # closed by this". The same read already returned the body, so this
-                          # costs no extra round trip.
+                          # Two different things, and conflating them makes takeable work look
+                          # occupied. mentions_issues is every number named anywhere — worth a
+                          # look before taking that Issue. delivers_issues is the subset this
+                          # pull request is actually the candidate for. Both come from the read
+                          # that already happened, so neither costs a round trip.
                           "mentions_issues": sorted({int(n) for n in _ISSUE_REF.findall(
-                              (pull.get("body") or "") + " " + (pull.get("title") or ""))})})
+                              (pull.get("body") or "") + " " + (pull.get("title") or ""))}),
+                          "delivers_issues": sorted(
+                              {int(n) for n in _DELIVERY_REF.findall(
+                                  (pull.get("body") or "") + " " + (pull.get("title") or ""))}
+                              | {int(n) for n in _BRANCH_ISSUE_REF.findall(
+                                  pull.get("head", {}).get("ref") or "")})})
     return summaries
 
 
@@ -320,7 +333,7 @@ def observe(root, reader, repo=None, issue=None, milestone=None):
     # elsewhere. Attach it here so choosing work needs one read, not a pass over every PR.
     by_issue = {}
     for pull in report["open_pull_requests"]:
-        for number in pull.get("mentions_issues", []):
+        for number in pull.get("delivers_issues", []):
             by_issue.setdefault(number, []).append(pull["number"])
     for issue_row in report.get("issues", []) or ([report["issue"]] if report.get("issue") else []):
         issue_row["open_candidates"] = sorted(by_issue.get(issue_row["number"], []))

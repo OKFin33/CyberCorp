@@ -180,6 +180,41 @@ class ObserveGlobalTests(unittest.TestCase):
         self.assertEqual(issue["labels"], ["work"])
         self.assertTrue(issue["in_milestone"])
 
+    def test_naming_an_issue_in_passing_does_not_make_the_pull_request_its_candidate(self):
+        routes = base_routes()
+        routes["repos/o/r/issues?milestone=4&state=open&per_page=100"] = [[
+            {"number": 7, "title": "Free", "state": "open", "assignees": [], "labels": [],
+             "updated_at": "2026-01-01T00:00:00Z"},
+        ]]
+        routes["repos/o/r/pulls?state=open&per_page=100"] = [[
+            {"number": 9, "title": "Something else", "state": "open",
+             "body": "Context: the acceptance for this is written into #7.",
+             "head": {"sha": "b" * 40, "ref": "kiro/unrelated"},
+             "base": {"sha": "a" * 40}, "mergeable_state": "clean"},
+        ]]
+        reader = FakeReader(routes)
+        report = repo_context.observe(ROOT, reader, repo="o/r")
+        self.assertEqual(report["open_pull_requests"][0]["mentions_issues"], [7])
+        self.assertEqual(report["open_pull_requests"][0]["delivers_issues"], [])
+        self.assertEqual(report["issues"][0]["open_candidates"], [])
+
+    def test_a_closing_keyword_or_the_branch_name_makes_it_a_candidate(self):
+        for body, ref, why in (("Closes #7.", "kiro/whatever", "closing keyword"),
+                               ("No keyword here.", "feat/issue-7-thing", "branch name"),
+                               ("fixes #7", "feat/issue7-thing", "both")):
+            routes = base_routes()
+            routes["repos/o/r/issues?milestone=4&state=open&per_page=100"] = [[
+                {"number": 7, "title": "Target", "state": "open", "assignees": [], "labels": [],
+                 "updated_at": "2026-01-01T00:00:00Z"},
+            ]]
+            routes["repos/o/r/pulls?state=open&per_page=100"] = [[
+                {"number": 9, "title": "Candidate", "state": "open", "body": body,
+                 "head": {"sha": "b" * 40, "ref": ref}, "base": {"sha": "a" * 40},
+                 "mergeable_state": "clean"},
+            ]]
+            report = repo_context.observe(ROOT, FakeReader(routes), repo="o/r")
+            self.assertEqual(report["issues"][0]["open_candidates"], [9], why)
+
     def test_unmet_prerequisites_are_listed_so_takeability_needs_no_further_read(self):
         routes = base_routes()
         routes["repos/o/r/issues?milestone=4&state=open&per_page=100"] = [[
